@@ -2,7 +2,7 @@
 
 // Define all variables initializes in reset so they're visible globally
 var margin, width, height, iw, clickable_gradient, unclickable_gradient,
-    x1970, x2012, x2013, x2014, x2015, x2016, x2017, x2018, x2023,
+    x1970, x2012, x2013, x2014, x2018, x2023,
     y1970tl, y2013tl, yMaintl, y2014tl, y2012tl,
     x = [], y = [], dw, dh,
     spaceStoneInPresent = false, mindStoneInPresent = false, realityStoneInPresent = false, timeStoneInPresent = false,
@@ -28,14 +28,18 @@ var margin, width, height, iw, clickable_gradient, unclickable_gradient,
     clickables = [],
     pulsatingInterval;
 
+var imgPath = "";
+
 // Initial conditions
 var reset = function() {
+    // TODO: Cancel any ongoing animations
+
     //Make fullscreen icon visible
     $('#fullscreen')[0].style.visibility = "visible";
 
     // Define bounds, grid, and key axis points
     margin = 20;
-    iw = 40;
+    iw = 40;    // TODO: Set iw to smaller value if screen width too small
     width = document.getElementById("endgame-canvas").offsetWidth;
     height = document.getElementById("endgame-canvas").offsetHeight;
     dw = (width - 2*margin) / 40;
@@ -225,49 +229,51 @@ var reset = function() {
 //   .y(y2014tl+10)
 
 // Time travel paths
-    jumpTo1970 = canvas.path('M' + (x2012+width/20) + ' ' + y2012tl + ' C ' + x2012 + ' ' +
-        height + ' 0 ' + height + ' ' + (x1970 + width/20)
-        + ' ' + y1970tl)
+    jumpTo1970 = canvas.path('M' + (x2012 + 2*dw) + ' ' + y2012tl +
+        ' c' + -8*dw + ',' + 0 + ' ' + -8*dw + ',' + -28*dh + ' ' + -6*dw + ',' + -32*dh)
         .fill('none');
-    // TODO: Finish fixing this
-    // jumpTo2012 = canvas.path('M' + x2023 + ' ' + yMaintl +
-    //     ' C ' + width + ' ' + y2013tl + ' 0 0 ' + (x2012 + width/20) + ' ' + y2012tl)
-    //     .fill('none');
-    // jumpTo2013 = canvas.path('M' + x2023 + ' ' + yMaintl + ' C ' + width + ' ' +
-    //     y2014tl + ' ' + x2012 + ' ' + height + ' ' + (x2013 + width/20)
-    //     + ' ' + y2013tl)
-    //     .fill('none');
-    // jumpTo2014 = canvas.path('M' + x2023 + ' ' + yMaintl + ' C ' + width + ' ' +
-    //     y2013tl + ' 0 0 ' + (x2014 + width/20) + ' ' + y2014tl)
-    //     .fill('none');
-    returnFrom1970 = canvas.path('M' + (x1970 + width/20) + ' ' + y1970tl + ' C ' + x2012 + ' ' +
-        yMaintl + ' ' + x2018 + ' ' + y2014tl + ' ' + (x2023 + width/20)
-        + ' ' + yMaintl)
-        .fill('none');
-    returnFrom2012 = canvas.path('M' + (x2012 + width/20) + ' ' + y2012tl  + ' C ' + x2018 + ' ' +
-        y2012tl + ' ' + x2018 + ' ' + y2013tl + ' ' + (x2023 + width/20)
-        + ' ' + yMaintl)
-        .fill('none');
-    returnFrom2013 = canvas.path('M' + (x2013 + width/20) + ' ' + y2013tl + ' C ' + x2018 + ' ' +
-        y2013tl + ' ' + x2018 + ' ' + y2013tl + ' ' + (x2023 + width/20)
-        + ' ' + yMaintl)
-        .fill('none');
-    returnFrom2014 = canvas.path('M' + (x2014 + width/20) + ' ' + y2014tl + ' C ' + x2018 + ' ' +
-        yMaintl + ' ' + x2023 + ' ' + y2014tl + ' ' + (x2023+width/20)
-        + ' ' + yMaintl)
-        .fill('none');
-
     jumpTo2012 = canvas.path('M' + x2023 + ',' + yMaintl +
-        ' c ' + dw + ',' + dh + ' ' + -18*dw + ',' + 0 + ' ' +  -22*dw + ',' + dh +
-        ' ' + -4*dw + ',' + 2*dh + ' ' + -3*dw + ',' + 14*dh + ' ' + -2*dw + ',' + 15*dh)
+        ' c ' + -3*dw + ',' + dh + ' ' + -3*dw + ',' + dh + ' ' + -6*dw + ',' + dh +
+        ' c ' + -3*dw + ',' + 0 + ' ' + -9*dw + ',' + 0 + ' ' + -12*dw + ',' + 0 +
+        ' c ' + -3*dw + ',' + 0 + ' ' + -5*dw + ',' + 1*dh + ' ' +  -6*dw + ',' + 4*dh +
+        ' c ' + -1*dw + ',' + 3*dh + ' ' + -1*dw + ',' + 9*dh + ' ' + 0 + ',' + 11*dh)
         .fill('none');
     jumpTo2013 = canvas.path('M' + x2023 + ',' + yMaintl +
-    ' c ' + dw + ',' + -1*dh + ' ' + -15*dw + ',' + 0 + ' ' +  -17*dw + ',' + -1*dh +
-    ' ' + -2*dw + ',' + -1*dh + ' ' + -2*dw + ',' + -6*dh + ' ' + -1*dw + ',' + -7*dh)
+        ' c ' + -2.5*dw + ',' + -2*dh + ' ' + -2.5*dw + ',' + -2*dh + ' ' + -5*dw + ',' + -2*dh +
+        ' c ' + -2.5*dw + ',' + 0 + ' ' + -5.5*dw + ',' + 0 + ',' + -8*dw + ',' + 0 +
+        ' c ' + -2.5*dw + ',' + 0 + ' ' + -4.5*dw + ',' + -1*dh + ' ' +  -5*dw + ',' + -2*dh +
+        ' c ' + -0.5*dw + ',' + -1*dh + ' ' + -0.5*dw + ',' + -3*dh + ' ' + 0 + ',' + -4*dh)
         .fill('none');
     jumpTo2014 = canvas.path('M' + x2023 + ',' + yMaintl +
-        ' c ' + dw + ',' + 1*dh + ' ' + -9*dw + ',' + 0 + ' ' +  -11*dw + ',' + 2*dh +
-        ' ' + -2*dw + ',' + 1*dh + ' ' + -2*dw + ',' + 5*dh + ' ' + -1*dw + ',' + 6*dh)
+        ' c ' + -3*dw + ',' + 3*dh + ' ' + -2*dw + ',' + 3*dh + ' ' + -5*dw + ',' + 3*dh +
+        ' c ' + -3*dw + ',' + 0 + ' ' + 1*dw + ',' + 0 + ' ' + -2*dw + ',' + 0 +
+        ' c ' + -3*dw + ',' + 0 + ' ' + -4*dw + ',' + 0 + ' ' +  -5*dw + ',' + 2*dh +
+        ' c ' + -0.5*dw + ',' + 1*dh + ' ' + -0.5*dw + ',' + 2*dh + ' ' + 0 + ',' + 3*dh)
+        .fill('none');
+
+    returnFrom1970= canvas.path('M' + (x1970 + 2*dw) + ' ' + y1970tl +
+        ' c ' + -1*dw + ',' + 2*dh + ' ' + -1*dw + ',' + 7*dh + ' ' + 0 + ',' + 10*dh +
+        ' c ' + 1*dw + ',' + 3*dh + ' ' + 3*dw + ',' + 5*dh + ' ' +  6*dw + ',' + 5*dh +
+        ' c ' + 3*dw + ',' + 0 + ' ' + 16*dw + ',' + 0 + ' ' + 19*dw + ',' + 0 +
+        ' c ' + 3*dw + ',' + 0 + ' ' + 3*dw + ',' + 0 + ' ' + 5*dw + ',' + 1*dh)
+        .fill('none');
+    returnFrom2012 = canvas.path('M' + (x2012 + 2*dw) + ' ' + y2012tl  +
+        ' c ' + -1*dw + ',' + -2*dh + ' ' + -1*dw + ',' + -7*dh + ' ' + 0 + ',' + -10*dh +
+        ' c ' + 1*dw + ',' + -3*dh + ' ' + 3*dw + ',' + -4*dh + ' ' +  6*dw + ',' + -4*dh +
+        ' c ' + 3*dw + ',' + 0 + ' ' + 10*dw + ',' + 0 + ' ' + 13*dw + ',' + 0 +
+        ' c ' + 3*dw + ',' + 0 + ' ' + 3*dw + ',' + -1*dh + ' ' + 5*dw + ',' + -2*dh)
+        .fill('none');
+    returnFrom2013 = canvas.path('M' + (x2013 + 2*dw) + ' ' + y2013tl +
+        ' c ' + -0.4*dw + ',' + 1*dh + ' ' + -0.4*dw + ',' + 2*dh + ' ' + 0  + ',' + 3*dh +
+        ' c ' + 0.5*dw + ',' + 1*dh + ' ' + 2.5*dw + ',' + 2*dh + ' ' + 5*dw + ',' + 2*dh +
+        ' c ' + 2.5*dw + ',' + 0 + ' ' + 5.5*dw + ',' + 0 + ' ' + 8*dw + ',' + 0 +
+        ' c ' + 2.5*dw + ',' + 0 + ' ' + 2.5*dw + ',' + dh + ' ' + 5*dw + ',' + 3*dh)
+        .fill('none');
+    returnFrom2014 = canvas.path('M' + (x2014 + width/20) + ' ' + y2014tl +
+        ' c ' + -0.3*dw + ',' + -0.8*dh + ' ' + -0.3*dw + ',' + -1.2*dh + ' ' + 0 + ',' + -2*dh +
+        ' c ' + 1*dw + ',' + -2*dh + ' ' + 2*dw + ',' + -2*dh + ' ' +  5*dw + ',' + -2*dh +
+        ' c ' + 3*dw + ',' + 0 + ' ' + 1*dw + ',' + 0 + ' ' + 2*dw + ',' + 0 +
+        ' c ' + 2*dw + ',' + 0 + ' ' + 2*dw + ',' + dh + ' ' + 5*dw + ',' + -4*dh)
         .fill('none');
 
 // Cap to 2014
@@ -348,147 +354,147 @@ var reset = function() {
 // Icons
     ironman_glow = canvas.circle(40)
         .fill(unclickable_gradient);
-    var ironman_icon = canvas.image("ironman.png")
+    var ironman_icon = canvas.image(imgPath + "ironman.png")
         .size(32,32).center(ironman_glow.cx(), ironman_glow.cy());
     ironman = canvas.group().add(ironman_glow).add(ironman_icon)
-        .move(x2023, yMaintl - 80);
+        .move(x2023, yMaintl - iw);
 
     cap_am_glow = canvas.circle(40)
         .fill(unclickable_gradient);
-    var cap_am_icon = canvas.image("cap.png")
+    var cap_am_icon = canvas.image(imgPath + "cap.png")
         .size(32,32).center(cap_am_glow.cx(), cap_am_glow.cy());
     cap_am = canvas.group().add(cap_am_glow).add(cap_am_icon)
-        .move(x2023, yMaintl-40);
+        .move(x2023+iw, yMaintl-iw);
 
     hulk_glow = canvas.circle(40)
         .fill(unclickable_gradient);
-    var hulk_icon = canvas.image("hulk.png")
+    var hulk_icon = canvas.image(imgPath + "hulk.png")
         .size(32,32).center(hulk_glow.cx(), hulk_glow.cy());
     hulk = canvas.group().add(hulk_glow).add(hulk_icon)
         .move(x2023, yMaintl);
 
     antman_glow  = canvas.circle(40)
         .fill(unclickable_gradient);
-    var antman_icon = canvas.image("antman.png")
+    var antman_icon = canvas.image(imgPath + "antman.png")
         .size(32,32).center(antman_glow.cx(), antman_glow.cy());
     antman = canvas.group().add(antman_glow).add(antman_icon)
-        .move(x2023, yMaintl+40);
+        .move(x2023+iw, yMaintl);
 
     thor_glow  = canvas.circle(40)
         .fill(unclickable_gradient);
-    var thor_icon = canvas.image("thor.png")
+    var thor_icon = canvas.image(imgPath + "thor.png")
         .size(32,32).center(thor_glow.cx(), thor_glow.cy());
     thor = canvas.group().add(thor_glow).add(thor_icon)
-        .move(x2023+40, yMaintl);
+        .move(x2023+2*iw, yMaintl-iw);
 
     rocket_glow  = canvas.circle(40)
         .fill(unclickable_gradient);
-    var rocket_icon = canvas.image("rocket.png")
+    var rocket_icon = canvas.image(imgPath + "rocket.png")
         .size(32,32).center(rocket_glow.cx(), rocket_glow.cy());
     rocket = canvas.group().add(rocket_glow).add(rocket_icon)
-        .move(x2023+40, yMaintl-40);
+        .move(x2023+2*iw, yMaintl);
 
     nebula_glow  = canvas.circle(40)
         .fill(unclickable_gradient);
-    var nebula_icon = canvas.image("nebula.png")
+    var nebula_icon = canvas.image(imgPath + "nebula.png")
         .size(32,32).center(nebula_glow.cx(), nebula_glow.cy());
     nebula = canvas.group().add(nebula_glow).add(nebula_icon)
-        .move(x2023+80, yMaintl+40);
+        .move(x2023+2*iw, yMaintl-2*iw);
 
     war_machine_glow  = canvas.circle(40)
         .fill(unclickable_gradient);
-    var war_machine_icon = canvas.image("war_machine.png")
+    var war_machine_icon = canvas.image(imgPath + "war_machine.png")
         .size(32,32).center(war_machine_glow.cx(), war_machine_glow.cy());
     war_machine = canvas.group().add(war_machine_glow).add(war_machine_icon)
-        .move(x2023+80,yMaintl);
+        .move(x2023+iw,yMaintl-2*iw);
 
     hawkeye_glow  = canvas.circle(40)
         .fill(unclickable_gradient);
-    var hawkeye_icon = canvas.image("hawkeye.png")
+    var hawkeye_icon = canvas.image(imgPath + "hawkeye.png")
         .size(32,32).center(hawkeye_glow.cx(), hawkeye_glow.cy());
     hawkeye = canvas.group().add(hawkeye_glow).add(hawkeye_icon)
-        .move(x2023+80,yMaintl-40);
+        .move(x2023+iw,yMaintl+iw);
 
     black_widow_glow  = canvas.circle(40)
         .fill(unclickable_gradient);
-    var black_widow_icon = canvas.image("black_widow.png")
+    var black_widow_icon = canvas.image(imgPath + "black_widow.png")
         .size(32,32).center(black_widow_glow.cx(), black_widow_glow.cy());
     black_widow = canvas.group().add(black_widow_glow).add(black_widow_icon)
-        .move(x2023+80, yMaintl-80);
+        .move(x2023+2*iw, yMaintl+iw);
 
     thanos_glow = canvas.circle(40)
         .fill(unclickable_gradient);
-    var thanos_icon = canvas.image("thanos.png")
+    var thanos_icon = canvas.image(imgPath + "thanos.png")
         .size(32,32).center(thanos_glow.cx(), thanos_glow.cy());
     thanos = canvas.group().add(thanos_glow).add(thanos_icon)
-        .move(x2014+width/20-40, y2014tl-40)
+        .move(x2014+2*dw+2*iw, y2014tl-iw)
         .opacity(0);
 
     gamora_glow = canvas.circle(40)
         .fill(unclickable_gradient);
-    var gamora_icon = canvas.image("gamora.png")
+    var gamora_icon = canvas.image(imgPath + "gamora.png")
         .size(32,32).center(gamora_glow.cx(), gamora_glow.cy());
     gamora = canvas.group().add(gamora_glow).add(gamora_icon)
-        .move(x2014+width/20-40, y2014tl)
+        .move(x2014+2*dw+2*iw, y2014tl)
         .opacity(0);
 
     nebula_evil_glow = canvas.circle(40)
         .fill(unclickable_gradient);
-    var nebula_evil_icon = canvas.image("nebula_evil.png")
+    var nebula_evil_icon = canvas.image(imgPath + "nebula_evil.png")
         .size(32,32).center(nebula_evil_glow.cx(), nebula_evil_glow.cy());
     nebula_evil = canvas.group().add(nebula_evil_glow).add(nebula_evil_icon)
-        .move(x2014+width/20-40, y2014tl+40)
+        .move(x2014+2*dw+3*iw, y2014tl-iw)
         .opacity(0);
 
-    portal = canvas.circle(16)
+    portal = canvas.circle(iw/2)
         .opacity(0);
 
     loki_glow = canvas.circle(40)
         .fill(unclickable_gradient);
-    var loki_icon = canvas.image("loki.png")
+    var loki_icon = canvas.image(imgPath + "loki.png")
         .size(32,32).center(loki_glow.cx(), loki_glow.cy());
     loki = canvas.group().add(loki_glow).add(loki_icon)
-        .move(x2012+width/20-20, y2012tl)
+        .move(x2012+2*dw+2*iw, y2012tl-iw)
         .opacity(0);
 
-    soulStone = canvas.image("soul_stone.png")
+    soulStone = canvas.image(imgPath + "soul_stone.png")
         .size(16,16)
-        .move(x2014+width/20, y2014tl)
+        .move(x2014+2*dw, y2014tl)
         .opacity(0);
 
-    powerStone = canvas.image("power_stone.png")
+    powerStone = canvas.image(imgPath + "power_stone.png")
         .size(16,16)
-        .move(x2014+width/20, y2014tl+20)
+        .move(x2014+2*dw+2*iw, y2014tl+iw/2)
         .opacity(0);
 
-    realityStone = canvas.image("reality_stone.png")
+    realityStone = canvas.image(imgPath + "reality_stone.png")
         .size(16,16)
-        .move(x2013+width/20, y2013tl)
+        .move(x2013+2*dw+iw, y2013tl)
         .opacity(0);
 
-    spaceStone_loki = canvas.image("space_stone.png")
+    spaceStone_loki = canvas.image(imgPath + "space_stone.png")
         .size(16,16)
-        .move(x2012+width/20-20, y2012tl+40)
+        .move(x2012+2*dw+5*iw/2, y2012tl)
         .opacity(0);
 
-    spaceStone_1970 = canvas.image("space_stone.png")
+    spaceStone_1970 = canvas.image(imgPath + "space_stone.png")
         .size(16,16)
-        .move(x1970+width/20-40, y1970tl)
+        .move(x1970+2*dw, y1970tl)
         .opacity(0);
 
-    timeStone = canvas.image("time_stone.png")
+    timeStone = canvas.image(imgPath + "time_stone.png")
         .size(16,16)
-        .move(x2012+width/20-20, y2012tl+60)
+        .move(x2012+2*dw+2*iw, y2012tl)
         .opacity(0);
 
-    mindStone = canvas.image("mind_stone.png")
+    mindStone = canvas.image(imgPath + "mind_stone.png")
         .size(16,16)
-        .move(x2012+width/20-20, y2012tl+80)
+        .move(x2012+2*dw+2*iw, y2012tl+iw/2)
         .opacity(0);
 
-    mjolnir = canvas.image("mjolnir.png")
+    mjolnir = canvas.image(imgPath + "mjolnir.png")
         .size(16,16)
-        .move(x2013+width/20, y2013tl+20)
+        .move(x2013+2*dw+iw, y2013tl-iw/2)
         .opacity(0);
 
 
@@ -520,10 +526,13 @@ var setPulsating = function() {
     }, 5000);
 };
 
+// Makes an icon group clickable, by assigning the new click handler, and adding a "Click Me" animation
 var make_clickable = function(icon, func, delay=0) {
     // Reset click handler
-    icon.click(null);
-    icon.click(func);
+    setTimeout(function() {
+        icon.click(null);
+        icon.click(func);
+    }, delay);
 
     // Show the clickable gradient
     icon.first().fill(clickable_gradient).opacity(0);
@@ -538,7 +547,9 @@ var make_clickable = function(icon, func, delay=0) {
         clickables.push(icon);
     }
 };
-var make_unclickable = function(icon) {
+
+// Makes an icon group unclickable, by clearing the click handler, and removing the "Click Me" animation
+var make_unclickable = function(icon, carryItems) {
     // Remove click handler
     icon.click(null);
 
@@ -553,7 +564,7 @@ var make_unclickable = function(icon) {
 };
 
 
-// ----------------  Events ------------------------\
+// ----------------  Events ------------------------
 
 var animate2023to2012 = function() {
     // Hide fullscreen, as it requires a reset to be used
@@ -562,83 +573,99 @@ var animate2023to2012 = function() {
     // Temporarily reset the pulsating icons
     clearInterval(pulsatingInterval);
 
-    // Prep icons for movement
-    // ironman.animate(500, "<").move(x2023-ironman.first().width(), yMaintl-ironman.first().height);
-    // cap_am.animate(500, "<").move(x2023-cap_am.first().width(), yMaintl);
-    // hulk.animate(500, "<").move(x2023, yMaintl-hulk.first().height);
-    // antman.animate(500, "<").move(x2023, yMaintl-antman.first().height);
+    // Move icons into preparatory position
+    ironman.finish();
+    cap_am.finish();
+    hulk.finish();
+    antman.finish();
+    // ironman.animate(200,'<').move(x2023,yMaintl-iw).after(function() { ironman.move(x2023,yMaintl-iw); });
+    // cap_am.animate(200,'<').move(x2023+iw,yMaintl-iw).after(function() { cap_am.move(x2023+iw,yMaintl-iw); });
+    // hulk.animate(200,'<').move(x2023,yMaintl).after(function() { hulk.move(2023,yMaintl); });
+    // antman.animate(200,'<').move(x2023+iw,yMaintl).after(function() { antman.move(x2023+iw,yMaintl); });
+    //
+    // setTimeout(function() {
+        // Trace paths for thor and rocket to go to 2013.
+        var ironmanPath = jumpTo2012.clone()
+            .dmove(ironman.cx()-x2023,ironman.cy()-yMaintl);
+        var capPath = jumpTo2012.clone()
+            .dmove(cap_am.cx()-x2023,cap_am.cy()-yMaintl);
+        var hulkPath = jumpTo2012.clone()
+            .dmove(hulk.cx()-x2023,hulk.cy()-yMaintl);
+        var antmanPath = jumpTo2012.clone()
+            .dmove(antman.cx()-x2023,antman.cy()-yMaintl);
 
-    // Trace paths for thor and rocket to go to 2013.
-    var ironmanPath = jumpTo2012.clone()
-        .dmove(ironman.cx()-x2023,ironman.cy()-yMaintl);
-    var capPath = jumpTo2012.clone()
-        .dmove(cap_am.cx()-x2023,cap_am.cy()-yMaintl);
-    var hulkPath = jumpTo2012.clone()
-        .dmove(hulk.cx()-x2023,hulk.cy()-yMaintl);
-    var antmanPath = jumpTo2012.clone()
-        .dmove(antman.cx()-x2023,antman.cy()-yMaintl);
+        // Draw the path of travel
+        jumpTo2012.drawAnimated(1000,'<>')
+            .stroke({ color: '#00F', width: 3, linecap: 'round' });
 
-    // Draw the path of travel
-    jumpTo2012.drawAnimated(1000,'<>')
-        .stroke({ color: '#00F', width: 3, linecap: 'round' });
+        // Show 2012 stub
+        stub2012.drawAnimated({
+            duration: 400,
+            easing: '<>',
+            delay: 600
+            })
+            .stroke({ color: '#555', width: 3, linecap: 'round' });
 
-    // Show 2012 stub
-    stub2012.drawAnimated({
-        duration: 400,
-        easing: '<>',
-        delay: 600
-        })
-        .stroke({ color: '#555', width: 3, linecap: 'round' });
-
-    // Show Loki and 3 infinity stones.
-    loki.animate({
-        duration: 300,
-        easing: '<>',
-        delay: 900
+        // Show Loki and 3 infinity stones.
+        loki.animate({
+            duration: 300,
+            easing: '<>',
+            delay: 900
+            }).opacity(1);
+        spaceStone_loki.animate({
+            duration: 300,
+            easing: '<>',
+            delay: 900
         }).opacity(1);
-    spaceStone_loki.animate({
-        duration: 300,
-        easing: '<>',
-        delay: 900
-    }).opacity(1);
-    timeStone.animate({
-        duration: 300,
-        easing: '<>',
-        delay: 900
-    }).opacity(1);
-    mindStone.animate({
-        duration: 300,
-        easing: '<>',
-        delay: 900
-    }).opacity(1);
+        timeStone.animate({
+            duration: 300,
+            easing: '<>',
+            delay: 900
+        }).opacity(1);
+        mindStone.animate({
+            duration: 300,
+            easing: '<>',
+            delay: 900
+        }).opacity(1);
 
-    var length = jumpTo2012.length();
-    canvas.finish();
-    canvas.animate(1000, '<>').during(function(pos, morph, eased){
-        var p = ironmanPath.pointAt(eased * length);
-        ironman.center(p.x, p.y);
+        // Move ironman to 2012
+        var length = ironmanPath.length();
+        ironman.animate(1000, '>').during(function(pos, morph, eased) {
+            p = ironmanPath.pointAt(eased * length);
+            ironman.center(p.x, p.y);
+        }).after(function() {
+            p = ironmanPath.pointAt(length);
+            ironman.center(p.x, p.y);
+        });
+        // Move cap to 2012
+        length = capPath.length();
+        cap_am.animate(1000, '>').during(function(pos, morph, eased) {
+            p = capPath.pointAt(eased * length);
+            cap_am.center(p.x, p.y);
+        }).after(function() {
+            p = capPath.pointAt(length);
+            cap_am.center(p.x, p.y);
+        });
+        // Move hulk to 2012
+        length = hulkPath.length();
+        hulk.animate(1000, '>').during(function(pos, morph, eased) {
+            p = hulkPath.pointAt(eased * length);
+            hulk.center(p.x, p.y);
+        }).after(function() {
+            p = hulkPath.pointAt(length);
+            hulk.center(p.x, p.y);
+        });
+        // Move antman to 2012
+        length = antmanPath.length();
+        antman.animate(1000, '>').during(function(pos, morph, eased) {
+            p = antmanPath.pointAt(eased * length);
+            antman.center(p.x, p.y)
+        }).after(function() {
+            p = antmanPath.pointAt(length);
+            antman.center(p.x, p.y)
+        });
+    //}, 200);
 
-        p = capPath.pointAt(eased * length);
-        cap_am.center(p.x, p.y);
-
-        p = hulkPath.pointAt(eased * length);
-        hulk.center(p.x, p.y);
-
-        p = antmanPath.pointAt(eased * length);
-        antman.center(p.x, p.y)
-    }).after(function() {
-        var p = ironmanPath.pointAt(length);
-        ironman.center(p.x, p.y);
-
-        p = capPath.pointAt(length);
-        cap_am.center(p.x, p.y);
-
-        p = hulkPath.pointAt(length);
-        hulk.center(p.x, p.y);
-
-        p = antmanPath.pointAt(length);
-        antman.center(p.x, p.y)
-    });
 
     // Remove click handlers
     make_unclickable(ironman);
@@ -667,31 +694,38 @@ var lokiStealsStone = function() {
         stop.at(1, '#a0d1da')
     });
 
+    var durationDelay = 200;
     var durationOpen = 300;
     var durationClose = 400;
 
-    // Group loki and space stone together
-    var lokiAndStone = canvas.group()
-        .add(loki)
-        .add(spaceStone_loki);
+    // Give loki the stone
+    spaceStone_loki.animate(durationDelay, "<>").move(loki.cx(), loki.cy());
 
-    // Display the portal behind loki
-    portal.center(lokiAndStone.cx(), lokiAndStone.cy()).opacity(1).fill(portalGradient)
-    portal.animate(durationOpen,'<').scale(5,5);
+    // Animate the portal after a delay
+    setTimeout(function() {
+        // Group loki and space stone together
+        var lokiAndStone = canvas.group()
+            .add(loki)
+            .add(spaceStone_loki);
 
-    // Loki and stone sucked into portal as it closes
-    lokiAndStone.animate(durationClose, '<', durationOpen)
-        .scale(0,0);
-    portal.animate(durationClose, '<')
-        .scale(0,0.8);
+        // Display the portal behind loki
+        portal.center(lokiAndStone.cx(), lokiAndStone.cy()).opacity(1).fill(portalGradient);
+        portal.animate(durationOpen,'<').scale(3,4);
 
-    // Give mind stone to antman
-    mindStone.animate(500, '<>', durationOpen+durationClose)
-        .move(antman.cx(), antman.cy());
+        // Loki and stone sucked into portal as it closes
+        lokiAndStone.animate(durationClose, '<', durationOpen)
+            .scale(0,0);
+        portal.animate(durationClose, '<')
+            .scale(0,0.8);
 
-    // Give time stone to hulk
-    timeStone.animate(500, '<>', durationOpen+durationClose)
-        .move(hulk.cx(), hulk.cy());
+        // Give mind stone to antman
+        mindStone.animate(200, '<>', durationOpen+durationClose)
+            .move(antman.cx(), antman.cy());
+
+        // Give time stone to hulk
+        timeStone.animate(200, '<>', durationOpen+durationClose)
+            .move(hulk.cx(), hulk.cy());
+    }, durationDelay);
 
     // Remove click handlers
     loki.click(null);
@@ -717,60 +751,75 @@ var animate2023to2013 = function() {
     // Temporarily reset the pulsating icons
     clearInterval(pulsatingInterval);
 
-    // Trace paths for thor and rocket to go to 2013.
-    var thorPath = jumpTo2013.clone()
-        .dmove(thor.cx()-x2023,thor.cy()-yMaintl);
-    var rocketPath = jumpTo2013.clone()
-        .dmove(rocket.cx()-x2023,rocket.cy()-yMaintl);
+    // Move icons into preparatory position
+    thor.finish();
+    rocket.finish();
+    thor.animate(200,'<').move(x2023,yMaintl-iw).after(function() { thor.move(x2023,yMaintl-iw); });
+    rocket.animate(200,'<').move(x2023,yMaintl).after(function() { rocket.move(x2023,yMaintl); });
 
-    // Draw the path of travel
-    jumpTo2013.drawAnimated(1000,'<>')
-        .stroke({ color: '#F00', width: 3, linecap: 'round' });
+    // Perform bulk of movement
+    setTimeout(function() {
+        // Finish the preparatory animations
+        thor.finish();
+        rocket.finish();
 
-    // Show reality stone.
-    realityStone.animate({
-        duration: 300,
-        easing: '<>',
-        delay: 900
-    }).opacity(1);
-    mjolnir.animate({
-        duration: 300,
-        easing: '<>',
-        delay: 900
-    }).opacity(1);
+        // Trace paths for thor and rocket to go to 2013.
+        var thorPath = jumpTo2013.clone()
+            .dmove(thor.cx()-x2023,thor.cy()-yMaintl);
+        var rocketPath = jumpTo2013.clone()
+            .dmove(rocket.cx()-x2023,rocket.cy()-yMaintl);
 
-    // Show 2013 stub
-    stub2013.drawAnimated({
-        duration: 400,
-        easing: '<>',
-        delay: 600
-        })
-        .stroke({ color: '#555', width: 3, linecap: 'round' });
+        // Draw the path of travel
+        jumpTo2013.drawAnimated(700,'>')
+            .stroke({ color: '#F00', width: 3, linecap: 'round' });
 
-    // Move rocket and thor to 2013
-    var length = jumpTo2012.length();
-    canvas.finish();
-    canvas.animate(1000, '<>').during(function(pos, morph, eased){
-        var p = thorPath.pointAt(eased * length);
-        thor.center(p.x, p.y);
+        // Show reality stone.
+        realityStone.animate({
+            duration: 300,
+            easing: '<>',
+            delay: 900
+        }).opacity(1);
+        mjolnir.animate({
+            duration: 300,
+            easing: '<>',
+            delay: 900
+        }).opacity(1);
 
-        p = rocketPath.pointAt(eased * length);
-        rocket.center(p.x, p.y);
-    }).after(function() {
-            var p = thorPath.pointAt(length);
+        // Show 2013 stub
+        stub2013.drawAnimated({
+            duration: 400,
+            easing: '<>',
+            delay: 600
+            })
+            .stroke({ color: '#555', width: 3, linecap: 'round' });
+
+        // Move thor to 2013
+        var length = thorPath.length();
+        thor.animate(700, '>').during(function(pos, morph, eased){
+            p = thorPath.pointAt(eased * length);
             thor.center(p.x, p.y);
-
+        }).after(function() {
+            p = thorPath.pointAt(length);
+            thor.center(p.x, p.y);
+        });
+        // Move rocket to 2013
+        var length = rocketPath.length();
+        rocket.animate(700, '>').during(function(pos, morph, eased){
+            p = rocketPath.pointAt(eased * length);
+            rocket.center(p.x, p.y);
+        }).after(function() {
             p = rocketPath.pointAt(length);
             rocket.center(p.x, p.y);
         });
 
-    // Give reality stone to rocket
-    var rocket_coor = rocketPath.pointAt(rocketPath.length());
-    realityStone.animate(500, '<>')
-        .move(rocket_coor.x, rocket_coor.y);
-    var thor_coor = thorPath.pointAt(thorPath.length());
-    mjolnir.animate(500, '<>')
-        .move(thor_coor.x, thor_coor.y);
+        // Give reality stone to rocket
+        var rocket_coor = rocketPath.pointAt(rocketPath.length());
+        realityStone.animate(500, '<>')
+            .move(rocket_coor.x, rocket_coor.y);
+        var thor_coor = thorPath.pointAt(thorPath.length());
+        mjolnir.animate(500, '<>')
+            .move(thor_coor.x, thor_coor.y);
+    }, 200);
 
     // Update click handlers for rocket and thor
     make_clickable(rocket, animate2013to2023, 1200);
@@ -787,68 +836,103 @@ var animate2023to2014 = function() {
     // Temporarily reset the pulsating icons
     clearInterval(pulsatingInterval);
 
-    // Trace paths for thor and rocket to go to 2013.
-    var warMachinePath = jumpTo2014.clone()
-        .dmove(war_machine.cx()-x2023,war_machine.cy()-yMaintl);
-    var nebulaPath = jumpTo2014.clone()
-        .dmove(nebula.cx()-x2023,nebula.cy()-yMaintl);
-    var hawkeyePath = jumpTo2014.clone()
-        .dmove(hawkeye.cx()-x2023,hawkeye.cy()-yMaintl);
-    var blackWidowPath = jumpTo2014.clone()
-        .dmove(black_widow.cx()-x2023,black_widow.cy()-yMaintl);
-
-    // Draw the path of travel
-    jumpTo2014.drawAnimated(1000,'<>')
-        .stroke({ color: '#F0F', width: 3, linecap: 'round' });
-
-    // Show power stone.
-    powerStone.animate({
-        duration: 300,
-        easing: '<>',
-        delay: 900
-    }).opacity(1);
-
-    // Show 2014 stub
-    stub2014.drawAnimated({
-        duration: 400,
-        easing: '<>',
-        delay: 600
-        })
-        .stroke({ color: '#555', width: 3, linecap: 'round' });
-
-    // Move rocket and thor to 2013
-    var length = jumpTo2014.length();
-    canvas.finish();
-    canvas.animate(1000, '<>').during(function(pos, morph, eased){
-        var p = warMachinePath.pointAt(eased * length);
-        war_machine.center(p.x, p.y);
-
-        p = nebulaPath.pointAt(eased * length);
-        nebula.center(p.x, p.y);
-
-        p = hawkeyePath.pointAt(eased * length);
-        hawkeye.center(p.x, p.y);
-
-        p = blackWidowPath.pointAt(eased * length);
-        black_widow.center(p.x, p.y);
-    }).after(function() {
-        var p = warMachinePath.pointAt(length);
-        war_machine.center(p.x, p.y);
-
-        p = nebulaPath.pointAt(length);
-        nebula.center(p.x, p.y);
-
-        p = hawkeyePath.pointAt(length);
-        hawkeye.center(p.x, p.y);
-
-        p = blackWidowPath.pointAt(length);
-        black_widow.center(p.x, p.y);
+    // Move icons into preparatory position
+    war_machine.finish();
+    nebula.finish();
+    hawkeye.finish();
+    black_widow.finish();
+    war_machine.animate(200,'<').move(x2023,yMaintl-iw).after(function() {
+        war_machine.move(x2023,yMaintl-iw);
+    });
+    nebula.animate(200,'<').move(x2023+iw,yMaintl-iw).after(function() {
+        nebula.move(x2023+iw,yMaintl-iw);
+    });
+    hawkeye.animate(200,'<').move(x2023,yMaintl).after(function() {
+        hawkeye.move(x2023,yMaintl);
+    });
+    black_widow.animate(200,'<').move(x2023+iw,yMaintl).after(function() {
+        black_widow.move(x2023+iw,yMaintl);
     });
 
-    // Give power stone to war machine
-    var warMachine_coor = warMachinePath.pointAt(warMachinePath.length());
-    powerStone.animate(500, '<>')
-        .move(warMachine_coor.x, warMachine_coor.y);
+    // Perform bulk of movement
+    setTimeout(function() {
+        // Finish the preparatory animations
+        war_machine.finish();
+        hawkeye.finish();
+        nebula.finish();
+        black_widow.finish();
+
+        // Trace paths for thor and rocket to go to 2013.
+        var warMachinePath = jumpTo2014.clone()
+            .dmove(war_machine.cx()-x2023,war_machine.cy()-yMaintl);
+        var nebulaPath = jumpTo2014.clone()
+            .dmove(nebula.cx()-x2023,nebula.cy()-yMaintl);
+        var hawkeyePath = jumpTo2014.clone()
+            .dmove(hawkeye.cx()-x2023,hawkeye.cy()-yMaintl);
+        var blackWidowPath = jumpTo2014.clone()
+            .dmove(black_widow.cx()-x2023,black_widow.cy()-yMaintl);
+
+        // Draw the path of travel
+        jumpTo2014.drawAnimated(1000,'<>')
+            .stroke({ color: '#F0F', width: 3, linecap: 'round' });
+
+        // Show power stone.
+        powerStone.animate({
+            duration: 300,
+            easing: '<>',
+            delay: 900
+        }).opacity(1);
+
+        // Show 2014 stub
+        stub2014.drawAnimated({
+            duration: 400,
+            easing: '<>',
+            delay: 400
+            })
+            .stroke({ color: '#555', width: 3, linecap: 'round' });
+
+        // Move war machine to 2014
+        var length = warMachinePath.length();
+        war_machine.animate(600, '>').during(function(pos, morph, eased){
+            p = warMachinePath.pointAt(eased * length);
+            war_machine.center(p.x, p.y);
+        }).after(function() {
+            p = warMachinePath.pointAt(length);
+            war_machine.center(p.x, p.y);
+        });
+        // Move hawkeye to 2014
+        length = hawkeyePath.length();
+        hawkeye.animate(600, '>').during(function(pos, morph, eased){
+            p = hawkeyePath.pointAt(eased * length);
+            hawkeye.center(p.x, p.y);
+        }).after(function() {
+            p = hawkeyePath.pointAt(length);
+            hawkeye.center(p.x, p.y);
+        });
+        // Move nebula to 2014
+        length = nebulaPath.length();
+        nebula.animate(600, '>').during(function(pos, morph, eased){
+            p = nebulaPath.pointAt(eased * length);
+            nebula.center(p.x, p.y);
+        }).after(function() {
+            p = nebulaPath.pointAt(length);
+            nebula.center(p.x, p.y);
+        });
+        // Move black widow to 2014
+        length = blackWidowPath.length();
+        black_widow.animate(600, '>').during(function(pos, morph, eased){
+            p = blackWidowPath.pointAt(eased * length);
+            black_widow.center(p.x, p.y);
+        }).after(function() {
+            p = blackWidowPath.pointAt(length);
+            black_widow.center(p.x, p.y);
+        });
+
+        // Give power stone to war machine
+        var warMachine_coor = warMachinePath.pointAt(warMachinePath.length());
+        powerStone.animate(500, '<>')
+            .move(warMachine_coor.x, warMachine_coor.y);
+    }, 200);
 
     // Update click handler for hawkeye and black widow
     make_clickable(hawkeye, animate2014to2023_SoulStone, 1000);
@@ -893,19 +977,23 @@ var animate2012to1970 = function() {
         delay: 900
     }).opacity(1);
 
-    // Move cap and ironman to 1970
-    var length = jumpTo1970.length();
-    canvas.finish();
-    canvas.animate(1000, '<>').during(function(pos, morph, eased) {
-        var p = ironmanPath.pointAt(eased * length);
+    // Move ironman to 1970
+    var length = ironmanPath.length();
+    ironman.finish();
+    ironman.animate(1000, '<>').during(function(pos, morph, eased) {
+        p = ironmanPath.pointAt(eased * length);
         ironman.center(p.x, p.y);
-
+    }).after(function() {
+        p = ironmanPath.pointAt(length);
+        ironman.center(p.x, p.y);
+    });
+    // Move cap to 1970
+    length = capPath.length();
+    cap_am.finish();
+    cap_am.animate(1000, '<>').during(function(pos, morph, eased) {
         p = capPath.pointAt(eased * length);
         cap_am.center(p.x, p.y);
     }).after(function() {
-        var p = ironmanPath.pointAt(length);
-        ironman.center(p.x, p.y);
-
         p = capPath.pointAt(length);
         cap_am.center(p.x, p.y);
     });
@@ -939,23 +1027,26 @@ var animate2012to2023 = function() {
     returnFrom2012.drawAnimated(1000,'<>')
         .stroke({ color: '#00F', width: 3, linecap: 'round' });
 
-    // Move icons back to 2023. Stones and supers have to be move separately, since stones were previously
-    // moved in this function
-    var length = returnFrom2012.length();
-    canvas.finish();
-    canvas.animate(1000, '<>').during(function(pos, morph, eased) {
+    // Move hulk back to 2023 with time stone
+    var length = hulkPath.length();
+    hulk.finish();
+    hulk.animate(1000, '<>').during(function(pos, morph, eased) {
         p = hulkPath.pointAt(eased * length);
         hulk.center(p.x, p.y);
         timeStone.move(p.x, p.y);
-
-        p = antmanPath.pointAt(eased * length);
-        antman.center(p.x, p.y)
-        mindStone.move(p.x, p.y);
     }).after(function() {
         p = hulkPath.pointAt(length);
         hulk.center(p.x, p.y);
         timeStone.move(p.x, p.y);
-
+    });
+    // Move antman back to 2023 with mindstone
+    length = antmanPath.length();
+    antman.finish();
+    antman.animate(1000, '<>').during(function(pos, morph, eased) {
+        p = antmanPath.pointAt(eased * length);
+        antman.center(p.x, p.y)
+        mindStone.move(p.x, p.y);
+    }).after(function() {
         p = antmanPath.pointAt(length);
         antman.center(p.x, p.y)
         mindStone.move(p.x, p.y);
@@ -990,30 +1081,43 @@ var animate2013to2023 = function() {
         .dmove(rocket.cx()-x2013-width/20,rocket.cy()-y2013tl);
 
     // Draw the path of travel
-    returnFrom2013.drawAnimated(1000,'<>')
+    returnFrom2013.drawAnimated(650,'<')
         .stroke({ color: '#F00', width: 3, linecap: 'round' });
 
-    // Rocket and Thor return from 2013 with reality stone (and possibly Mjolnir)
-    // moved in this function
-    var length = returnFrom2013.length();
-    canvas.finish();
-    canvas.animate(1000, '<>').during(function(pos, morph, eased) {
+    // Move thor to 2023 with mjolnir
+    var length = thorPath.length();
+    thor.finish();
+    thor.animate(650, '<').during(function(pos, morph, eased) {
         p = thorPath.pointAt(eased * length);
         thor.center(p.x, p.y);
         mjolnir.move(p.x, p.y);
-
-        p = rocketPath.pointAt(eased * length);
-        rocket.center(p.x, p.y);
-        realityStone.move(p.x, p.y);
     }).after(function() {
         p = thorPath.pointAt(length);
         thor.center(p.x, p.y);
         mjolnir.move(p.x, p.y);
-
+    });
+    // Move rocket back to 2023 with reality stone
+    length = rocketPath.length();
+    rocket.finish();
+    rocket.animate(650, '<').during(function(pos, morph, eased) {
+        p = rocketPath.pointAt(eased * length);
+        rocket.center(p.x, p.y);
+        realityStone.move(p.x, p.y);
+    }).after(function() {
         p = rocketPath.pointAt(length);
         rocket.center(p.x, p.y);
         realityStone.move(p.x, p.y);
     });
+
+    // After arriving back in 2023, thor and rocket move into
+    setTimeout(function() {
+        thor.finish();
+        rocket.finish();
+        thor.animate(250,'>').move(x2023+2*iw, yMaintl-iw).after(function() { thor.move(x2023+2*iw, yMaintl-iw); });
+        rocket.animate(250,'>').move(x2023+2*iw, yMaintl).after(function() { rocket.move(x2023+2*iw, yMaintl); });
+        mjolnir.animate(250,'>').move(x2023+5*iw/2, yMaintl-iw/2).after(function() { mjolnir.move(x2023+5*iw/2, yMaintl-iw/2); });
+        realityStone.animate(250,'>').move(x2023+5*iw/2, yMaintl+iw/2).after(function() { realityStone.move(x2023+5*iw/2, yMaintl+iw/2); });
+    }, 650);
 
     // Remove click handlers
     make_unclickable(rocket);
@@ -1044,7 +1148,7 @@ var animate2014to2023_SoulStone = function() {
 
 	// Soul stone appears with hawkeye
 	soulStone.move(hawkeye.cx(), hawkeye.cy());
-	soulStone.animate(1000,"<>",1000)
+	soulStone.animate(500,"<>",500)
         .opacity(1);
 
 	// Trace path for hawkeye to return to present
@@ -1055,18 +1159,17 @@ var animate2014to2023_SoulStone = function() {
     // Draw the path of travel, assuming war machine hasn't already travelled it
     if (!powerStoneInPresent) {
         returnFrom2014.drawAnimated({
-            duration: 1000,
-            easing: '<>',
-            delay: 2000
+            duration: 650,
+            easing: '<',
+            delay: 1000
             })
             .stroke({color: '#F0F', width: 3, linecap: 'round'});
     }
 
-    // Rocket and Thor return from 2013 with reality stone (and possibly Mjolnir)
-    // moved in this function
-    var length = returnFrom2014.length();
-    canvas.finish();
-    canvas.animate(1000, '<>',2000).during(function(pos, morph, eased) {
+    // Hawkeye returns to 2023 with soul stone
+    var length = hawkeyePath.length();
+    hawkeye.finish();
+    hawkeye.animate(650, '<',1000).during(function(pos, morph, eased) {
         p = hawkeyePath.pointAt(eased * length);
         hawkeye.center(p.x, p.y);
         soulStone.move(p.x, p.y);
@@ -1075,6 +1178,13 @@ var animate2014to2023_SoulStone = function() {
         hawkeye.center(p.x, p.y);
         soulStone.move(p.x, p.y);
     });
+
+    // After arrival in 2023, move to correct place
+    setTimeout(function() {
+        hawkeye.finish();
+        hawkeye.animate(400,'>').move(x2023+2*iw, yMaintl+iw).after(function() { hawkeye.move(x2023+2*iw, yMaintl+iw); });
+        soulStone.animate(400,'>').move(x2023+5*iw/2, yMaintl+3*iw/2).after(function() { soulStone.move(x2023+5*iw/2, yMaintl+3*iw/2); });
+    }, 1650);
     
 	// Remove click handler for hawkeye
     make_unclickable(hawkeye);
@@ -1105,14 +1215,14 @@ var animate2014To2023_PowerStone = function() {
 
     // Draw the path of travel, assuming hawkeye hasn't already travelled it
     if (!soulStoneInPresent) {
-        returnFrom2014.drawAnimated(1000, '<>')
+        returnFrom2014.drawAnimated(650, '<')
             .stroke({color: '#F0F', width: 3, linecap: 'round'});
     }
 
     // War machine returns to 2023 with power stone. Nebula stays behind
-    var length = returnFrom2014.length();
-    canvas.finish();
-    canvas.animate(1000, '<>').during(function(pos, morph, eased) {
+    var length = warMachinePath.length();
+    war_machine.finish();
+    war_machine.animate(600, '<').during(function(pos, morph, eased) {
         p = warMachinePath.pointAt(eased * length);
         war_machine.center(p.x, p.y);
         powerStone.move(p.x, p.y);
@@ -1121,6 +1231,13 @@ var animate2014To2023_PowerStone = function() {
         war_machine.center(p.x, p.y);
         powerStone.move(p.x, p.y);
     });
+
+    // After arrival in 2023, move to correct place
+    setTimeout(function() {
+        war_machine.finish();
+        war_machine.animate(250,'>').move(x2023+iw, yMaintl-2*iw).after(function() { war_machine.move(x2023+iw, yMaintl-2*iw); });
+        powerStone.animate(250,'>').move(x2023+3*iw/2, yMaintl-3*iw/2).after(function() { powerStone.move(x2023+3*iw/2, yMaintl-3*iw/2); });
+    }, 600);
 
     // Thanos, Gamora, and Evil Nebula show up
     thanos.animate(1000, '<>')
@@ -1139,7 +1256,7 @@ var animate2014To2023_PowerStone = function() {
     make_clickable(nebula_evil, animate2014to2023_Nebula);
 
     // Add click handler for evil Nebula to go to the present.
-    powerStoneInPresent = true
+    powerStoneInPresent = true;
 
     // Set click handlers for final battle if everyone's in the present
     if (spaceStoneInPresent && mindStoneInPresent && timeStoneInPresent && realityStoneInPresent && powerStoneInPresent
@@ -1155,21 +1272,34 @@ var animate2014to2023_Nebula = function() {
     // Temporarily reset the pulsating icons
     clearInterval(pulsatingInterval);
 
-    // Trace path for evil nebula
-    var nebulaPath = returnFrom2014.clone()
-        .opacity(0)
-        .dmove(nebula_evil.cx()-x2014-width/20,nebula_evil.cy()-y2014tl);
+    // Move evil nebula in place for time travel
+    nebula_evil.finish();
+    nebula_evil.animate(300,'<').move(x2014+2*dw, y2014tl-iw).after(function() { nebula_evil.move(x2014+2*dw, y2014tl-iw); });
 
     // Evil nebula goes to 2023
-    var length = returnFrom2014.length();
-    canvas.finish();
-    canvas.animate(1000, '<>').during(function(pos, morph, eased) {
-        p = nebulaPath.pointAt(eased * length);
-        nebula_evil.center(p.x, p.y);
-    }).after(function() {
-        p = nebulaPath.pointAt(length);
-        nebula_evil.center(p.x, p.y);
-    });
+    setTimeout(function() {
+        nebula_evil.finish();
+
+        // Trace path for evil nebula
+        var nebulaPath = returnFrom2014.clone()
+            .opacity(0)
+            .dmove(nebula_evil.cx()-x2014-width/20,nebula_evil.cy()-y2014tl);
+
+        var length = nebulaPath.length();
+        nebula_evil.animate(600, '-').during(function(pos, morph, eased) {
+            p = nebulaPath.pointAt(eased * length);
+            nebula_evil.center(p.x, p.y);
+        }).after(function() {
+            p = nebulaPath.pointAt(length);
+            nebula_evil.center(p.x, p.y);
+        });
+    }, 300);
+
+    //After arrival in 2023, move to correct place
+    setTimeout(function() {
+        nebula_evil.finish();
+        nebula_evil.animate(300,'>').move(x2023+2*iw, yMaintl-2*iw).after(function() { nebula_evil.move(x2023+2*iw, yMaintl-2*iw); });
+    }, 900);
 
     // Mark evil nebula in present
     nebulaInPresent = true;
@@ -1190,39 +1320,67 @@ var animate2014to2023_Thanos = function() {
     // Temporarily reset the pulsating icons
     clearInterval(pulsatingInterval);
 
-    // Trace path of travel for thanos, gamora, and good nebula
-    var nebulaPath = returnFrom2014.clone()
-        .opacity(0)
-        .dmove(nebula.cx()-x2014-width/20,nebula.cy()-y2014tl);
-    var gamoraPath = returnFrom2014.clone()
-        .opacity(0)
-        .dmove(gamora.cx()-x2014-width/20,gamora.cy()-y2014tl);
-    var thanosPath = returnFrom2014.clone()
-        .opacity(0)
-        .dmove(thanos.cx()-x2014-width/20,thanos.cy()-y2014tl);
+    // Move evil nebula in place for time travel
+    thanos.finish();
+    gamora.finish();
+    nebula.finish();
+    thanos.animate(300,'<').move(x2014+2*dw, y2014tl-iw).after(function() { thanos.move(x2014+2*dw, y2014tl-iw); });
+    gamora.animate(300,'<').move(x2014+2*dw, y2014tl).after(function() { gamora.move(x2014+2*dw, y2014tl); });
+    nebula.animate(300,'<').move(x2014+2*dw+iw, y2014tl).after(function() { nebula.move(x2014+2*dw+iw, y2014tl); });
 
-    // Evil nebula goes to 2023
-    var length = returnFrom2014.length();
-    canvas.finish();
-    canvas.animate(1000, '<>').during(function(pos, morph, eased) {
-        p = nebulaPath.pointAt(eased * length);
-        nebula.center(p.x, p.y);
+    setTimeout(function(){
+        // Trace path of travel for thanos, gamora, and good nebula
+        var nebulaPath = returnFrom2014.clone()
+            .opacity(0)
+            .dmove(nebula.cx()-x2014-width/20,nebula.cy()-y2014tl);
+        var gamoraPath = returnFrom2014.clone()
+            .opacity(0)
+            .dmove(gamora.cx()-x2014-width/20,gamora.cy()-y2014tl);
+        var thanosPath = returnFrom2014.clone()
+            .opacity(0)
+            .dmove(thanos.cx()-x2014-width/20,thanos.cy()-y2014tl);
 
-        p = gamoraPath.pointAt(eased * length);
-        gamora.center(p.x, p.y);
+        // Good nebula returns to 2023
+        var length = nebulaPath.length();
+        nebula.finish();
+        nebula.animate(600, '-').during(function(pos, morph, eased) {
+            p = nebulaPath.pointAt(eased * length);
+            nebula.center(p.x, p.y);
+        }).after(function() {
+            p = nebulaPath.pointAt(length);
+            nebula.center(p.x, p.y);
+        });
+        // Gamora returns to 2023
+        length = gamoraPath.length();
+        gamora.finish();
+        gamora.animate(600, '-').during(function(pos, morph, eased) {
+            p = gamoraPath.pointAt(eased * length);
+            gamora.center(p.x, p.y);
+        }).after(function() {
+            p = gamoraPath.pointAt(length);
+            gamora.center(p.x, p.y);
+        });
+        // Thanos returns to 2023
+        length = thanosPath.length();
+        thanos.finish();
+        thanos.animate(600, '-').during(function(pos, morph, eased) {
+            p = thanosPath.pointAt(eased * length);
+            thanos.center(p.x, p.y);
+        }).after(function() {
+            p = thanosPath.pointAt(length);
+            thanos.center(p.x, p.y);
+        });
+    }, 300);
 
-        p = thanosPath.pointAt(eased * length);
-        thanos.center(p.x, p.y);
-    }).after(function() {
-        p = nebulaPath.pointAt(length);
-        nebula.center(p.x, p.y);
-
-        p = gamoraPath.pointAt(length);
-        gamora.center(p.x, p.y);
-
-        p = thanosPath.pointAt(length);
-        thanos.center(p.x, p.y);
-    });
+    //After arrival in 2023, move to correct place
+    setTimeout(function() {
+        thanos.finish();
+        gamora.finish();
+        nebula.finish();
+        thanos.animate(300,'>').move(x2023, yMaintl-2*iw).after(function() { thanos.move(x2023, yMaintl-2*iw); });
+        gamora.animate(300,'>').move(x2023, yMaintl+iw).after(function() { gamora.move(x2023, yMaintl+iw); });
+        nebula.animate(300,'>').move(x2023+iw, yMaintl+iw).after(function() { nebula.move(x2023+iw, yMaintl+iw); });
+    }, 900);
 
     // Remove click handler
     make_unclickable(nebula_evil);
@@ -1248,20 +1406,24 @@ var animate1970to2023 = function() {
     returnFrom1970.drawAnimated(1000,'<>')
         .stroke({ color: '#3FF', width: 3, linecap: 'round' });
 
-    // Cap and Ironman return to present with space stone
-    var length = returnFrom1970.length();
-    canvas.finish();
-    canvas.animate(1000, '<>').during(function(pos, morph, eased) {
+    // Ironman returns to present
+    var length = ironmanPath.length();
+    ironman.finish();
+    ironman.animate(1000, '<>').during(function(pos, morph, eased) {
         p = ironmanPath.pointAt(eased * length);
         ironman.center(p.x, p.y);
-
+    }).after(function() {
+        p = ironmanPath.pointAt(length);
+        ironman.center(p.x, p.y);
+    });
+    // Cap returns to present with space stone
+    length = capPath.length();
+    cap_am.finish();
+    cap_am.animate(1000, '<>').during(function(pos, morph, eased) {
         p = capPath.pointAt(eased * length);
         cap_am.center(p.x, p.y);
         spaceStone_1970.move(p.x, p.y);
     }).after(function() {
-        p = ironmanPath.pointAt(length);
-        ironman.center(p.x, p.y);
-
         p = capPath.pointAt(length);
         cap_am.center(p.x, p.y);
         spaceStone_1970.move(p.x, p.y);
@@ -1294,7 +1456,6 @@ var finalBattle = function() {
     // stones.
 
     // TODO: Optional - Give infinity stones to hulk and he brings everyone back with portals and shit
-    // TODO: Mjolnir goes to cap
 
     var ix = ironman.x();
     var iy = ironman.y();
@@ -1344,7 +1505,8 @@ var capReturnsStones = function() {
     realityStone.animate(1000, "<>", 250).move(x2014+iw/2-realityStone.width()/2 + width/20, y2014tl - realityStone.height()/3);
     mindStone.animate(1000, "<>", 250).move(x2014 + width/20+iw-mindStone.width()/2, y2014tl + ih/2 - mindStone.height()/2);
     mjolnir.animate(1000, "<>", 750).move(x2014 + width/20 + iw/2, y2014tl + ih/2);
-    // TODO: Adjust position of soul and power stones. Reveal rest of 2014 timeline on slight delay
+    group2014Timeline.animate(500,"",1750).opacity(1);
+    // TODO: Adjust position of soul and power stones.
 
     // Move cap to 2013 timeline. Leave power and soul stones behind
     cap_am.animate(1000, "<>", 250).move(x2013 + width/20, y2013tl);
@@ -1353,21 +1515,24 @@ var capReturnsStones = function() {
     realityStone.animate(1000, "<>", 250).move(x2013+iw/2-realityStone.width()/2 + width/20, y2013tl - realityStone.height()/3);
     mindStone.animate(1000, "<>", 250).move(x2013 + width/20+iw-mindStone.width()/2, y2013tl + ih/2 - mindStone.height()/2);
     mjolnir.animate(1000, "<>", 250).move(x2013 + width/20 + iw/2, y2013tl + ih/2);
-    // TODO: Adjust position of reality stone and mjolnir. Reveal rest of 2013 timeline on slight delay
+    group2013Timeline.animate(500,"",3000).opacity(1);
+    // TODO: Adjust position of reality stone and mjolnir.
 
     // Move cap to 2012 timeline. Leave reality stone behind
     cap_am.animate(1000, "<>", 250).move(x2012 + width/20, y2012tl);
     timeStone.animate(1000, "<>", 250).move(x2012 + width/20-timeStone.width()/2, y2012tl + ih/2 - timeStone.height()/2);
     spaceStone_1970.animate(1000, "<>", 250).move(x2012 + width/20, y2012tl+ih-spaceStone_1970.height());
     mindStone.animate(1000, "<>", 250).move(x2012 + width/20+iw-mindStone.width()/2, y2012tl + ih/2 - mindStone.height()/2);
-    // TODO: Adjust position of mind and time stones. Reveal rest of 2012 timeline on slight delay.
+    group2012Timeline.animate(500,"",4250).opacity(1);
+    // TODO: Adjust position of mind and time stones.
 
     // Move cap to 1970 timeline. Leave mind and time stones behind
     cap_am.animate(1000, "<>", 250).move(x1970 + width/20, y1970tl);
     spaceStone_1970.animate(1000, "<>", 250).move(x1970 + width/20, y1970tl+ih-spaceStone_1970.height());
-    // TODO: Adjust position of space stone. Reveal rest of 1970 timeline on slight delay
+    group1970Timeline.animate(500,"",5500).opacity(1);
+    // TODO: Adjust position of space stone.
 
-    make_clickable(cap_am, capLivesOutLife, 4500);
+    make_clickable(cap_am, capLivesOutLife, 5500);
     // Cap moves to 1970. Leaves space stone and restof 1970 timeline populates. Cap travels along
     // this timeline and we see a prompt where he's sitting on the bench
 };
@@ -1416,7 +1581,7 @@ $(document).ready(function() {
             document.mozFullScreenElement ||
             document.msFullscreenElement
         ) {
-            $("#fullscreen")[0].src = "fullscreen.png";
+            $("#fullscreen")[0].src = imgPath + "fullscreen.png";
             if (document.exitFullscreen) {
                 document.exitFullscreen();
             } else if (document.mozCancelFullScreen) {
@@ -1428,7 +1593,7 @@ $(document).ready(function() {
             }
         } else {
             // TODO: Get a new png for exitfullscreen
-            $("#fullscreen")[0].src = "exitfullscreen.png";
+            $("#fullscreen")[0].src = imgPath + "exitfullscreen.png";
             element = $('#endgame-container')[0];
             if (element.requestFullscreen) {
                 element.requestFullscreen();
