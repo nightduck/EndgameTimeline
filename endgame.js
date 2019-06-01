@@ -527,11 +527,16 @@ var setPulsating = function() {
 };
 
 // Makes an icon group clickable, by assigning the new click handler, and adding a "Click Me" animation
-var make_clickable = function(icon, func, delay=0) {
+var make_clickable = function(icon, func, delay=0, carryItems = []) {
     // Reset click handler
     setTimeout(function() {
         icon.click(null);
         icon.click(func);
+
+        for (var i in carryItems) {
+            carryItems[i].click(null);
+            carryItems[i].click(func);
+        }
     }, delay);
 
     // Show the clickable gradient
@@ -549,9 +554,13 @@ var make_clickable = function(icon, func, delay=0) {
 };
 
 // Makes an icon group unclickable, by clearing the click handler, and removing the "Click Me" animation
-var make_unclickable = function(icon, carryItems) {
+var make_unclickable = function(icon, carryItems = []) {
     // Remove click handler
     icon.click(null);
+
+    for (var i in carryItems) {
+        carryItems[i].click(null);
+    }
 
     // Remove clickable gradient
     icon.first().fill(unclickable_gradient);
@@ -674,8 +683,7 @@ var animate2023to2012 = function() {
     make_unclickable(antman);
 
     // Update click handlers for Loki and space stone
-    make_clickable(loki, lokiStealsStone, 1200);
-    spaceStone_loki.click(lokiStealsStone);
+    make_clickable(loki, lokiStealsStone, 1200, [spaceStone_loki]);
 
     // Pulsate all clickable icons periodically
     setPulsating();
@@ -737,8 +745,8 @@ var lokiStealsStone = function() {
     make_clickable(cap_am, animate2012to1970, durationOpen+durationClose);
 
     // Update click handlers for hulk and antman
-    make_clickable(hulk, animate2012to2023, durationOpen+durationClose);
-    make_clickable(antman, animate2012to2023, durationOpen+durationClose);
+    make_clickable(hulk, animate2012to2023, durationOpen+durationClose, [timeStone]);
+    make_clickable(antman, animate2012to2023, durationOpen+durationClose, [mindStone]);
 
     // Pulsate all clickable icons periodically
     setPulsating();
@@ -822,8 +830,8 @@ var animate2023to2013 = function() {
     }, 200);
 
     // Update click handlers for rocket and thor
-    make_clickable(rocket, animate2013to2023, 1200);
-    make_clickable(thor, animate2013to2023, 1200);
+    make_clickable(rocket, animate2013to2023, 1200, [realityStone]);
+    make_clickable(thor, animate2013to2023, 1200, [mjolnir]);
 
     // Pulsate all clickable icons periodically
     setPulsating();
@@ -939,9 +947,7 @@ var animate2023to2014 = function() {
     make_clickable(black_widow, animate2014to2023_SoulStone, 1000);
 
     // Update click handler for war machine and nebula
-    powerStone.click(null);
-    powerStone.click(animate2014To2023_PowerStone);
-    make_clickable(war_machine, animate2014To2023_PowerStone, 1000);
+    make_clickable(war_machine, animate2014To2023_PowerStone, 1000, [powerStone]);
     make_clickable(nebula, animate2014To2023_PowerStone, 1000);
 
     // Pulsate all clickable icons periodically
@@ -998,16 +1004,14 @@ var animate2012to1970 = function() {
         cap_am.center(p.x, p.y);
     });
 
-    // Give time stone to hulk
+    // Give space stone to cap
     var cap_coor = capPath.pointAt(capPath.length());
     spaceStone_1970.animate(500, '<>')
         .move(cap_coor.x, cap_coor.y);
 
     // Update click handler for cap and ironman
     make_clickable(ironman, animate1970to2023, 1200);
-    make_clickable(cap_am, animate1970to2023, 1200);
-    spaceStone_1970.click(null);
-    spaceStone_1970.click(animate1970to2023, 1200);
+    make_clickable(cap_am, animate1970to2023, 1200, [spaceStone_1970]);
 
     // Pulsate all clickable icons periodically
     setPulsating();
@@ -1053,8 +1057,8 @@ var animate2012to2023 = function() {
     });
 
     // Remove click handlers.
-    make_unclickable(hulk);
-    make_unclickable(antman);
+    make_unclickable(hulk, [timeStone]);
+    make_unclickable(antman, [mindStone]);
 
     // Mark boolean that this dependency is satisfied
     mindStoneInPresent = true;
@@ -1120,8 +1124,8 @@ var animate2013to2023 = function() {
     }, 650);
 
     // Remove click handlers
-    make_unclickable(rocket);
-    make_unclickable(thor);
+    make_unclickable(rocket, [realityStone]);
+    make_unclickable(thor, [mjolnir]);
 
     // Mark boolean that this dependency is satisfied
     realityStoneInPresent = true
@@ -1187,7 +1191,7 @@ var animate2014to2023_SoulStone = function() {
     }, 1650);
     
 	// Remove click handler for hawkeye
-    make_unclickable(hawkeye);
+    make_unclickable(hawkeye, [soulStone]);
     make_unclickable(black_widow);
 
     // Mark boolean that this dependency is satisfied
@@ -1248,8 +1252,7 @@ var animate2014To2023_PowerStone = function() {
         .opacity(1);
 
     // Remove click handlers
-    powerStone.click(null);
-    make_unclickable(war_machine);
+    make_unclickable(war_machine, [powerStone]);
     make_unclickable(nebula);
 
     // Create click handler for evil nebula
@@ -1431,11 +1434,10 @@ var animate1970to2023 = function() {
 
     // Remove click handlers
     make_unclickable(ironman);
-    make_unclickable(cap_am);
-    spaceStone_1970.click(null);
+    make_unclickable(cap_am, [spaceStone_1970]);
 
     // Mark boolean that this dependency is satisfied
-    spaceStoneInPresent = true
+    spaceStoneInPresent = true;
 
     // Set click handlers for final battle if everyone's in the present
     if (spaceStoneInPresent && mindStoneInPresent && timeStoneInPresent && realityStoneInPresent && powerStoneInPresent
@@ -1457,6 +1459,7 @@ var finalBattle = function() {
 
     // TODO: Optional - Give infinity stones to hulk and he brings everyone back with portals and shit
 
+    // Give stones to ironman
     var ix = ironman.x();
     var iy = ironman.y();
     var ih = ironman.first().height();
@@ -1467,13 +1470,17 @@ var finalBattle = function() {
     spaceStone_1970.animate(500, "<>").move(ix, iy+ih-spaceStone_1970.height());
     realityStone.animate(500, "<>").move(ix+iw/2-realityStone.width()/2, iy - realityStone.height()/3);
     mindStone.animate(500, "<>").move(ix+iw-mindStone.width()/2, iy + ih/2 - mindStone.height()/2);
+
+    // Give mjolnir to cap
     mjolnir.animate(500, "<>").move(cap_am.cx(), cap_am.cy());
 
     thanos.animate(1000,"<",750).opacity(0);
 
-    // Remove click handler
-    make_unclickable(ironman);
-    make_clickable(cap_am, capReturnsStones, 2000);
+    // Remove click handler from ironman
+    make_unclickable(ironman, [powerStone, soulStone, timeStone, spaceStone_1970, realityStone, mindStone, mjolnir]);
+
+    // Assign click handler to cap
+    make_clickable(cap_am, capReturnsStones, 2000, [mjolnir]);
 
     // Pulsate all clickable icons periodically
     setPulsating();
