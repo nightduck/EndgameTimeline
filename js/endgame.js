@@ -65,11 +65,19 @@ var redraw = function() {
         document.mozFullScreenElement ||
         document.msFullscreenElement
     ) {
+        // If fullscreen, set height to height of screen
         height = window.screen.availHeight;
     } else {
+        // If not in fullscreen, set height to the max the div will allow, ...
         height = parseInt(getComputedStyle(document.getElementById("endgame-canvas")).maxHeight, 10);
+        if (height > window.screen.availHeight) {
+            // ... unless that max div height is higher than the screen, then just max out at screen height. This
+            // scenario is common on mobile landscape views
+            height = window.screen.availHeight;
+        }
     }
     if (height > 3 / 4 * width) {
+        // If the height is too tall, correct it to a 4:3 aspect ratio
         var newHeight = 3 / 4 * width;
         if (
             document.fullscreenElement ||
