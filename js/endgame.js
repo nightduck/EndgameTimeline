@@ -2,29 +2,30 @@
 
 // Define all variables initializes in redraw so they're visible globally
 var margin, width, height, verticalOffset, iw, clickable_gradient, unclickable_gradient,
-    x1970, x2012, x2013, x2014, x2018, x2023,
-    y1970tl, y2013tl, yMaintl, y2014tl, y2012tl,
+    x1950, x1970, x2012, x2013, x2014, x2018, x2023,
+    y1950tl, y1970tl, y2013tl, yMaintl, y2014tl, y2012tl,
     x = [], y = [], dw, dh,
     spaceStoneInPresent = false, mindStoneInPresent = false, realityStoneInPresent = false, timeStoneInPresent = false,
     powerStoneInPresent = false, soulStoneInPresent = false, thanosInPresent = false, nebulaInPresent = false,
     canvas, background,
-    tlMain, tick1970_onMain, tick2012_onMain, tick2013_onMain, tick2014_onMain, tick2018_onMain, tick2023_onMain,
-    label1970_onMain, label2012_onMain, label2013_onMain, label2014_onMain, label2018_onMain, label2023_onMain,
-    stub1970, stub2012, stub2013, stub2014,
+    tlMain, tick1950_onMain, tick1970_onMain, tick2012_onMain, tick2013_onMain, tick2014_onMain, tick2018_onMain, tick2023_onMain,
+    label1950_onMain, label1970_onMain, label2012_onMain, label2013_onMain, label2014_onMain, label2018_onMain, label2023_onMain,
+    stub1950, stub1970, stub2012, stub2013, stub2014,
+    tl1950, tick2018_on1950, tickbench_on1950, label2018_on1950, labelbench_on1950,
     tl1970, tick2018_on1970, tick2023_on1970, label2018_on1970, label2023_on1970,
     tl2012, tick2018_on2012, label2018_on2012,
     tl2013, tick2018_on2013, tick2023_on2013, label2018_on2013, label2023_on2013,
     tl2014,
     jumpTo1970, jumpTo2012, jumpTo2013, jumpTo2014,
     returnFrom1970, returnFrom2012, returnFrom2013, returnFrom2014,
-    ironman, cap_am, hulk, antman, hawkeye, thor, rocket, gamora, war_machine, black_widow, nebula,
-    ironman_glow, cap_am_glow, hulk_glow, antman_glow, hawkeye_glow, thor_glow, rocket_glow, gamora_glow,
+    ironman, cap_am, hulk, antman, hawkeye, thor, rocket, gamora, war_machine, black_widow, nebula, peggy,
+    ironman_glow, cap_am_glow, hulk_glow, antman_glow, hawkeye_glow, thor_glow, rocket_glow, gamora_glow, peggy_glow,
     war_machine_glow, black_widow_glow, nebula_glow,
     nebula_evil, thanos, loki,
     nebula_evil_glow, thanos_glow, loki_glow,
     soulStone, powerStone, realityStone, spaceStone_loki, spaceStone_1970,  timeStone, mindStone, mjolnir,
-    groupMainTimeline, group1970Timeline, group2012Timeline, group2013Timeline, group2014Timeline,
-    group1970Fractals, group2012Fractals, group2013Fractals,
+    groupMainTimeline, group1950Timeline, group1970Timeline, group2012Timeline, group2013Timeline, group2014Timeline,
+    group1950Fractals, group1970Fractals, group2012Fractals, group2013Fractals,
     clickables = [],
     pulsatingInterval,
     ironmanCapState = 0,    // This tracks the plotline of cap and ironman. For states >=5, it also tracks items
@@ -104,19 +105,21 @@ var redraw = function() {
         x[i] = (i * dw + margin);
         y[i] = (i * dh + margin)
     }
-    var xBreakStart = x[2],
-        xBreakEnd = x[4];
-    x1970 = x[0],
-        x2012 = x[6],
-        x2013 = x[12],
-        x2014 = x[18],
-        x2018 = x[26],
-        x2023 = x[32],
-        y1970tl = y[4],
-        y2013tl = y[12],
-        yMaintl = y[20],
-        y2014tl = y[28],
-        y2012tl = y[36],
+    var xBreakStart = x[6],
+        xBreakEnd = x[8];
+    x1950 = x[0],
+        x1970 = x[4],
+        x2012 = x[10],
+        x2013 = x[16],
+        x2014 = x[22],
+        x2018 = x[28],
+        x2023 = x[34],
+        y1950tl = y[1],
+        y1970tl = y[5],
+        y2013tl = y[13],
+        yMaintl = y[21],
+        y2014tl = y[29],
+        y2012tl = y[37],
         spaceStoneInPresent = false,
         mindStoneInPresent = false,
         realityStoneInPresent = false,
@@ -153,6 +156,9 @@ var redraw = function() {
         xBreakEnd - dxBreak, yMaintl + 5, xBreakEnd, yMaintl, width, yMaintl])
         .fill('none')
         .stroke({color: '#333', width: 3, linejoin: 'round'});
+    tick1950_onMain = canvas.line(x1950, yMaintl - 5, x1950, yMaintl + 5)
+        .fill('none')
+        .stroke({color: '#333', width: 3, linecap: 'round'});
     tick1970_onMain = canvas.line(x1970, yMaintl - 5, x1970, yMaintl + 5)
         .fill('none')
         .stroke({color: '#333', width: 3, linecap: 'round'});
@@ -175,6 +181,9 @@ var redraw = function() {
         .font('family', 'Helvetica')
         .cx(x1970)
         .y(yMaintl + 10);
+    label1950_onMain = label1970_onMain.clone()
+        .text("1950?")
+        .cx(x1950);
     label2012_onMain = label1970_onMain.clone()
         .text("2012")
         .cx(x2012);
@@ -192,9 +201,12 @@ var redraw = function() {
         .cx(x2023);
 
 // Stubs of alternate timelines
+    stub1950 = canvas.path('M' + x1950 + ' ' + yMaintl + ' c ' + dw + ' 0 0 '
+        + (y1950tl - yMaintl) + ' ' + 2 * dw + ' ' + (y1950tl - yMaintl))
+        .fill('none');
     stub1970 = canvas.path('M' + x1970 + ' ' + yMaintl + ' c ' + dw + ' 0 0 '
         + (y1970tl - yMaintl) + ' ' + 2 * dw + ' ' + (y1970tl - yMaintl))
-        .fill('none')
+        .fill('none');
     stub2012 = canvas.path('M' + x2012 + ' ' + yMaintl + ' c ' + width / 40 + ' 0 0 '
         + (y2012tl - yMaintl) + ' ' + width / 20 + ' ' + (y2012tl - yMaintl))
         .fill('none');
@@ -204,6 +216,24 @@ var redraw = function() {
     stub2014 = canvas.path('M' + x2014 + ' ' + yMaintl + ' c ' + width / 40 + ' 0 0 '
         + (y2014tl - yMaintl) + ' ' + width / 20 + ' ' + (y2014tl - yMaintl))
         .fill('none');
+
+    // 1950 Timeline
+    //tl1950 = canvas.line(x1950 + 2*dw, y1950tl, width, y1950tl)
+    tl1950 = canvas.path('M' + (x1950 + 2*dw) + ' ' + y1950tl + ' L ' + width + ',' + y1950tl)
+        .fill('none');
+    tick2018_on1950 = canvas.line(x2018, y1950tl - 5, x2018, y1950tl + 5)
+        .fill('none')
+        .stroke({color: '#333', width: 3, linecap: 'round'});
+    tickbench_on1950 = canvas.line(x2023+2*dw, y1950tl - 5, x2023+2*dw, y1950tl + 5)
+        .fill('none')
+        .stroke({color: '#333', width: 3, linecap: 'round'});
+    label2018_on1950 = canvas.text("The Snap")
+        .font('family', 'Helvetica')
+        .cx(x2018)
+        .y(y1950tl + 10);
+    labelbench_on1950 = label2018_on1950.clone()
+        .text("Cap on Bench")
+        .x(x2023+2*dw);
 
 // 1970 Timeline
     tl1970 = canvas.polyline([x1970 + width / 20, y1970tl, xBreakStart + 2 * dxBreak, y1970tl,
@@ -286,19 +316,18 @@ var redraw = function() {
         .fill('none');
     jumpTo2012 = canvas.path('M' + x2023 + ',' + yMaintl +
         ' c ' + -3 * dw + ',' + dh + ' ' + -3 * dw + ',' + dh + ' ' + -6 * dw + ',' + dh +
-        ' c ' + -3 * dw + ',' + 0 + ' ' + -9 * dw + ',' + 0 + ' ' + -12 * dw + ',' + 0 +
+        ' c ' + -3 * dw + ',' + 0 + ' ' + -7 * dw + ',' + 0 + ' ' + -10 * dw + ',' + 0 +
         ' c ' + -3 * dw + ',' + 0 + ' ' + -5 * dw + ',' + 1 * dh + ' ' + -6 * dw + ',' + 4 * dh +
         ' c ' + -1 * dw + ',' + 3 * dh + ' ' + -1 * dw + ',' + 9 * dh + ' ' + 0 + ',' + 11 * dh)
         .fill('none');
     jumpTo2013 = canvas.path('M' + x2023 + ',' + yMaintl +
         ' c ' + -2.5 * dw + ',' + -2 * dh + ' ' + -2.5 * dw + ',' + -2 * dh + ' ' + -5 * dw + ',' + -2 * dh +
-        ' c ' + -2.5 * dw + ',' + 0 + ' ' + -5.5 * dw + ',' + 0 + ',' + -8 * dw + ',' + 0 +
+        ' c ' + -2.5 * dw + ',' + 0 + ' ' + -3.5 * dw + ',' + 0 + ',' + -6 * dw + ',' + 0 +
         ' c ' + -2.5 * dw + ',' + 0 + ' ' + -4.5 * dw + ',' + -1 * dh + ' ' + -5 * dw + ',' + -2 * dh +
         ' c ' + -0.5 * dw + ',' + -1 * dh + ' ' + -0.5 * dw + ',' + -3 * dh + ' ' + 0 + ',' + -4 * dh)
         .fill('none');
     jumpTo2014 = canvas.path('M' + x2023 + ',' + yMaintl +
         ' c ' + -3 * dw + ',' + 3 * dh + ' ' + -2 * dw + ',' + 3 * dh + ' ' + -5 * dw + ',' + 3 * dh +
-        ' c ' + -3 * dw + ',' + 0 + ' ' + 1 * dw + ',' + 0 + ' ' + -2 * dw + ',' + 0 +
         ' c ' + -3 * dw + ',' + 0 + ' ' + -4 * dw + ',' + 0 + ' ' + -5 * dw + ',' + 2 * dh +
         ' c ' + -0.5 * dw + ',' + 1 * dh + ' ' + -0.5 * dw + ',' + 2 * dh + ' ' + 0 + ',' + 3 * dh)
         .fill('none');
@@ -306,25 +335,24 @@ var redraw = function() {
     returnFrom1970 = canvas.path('M' + (x1970 + 2 * dw) + ' ' + y1970tl +
         ' c ' + -1 * dw + ',' + 2 * dh + ' ' + -1 * dw + ',' + 7 * dh + ' ' + 0 + ',' + 10 * dh +
         ' c ' + 1 * dw + ',' + 3 * dh + ' ' + 3 * dw + ',' + 5 * dh + ' ' + 6 * dw + ',' + 5 * dh +
-        ' c ' + 3 * dw + ',' + 0 + ' ' + 16 * dw + ',' + 0 + ' ' + 19 * dw + ',' + 0 +
+        ' c ' + 3 * dw + ',' + 0 + ' ' + 14 * dw + ',' + 0 + ' ' + 17 * dw + ',' + 0 +
         ' c ' + 3 * dw + ',' + 0 + ' ' + 3 * dw + ',' + 0 + ' ' + 5 * dw + ',' + 1 * dh)
         .fill('none');
     returnFrom2012 = canvas.path('M' + (x2012 + 2 * dw) + ' ' + y2012tl +
         ' c ' + -1 * dw + ',' + -2 * dh + ' ' + -1 * dw + ',' + -7 * dh + ' ' + 0 + ',' + -10 * dh +
         ' c ' + 1 * dw + ',' + -3 * dh + ' ' + 3 * dw + ',' + -4 * dh + ' ' + 6 * dw + ',' + -4 * dh +
-        ' c ' + 3 * dw + ',' + 0 + ' ' + 10 * dw + ',' + 0 + ' ' + 13 * dw + ',' + 0 +
+        ' c ' + 3 * dw + ',' + 0 + ' ' + 8 * dw + ',' + 0 + ' ' + 11 * dw + ',' + 0 +
         ' c ' + 3 * dw + ',' + 0 + ' ' + 3 * dw + ',' + -1 * dh + ' ' + 5 * dw + ',' + -2 * dh)
         .fill('none');
     returnFrom2013 = canvas.path('M' + (x2013 + 2 * dw) + ' ' + y2013tl +
         ' c ' + -0.4 * dw + ',' + 1 * dh + ' ' + -0.4 * dw + ',' + 2 * dh + ' ' + 0 + ',' + 3 * dh +
         ' c ' + 0.5 * dw + ',' + 1 * dh + ' ' + 2.5 * dw + ',' + 2 * dh + ' ' + 5 * dw + ',' + 2 * dh +
-        ' c ' + 2.5 * dw + ',' + 0 + ' ' + 5.5 * dw + ',' + 0 + ' ' + 8 * dw + ',' + 0 +
+        ' c ' + 2.5 * dw + ',' + 0 + ' ' + 3.5 * dw + ',' + 0 + ' ' + 6 * dw + ',' + 0 +
         ' c ' + 2.5 * dw + ',' + 0 + ' ' + 2.5 * dw + ',' + dh + ' ' + 5 * dw + ',' + 3 * dh)
         .fill('none');
     returnFrom2014 = canvas.path('M' + (x2014 + width / 20) + ' ' + y2014tl +
         ' c ' + -0.3 * dw + ',' + -0.8 * dh + ' ' + -0.3 * dw + ',' + -1.2 * dh + ' ' + 0 + ',' + -2 * dh +
         ' c ' + 1 * dw + ',' + -2 * dh + ' ' + 2 * dw + ',' + -2 * dh + ' ' + 5 * dw + ',' + -2 * dh +
-        ' c ' + 3 * dw + ',' + 0 + ' ' + 1 * dw + ',' + 0 + ' ' + 2 * dw + ',' + 0 +
         ' c ' + 2 * dw + ',' + 0 + ' ' + 2 * dw + ',' + dh + ' ' + 5 * dw + ',' + -4 * dh)
         .fill('none');
 
@@ -343,6 +371,12 @@ var redraw = function() {
         .add(label2014_onMain)
         .add(label2018_onMain)
         .add(label2023_onMain);
+    group1950Timeline = canvas.group()
+        .add(tickbench_on1950)
+        .add(tick2018_on1950)
+        .add(labelbench_on1950)
+        .add(label2018_on1950)
+        .opacity(0);
     group1970Timeline = canvas.group()
         .add(tl1970)
         // .add(tick2012_on1970)
@@ -502,6 +536,14 @@ var redraw = function() {
         .size(iw*0.8, iw*0.8).center(loki_glow.cx(), loki_glow.cy());
     loki = canvas.group().add(loki_glow).add(loki_icon)
         .move(x2012 + 2 * dw + 2 * iw, y2012tl - iw)
+        .opacity(0);
+
+    peggy_glow = canvas.circle(iw)
+        .fill(unclickable_gradient);
+    var peggy_icon = canvas.image(imgPath + "carter.png")
+        .size(iw*0.8, iw*0.8).center(peggy_glow.cx(), peggy_glow.cy());
+    peggy = canvas.group().add(peggy_glow).add(peggy_icon)
+        .move(x1950, yMaintl-iw)
         .opacity(0);
 
     soulStone = canvas.image(imgPath + "soul_stone.png")
@@ -807,8 +849,8 @@ var redraw = function() {
             make_clickable(cap_am, capReturnsStones, 0, [mjolnir]);
             break;
         case 6:
-            // Put all the stones at each timeline and move cap to 1970 timeline
-            cap_am.move(x1970 + width/20, y1970tl);
+            // Put all the stones at each timeline and move cap to 1950 timeline, show Peggy
+            cap_am.move(x1950, yMaintl);
             timeStone.move(x2012 + 2*dw, y2012tl-iw/2);
             soulStone.move(x2014 + 2*dw+iw/2, y2014tl-iw/2);
             powerStone.move(x2014 + 2*dw, y2014tl-iw/2);
@@ -817,6 +859,12 @@ var redraw = function() {
             timeStone.move(x2012 + 2*dw, y2012tl-iw/2);
             mindStone.move(x2012 + 2*dw+iw/2, y2012tl-iw/2);
             spaceStone_1970.move(x1970 + 2*dw, y1970tl-iw/2);
+
+            stub1970.stroke({color: '#555', width: 3, linecap: 'round'});
+            stub2012.stroke({color: '#555', width: 3, linecap: 'round'});
+            stub2013.stroke({color: '#555', width: 3, linecap: 'round'});
+            stub2014.stroke({color: '#555', width: 3, linecap: 'round'});
+            peggy.opacity(1);
             group2014Timeline.opacity(1);
             group2013Timeline.opacity(1);
             group2012Timeline.opacity(1);
@@ -830,9 +878,11 @@ var redraw = function() {
             mjolnir.opacity(1);
 
             make_clickable(cap_am, capLivesOutLife);
+            make_clickable(peggy, capLivesOutLife);
             break;
         case 7:
-            cap_am.move(x2023 + 2*dw, y1970tl);
+            // Place all stones in correct spots, show all timelines and put cap at end of 1950 timeline
+            cap_am.move(x2023 + 2*dw-iw, y1950tl);
             timeStone.move(x2012 + 2*dw, y2012tl-iw/2);
             soulStone.move(x2014 + 2*dw+iw/2, y2014tl-iw/2);
             powerStone.move(x2014 + 2*dw, y2014tl-iw/2);
@@ -841,6 +891,15 @@ var redraw = function() {
             timeStone.move(x2012 + 2*dw, y2012tl-iw/2);
             mindStone.move(x2012 + 2*dw+iw/2, y2012tl-iw/2);
             spaceStone_1970.move(x1970 + 2*dw, y1970tl-iw/2);
+
+            stub1950.stroke({color: '#555', width: 3, linecap: 'round'});
+            stub1970.stroke({color: '#555', width: 3, linecap: 'round'});
+            stub2012.stroke({color: '#555', width: 3, linecap: 'round'});
+            stub2013.stroke({color: '#555', width: 3, linecap: 'round'});
+            stub2014.stroke({color: '#555', width: 3, linecap: 'round'});
+            tl1950.stroke({color: '#555', width: 3, linecap: 'round'});
+            group1950Timeline.opacity(1);
+
             group2014Timeline.opacity(1);
             group2013Timeline.opacity(1);
             group2012Timeline.opacity(1);
@@ -852,6 +911,7 @@ var redraw = function() {
             realityStone.opacity(1);
             mindStone.opacity(1);
             mjolnir.opacity(1);
+            make_unclickable(cap_am);
             break;
     }
 
@@ -1921,8 +1981,13 @@ var capReturnsStones = function() {
     group1970Timeline.animate(500,"",5500).opacity(1);
     spaceStone_1970.animate(450,"<>").move(x1970 + 2*dw, y1970tl-iw/2);
 
+    // Move cap to 1950, show Peggy
+    cap_am.animate(1000, "<>", 250).move(x1950, yMaintl);
+    peggy.animate(500, "<>", 6500).opacity(1);
+
     make_unclickable(cap_am, [powerStone, soulStone, timeStone, spaceStone_1970, realityStone, mindStone, mjolnir]);
-    make_clickable(cap_am, capLivesOutLife, 5500);
+    make_clickable(cap_am, capLivesOutLife, 6750);
+    make_clickable(peggy, capLivesOutLife, 6750);
     // Cap moves to 1970. Leaves space stone and restof 1970 timeline populates. Cap travels along
     // this timeline and we see a prompt where he's sitting on the bench
 
@@ -1931,9 +1996,43 @@ var capReturnsStones = function() {
 };
 
 var capLivesOutLife = function() {
-    // Cap travels along 1970 timeline
-    cap_am.animate(1500,"<>").move(x2023 + 2*dw, y1970tl);
+    // Stroke 1950 timeline
+    stub1950.drawAnimated(700,'<')
+        .stroke({color: '#555', width: 3, linecap: 'round'});
+    tl1950.drawAnimated({
+        duration: 2700,
+        easing: '>',
+        delay: 1000
+        })
+        .stroke({color: '#555', width: 3, linecap: 'round'});
+
+    group1950Timeline.animate(250, '<>', 3000).opacity(1);
+
+    // Cap and peggy travel along 1950 timeline
+    var length = stub1950.length();
+    cap_am.animate(750, '<').during(function(pos, morph, eased){
+        p = stub1950.pointAt(eased * length);
+        cap_am.move(p.x, p.y);
+    }).after(function() {
+        p = stub1950.pointAt(length);
+        cap_am.move(p.x, p.y);
+    });
+    peggy.animate(750, '<').during(function(pos, morph, eased){
+        p = stub1950.pointAt(eased * length);
+        peggy.move(p.x, p.y-iw);
+    }).after(function() {
+        p = stub1950.pointAt(length);
+        peggy.move(p.x, p.y-iw);
+    });
+    cap_am.animate(1200, '-').move(x[26]);
+    peggy.animate(1200, '-').move(x[26]);
+
+    // Peggy dies in 2016, but cap goes on to future
+    cap_am.animate(1000, '>').move(x2023 + 2*dw-iw);
+    peggy.animate(500, '<>').opacity(0);
+
     make_unclickable(cap_am);
+    make_unclickable(peggy);
     // Update states
     ironmanCapState++;
 };
