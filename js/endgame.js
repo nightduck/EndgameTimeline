@@ -33,7 +33,7 @@ var margin, width, height, verticalOffset, iw, clickable_gradient, unclickable_g
     nebulaState = 0,        // This tracks the plotline of nebula, war machine, thanos, evil nebula, and gamora
     hawkeyeState=0;         // This trakcs the plotline of hawkeye and black widow
 
-var imgPath = "/rsc/endgame/";
+var imgPath = "rsc/endgame/";
 
 var finishAllAnimations = function(dom) {
       dom.finish();
