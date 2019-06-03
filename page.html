@@ -4,35 +4,53 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        .constrain-height {
+            min-height: 100px;
+            max-height: 480px;
+        }
+
+        .constrain-height * {
+            max-height: inherit;
+        }
+
+        .container > div {
+            width: 100%;
+        }
+
         .container {
-            width: 1280px;
-            height: 720px;
+            width: 100%;
+            height: 100%;
             position: relative;
         }
         .content {
             width: 100%;
-            height: 100%;
+            position: relative;
         }
         .overlay {
             position: absolute;
             right: 0;
-            top: 0;
+            bottom: 0;
         }
     </style>
 </head>
 <body>
-<div class="container", id="endgame-container">
-    <div id="endgame-canvas" class="content">
-    </div>
-    <div class="overlay">
-        <img class="icons" id="reset" src="synchronize.png"/>
-        <img class="icons" id="fullscreen" src="fullscreen.png">
+<div class="constrain-height">
+    <div class="container" id="endgame-container">
+        <div id="top-padding"></div>
+        <div id="endgame-canvas" class="content">
+            <div class="overlay">
+                <img class="icons" id="reset" src="/rsc/endgame/synchronize.png"/>
+                <img class="icons" id="fullscreen" src="/rsc/endgame/fullscreen.png">
+            </div>
+        </div>
+        <div class="caption"></div>
+        <div id="bottom-padding"></div>
     </div>
 </div>
 <a href="https://icons8.com/icon/7423/synchronize">Synchronize icon by Icons8</a>
 </body>
-<script src="svg.min.js"></script>
-<script src="svg.path.js"></script>
-<script src="jquery.js"></script>
-<script src="endgame.js"></script>
+<script src="/js/svg.min.js"></script>
+<script src="/js/svg.path.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/endgame.js"></script>
 </html>

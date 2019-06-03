@@ -1,7 +1,7 @@
 // TODO: Set these variably depending on viewing device
 
 // Define all variables initializes in redraw so they're visible globally
-var margin, width, height, iw, clickable_gradient, unclickable_gradient,
+var margin, width, height, verticalOffset, iw, clickable_gradient, unclickable_gradient,
     x1970, x2012, x2013, x2014, x2018, x2023,
     y1970tl, y2013tl, yMaintl, y2014tl, y2012tl,
     x = [], y = [], dw, dh,
@@ -33,7 +33,7 @@ var margin, width, height, iw, clickable_gradient, unclickable_gradient,
     nebulaState = 0,        // This tracks the plotline of nebula, war machine, thanos, evil nebula, and gamora
     hawkeyeState=0;         // This trakcs the plotline of hawkeye and black widow
 
-var imgPath = "";
+var imgPath = "/rsc/endgame/";
 
 var finishAllAnimations = function(dom) {
       dom.finish();
@@ -52,11 +52,43 @@ var redraw = function() {
     // Clear list of clickables
     clickables.length = 0;
 
-    // Define bounds, grid, and key axis points
+    // Clear the padding, in case they were set for mobile portrait mode
+    document.getElementById('top-padding').style.height = "0px";
+    document.getElementById('bottom-padding').style.height = "0px";
+
+    // Define bounds. Limit height to a 4:3 aspect ratio, and if in fullscreen, center vertically
     margin = 20;
-    iw = 40;    // TODO: Set iw to smaller value if screen width too small
     width = document.getElementById("endgame-canvas").offsetWidth;
-    height = document.getElementById("endgame-canvas").offsetHeight;
+    if (
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+    ) {
+        height = window.screen.availHeight;
+    } else {
+        height = parseInt(getComputedStyle(document.getElementById("endgame-canvas")).maxHeight, 10);
+    }
+    if (height > 3 / 4 * width) {
+        var newHeight = 3 / 4 * width;
+        if (
+            document.fullscreenElement ||
+            document.webkitFullscreenElement ||
+            document.mozFullScreenElement ||
+            document.msFullscreenElement
+        ) {
+            // If the user is on mobile in portrait mode, we want to center the canvas vertically, so pad the top and
+            // bottom
+            filler = (height - newHeight) / 2;
+            document.getElementById('top-padding').style.height = filler + "px";
+            document.getElementById('bottom-padding').style.height = filler + "px";
+        }
+        height = newHeight;
+    } else {
+        verticalOffset = 0;
+    }
+
+    // Define grid and key axis points
     dw = (width - 2 * margin) / 40;
     dh = (height - 2 * margin) / 40;
     var i;
@@ -77,19 +109,6 @@ var redraw = function() {
         yMaintl = y[20],
         y2014tl = y[28],
         y2012tl = y[36],
-        // x1970 = margin,
-        //     xBreakStart = (width - 2*margin) / 20 + margin,
-        //     xBreakEnd = 2 * (width - 2*margin) / 20 + margin,
-        //     x2012 = 3 * (width - 2*margin) / 20 + margin,
-        //     x2013 = 6 * (width - 2*margin) / 20 + margin,
-        //     x2014 = 9 * (width - 2*margin) / 20 + margin,
-        //     x2018 = 13 * (width - 2*margin) / 20 + margin,
-        //     x2023 = 16 * (width - 2*margin) / 20 + margin,
-        //     y1970tl = height / 6,
-        //     y2013tl = 2 * height / 6,
-        //     yMaintl = 3 * height / 6,
-        //     y2014tl = 4 * height / 6,
-        //     y2012tl = 5 * height / 6,
         spaceStoneInPresent = false,
         mindStoneInPresent = false,
         realityStoneInPresent = false,
@@ -97,6 +116,11 @@ var redraw = function() {
         soulStoneInPresent = false,
         thanosInPresent = false,
         nebulaInPresent = false;
+    if (dw < 20) {
+        iw = 2*dw;    // Set iw to smaller value if screen width too small
+    } else {
+        iw = 40;
+    }
 
     // If the canvas is already defined, clear it. Otherwise, define a new one
     if (canvas) {
@@ -104,6 +128,7 @@ var redraw = function() {
         clearInterval(pulsatingInterval);
         finishAllAnimations(canvas);
 
+        // C
         canvas.clear().size(width, height);
 
     } else {
@@ -295,12 +320,6 @@ var redraw = function() {
         ' c ' + 2 * dw + ',' + 0 + ' ' + 2 * dw + ',' + dh + ' ' + 5 * dw + ',' + -4 * dh)
         .fill('none');
 
-// Cap to 2014
-// Cap to 2013
-// Cap to 2012
-// Cap to 1970
-// Cap living in 1970 (possible not stroked?)
-
 // Group timelines with their tickmarks
     groupMainTimeline = canvas.group()
         .add(tlMain)
@@ -358,6 +377,7 @@ var redraw = function() {
     group1970Fractals = canvas.group();
     group2012Fractals = canvas.group();
     group2013Fractals = canvas.group();
+    // TODO: Add fractals
 
 // Gradients
     clickable_gradient = canvas.gradient('radial', function (stop) {
@@ -371,96 +391,96 @@ var redraw = function() {
     });
 
 // Icons
-    ironman_glow = canvas.circle(40)
+    ironman_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var ironman_icon = canvas.image(imgPath + "ironman.png")
-        .size(32, 32).center(ironman_glow.cx(), ironman_glow.cy());
+        .size(iw*0.8, iw*0.8).center(ironman_glow.cx(), ironman_glow.cy());
     ironman = canvas.group().add(ironman_glow).add(ironman_icon)
         .move(x2023, yMaintl - iw);
 
-    cap_am_glow = canvas.circle(40)
+    cap_am_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var cap_am_icon = canvas.image(imgPath + "cap.png")
-        .size(32, 32).center(cap_am_glow.cx(), cap_am_glow.cy());
+        .size(iw*0.8, iw*0.8).center(cap_am_glow.cx(), cap_am_glow.cy());
     cap_am = canvas.group().add(cap_am_glow).add(cap_am_icon)
         .move(x2023 + iw, yMaintl - iw);
 
-    hulk_glow = canvas.circle(40)
+    hulk_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var hulk_icon = canvas.image(imgPath + "hulk.png")
-        .size(32, 32).center(hulk_glow.cx(), hulk_glow.cy());
+        .size(iw*0.8, iw*0.8).center(hulk_glow.cx(), hulk_glow.cy());
     hulk = canvas.group().add(hulk_glow).add(hulk_icon)
         .move(x2023, yMaintl);
 
-    antman_glow = canvas.circle(40)
+    antman_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var antman_icon = canvas.image(imgPath + "antman.png")
-        .size(32, 32).center(antman_glow.cx(), antman_glow.cy());
+        .size(iw*0.8, iw*0.8).center(antman_glow.cx(), antman_glow.cy());
     antman = canvas.group().add(antman_glow).add(antman_icon)
         .move(x2023 + iw, yMaintl);
 
-    thor_glow = canvas.circle(40)
+    thor_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var thor_icon = canvas.image(imgPath + "thor.png")
-        .size(32, 32).center(thor_glow.cx(), thor_glow.cy());
+        .size(iw*0.8, iw*0.8).center(thor_glow.cx(), thor_glow.cy());
     thor = canvas.group().add(thor_glow).add(thor_icon)
         .move(x2023 + 2 * iw, yMaintl - iw);
 
-    rocket_glow = canvas.circle(40)
+    rocket_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var rocket_icon = canvas.image(imgPath + "rocket.png")
-        .size(32, 32).center(rocket_glow.cx(), rocket_glow.cy());
+        .size(iw*0.8, iw*0.8).center(rocket_glow.cx(), rocket_glow.cy());
     rocket = canvas.group().add(rocket_glow).add(rocket_icon)
         .move(x2023 + 2 * iw, yMaintl);
 
-    nebula_glow = canvas.circle(40)
+    nebula_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var nebula_icon = canvas.image(imgPath + "nebula.png")
-        .size(32, 32).center(nebula_glow.cx(), nebula_glow.cy());
+        .size(iw*0.8, iw*0.8).center(nebula_glow.cx(), nebula_glow.cy());
     nebula = canvas.group().add(nebula_glow).add(nebula_icon)
         .move(x2023 + 2 * iw, yMaintl - 2 * iw);
 
-    war_machine_glow = canvas.circle(40)
+    war_machine_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var war_machine_icon = canvas.image(imgPath + "war_machine.png")
-        .size(32, 32).center(war_machine_glow.cx(), war_machine_glow.cy());
+        .size(iw*0.8, iw*0.8).center(war_machine_glow.cx(), war_machine_glow.cy());
     war_machine = canvas.group().add(war_machine_glow).add(war_machine_icon)
         .move(x2023 + iw, yMaintl - 2 * iw);
 
-    hawkeye_glow = canvas.circle(40)
+    hawkeye_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var hawkeye_icon = canvas.image(imgPath + "hawkeye.png")
-        .size(32, 32).center(hawkeye_glow.cx(), hawkeye_glow.cy());
+        .size(iw*0.8, iw*0.8).center(hawkeye_glow.cx(), hawkeye_glow.cy());
     hawkeye = canvas.group().add(hawkeye_glow).add(hawkeye_icon)
         .move(x2023 + iw, yMaintl + iw);
 
-    black_widow_glow = canvas.circle(40)
+    black_widow_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var black_widow_icon = canvas.image(imgPath + "black_widow.png")
-        .size(32, 32).center(black_widow_glow.cx(), black_widow_glow.cy());
+        .size(iw*0.8, iw*0.8).center(black_widow_glow.cx(), black_widow_glow.cy());
     black_widow = canvas.group().add(black_widow_glow).add(black_widow_icon)
         .move(x2023 + 2 * iw, yMaintl + iw);
 
-    thanos_glow = canvas.circle(40)
+    thanos_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var thanos_icon = canvas.image(imgPath + "thanos.png")
-        .size(32, 32).center(thanos_glow.cx(), thanos_glow.cy());
+        .size(iw*0.8, iw*0.8).center(thanos_glow.cx(), thanos_glow.cy());
     thanos = canvas.group().add(thanos_glow).add(thanos_icon)
         .move(x2014 + 2 * dw + 2 * iw, y2014tl - iw)
         .opacity(0);
 
-    gamora_glow = canvas.circle(40)
+    gamora_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var gamora_icon = canvas.image(imgPath + "gamora.png")
-        .size(32, 32).center(gamora_glow.cx(), gamora_glow.cy());
+        .size(iw*0.8, iw*0.8).center(gamora_glow.cx(), gamora_glow.cy());
     gamora = canvas.group().add(gamora_glow).add(gamora_icon)
         .move(x2014 + 2 * dw + 2 * iw, y2014tl)
         .opacity(0);
 
-    nebula_evil_glow = canvas.circle(40)
+    nebula_evil_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var nebula_evil_icon = canvas.image(imgPath + "nebula_evil.png")
-        .size(32, 32).center(nebula_evil_glow.cx(), nebula_evil_glow.cy());
+        .size(iw*0.8, iw*0.8).center(nebula_evil_glow.cx(), nebula_evil_glow.cy());
     nebula_evil = canvas.group().add(nebula_evil_glow).add(nebula_evil_icon)
         .move(x2014 + 2 * dw + 3 * iw, y2014tl - iw)
         .opacity(0);
@@ -468,51 +488,51 @@ var redraw = function() {
     portal = canvas.circle(iw / 2)
         .opacity(0);
 
-    loki_glow = canvas.circle(40)
+    loki_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var loki_icon = canvas.image(imgPath + "loki.png")
-        .size(32, 32).center(loki_glow.cx(), loki_glow.cy());
+        .size(iw*0.8, iw*0.8).center(loki_glow.cx(), loki_glow.cy());
     loki = canvas.group().add(loki_glow).add(loki_icon)
         .move(x2012 + 2 * dw + 2 * iw, y2012tl - iw)
         .opacity(0);
 
     soulStone = canvas.image(imgPath + "soul_stone.png")
-        .size(16, 16)
+        .size(iw*0.4, iw*0.4)
         .move(x2014 + 2 * dw, y2014tl)
         .opacity(0);
 
     powerStone = canvas.image(imgPath + "power_stone.png")
-        .size(16, 16)
+        .size(iw*0.4, iw*0.4)
         .move(x2014 + 2 * dw + 2 * iw, y2014tl + iw / 2)
         .opacity(0);
 
     realityStone = canvas.image(imgPath + "reality_stone.png")
-        .size(16, 16)
+        .size(iw*0.4, iw*0.4)
         .move(x2013 + 2 * dw + iw, y2013tl)
         .opacity(0);
 
     spaceStone_loki = canvas.image(imgPath + "space_stone.png")
-        .size(16, 16)
+        .size(iw*0.4, iw*0.4)
         .move(x2012 + 2 * dw + 5 * iw / 2, y2012tl)
         .opacity(0);
 
     spaceStone_1970 = canvas.image(imgPath + "space_stone.png")
-        .size(16, 16)
+        .size(iw*0.4, iw*0.4)
         .move(x1970 + 2 * dw, y1970tl)
         .opacity(0);
 
     timeStone = canvas.image(imgPath + "time_stone.png")
-        .size(16, 16)
+        .size(iw*0.4, iw*0.4)
         .move(x2012 + 2 * dw + 2 * iw, y2012tl)
         .opacity(0);
 
     mindStone = canvas.image(imgPath + "mind_stone.png")
-        .size(16, 16)
+        .size(iw*0.4, iw*0.4)
         .move(x2012 + 2 * dw + 2 * iw, y2012tl + iw / 2)
         .opacity(0);
 
     mjolnir = canvas.image(imgPath + "mjolnir.png")
-        .size(16, 16)
+        .size(iw*0.4, iw*0.4)
         .move(x2013 + 2 * dw + iw, y2013tl - iw / 2)
         .opacity(0);
 
@@ -1985,6 +2005,10 @@ $(document).ready(function() {
         // canvas.height(container.clientHeight);
         // canvas.width(container.clientWidth);
     });
+
+    window.addEventListener('resize', function() {
+        redraw();
+    })
 
     $('#endgame-container')[0].addEventListener("fullscreenchange", function () {
         redraw();
