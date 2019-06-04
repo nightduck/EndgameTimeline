@@ -4,33 +4,91 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        .constrain-height {
-            min-height: 100px;
-            max-height: 480px;
-        }
+        /*.constrain-height {*/
+        /*    min-height: 100px;*/
+        /*}*/
 
-        .constrain-height * {
-            max-height: inherit;
-        }
+        /*.constrain-height * {*/
+        /*    max-height: inherit;*/
+        /*}*/
 
         .container > div {
             width: 100%;
         }
 
         .container {
+            display: block;
             width: 100%;
-            height: 100%;
+            /*height: 100%;*/
             position: relative;
+            overflow: hidden;
         }
         .content {
             width: 100%;
+            /*max-height: 480px;*/
             position: relative;
+
         }
         .overlay {
             position: absolute;
             right: 0;
-            bottom: 0;
+            top: 0;
         }
+        .caption {
+            position: relative;
+            bottom: 0;
+            color: white;
+            padding: 10px 20px;
+            overflow: auto;
+            background: rgba(0,0,0,0.75);
+        }
+
+        .caption-drawer{
+            position: absolute;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /*.caption > * {*/
+        /*    */
+        /*}*/
+
+        /*.caption-drawer {*/
+        /*    position: absolute;*/
+        /*    left: 0;*/
+        /*    bottom: -30%;*/
+        /*    -webkit-transition: all 0.6s ease;*/
+        /*    -moz-transition:    all 0.6s ease;*/
+        /*    -o-transition:      all 0.6s ease;*/
+        /*}*/
+        /*.container:before {*/
+        /*    content: "?";*/
+        /*    position: absolute;*/
+        /*    background: rgba(255,255,255,0.75);*/
+        /*    color: black;*/
+        /*    width: 24px;*/
+        /*    height: 24px;*/
+        /*    -webkit-border-radius: 12px;*/
+        /*    -moz-border-radius:    12px;*/
+        /*    border-radius:         12px;*/
+        /*    text-align: center;*/
+        /*    font-size: 14px;*/
+        /*    line-height: 24px;*/
+        /*    !* Only Fx 4 supporting transitions on psuedo elements so far... *!*/
+        /*    -webkit-transition: all 0.6s ease;*/
+        /*    -moz-transition: all 0.6s ease;*/
+        /*    -o-transition: all 0.6s ease;*/
+        /*    opacity: 0.75;*/
+        /*}*/
+        /*.container:before {  bottom: 10px; left: 10px; }*/
+        /*.svg-circleplus {*/
+        /*    height: 20px;*/
+        /*    stroke: red;*/
+        /*    top: -20px;*/
+        /*    left: 50%;*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -39,11 +97,24 @@
         <div id="top-padding"></div>
         <div id="endgame-canvas" class="content">
             <div class="overlay">
+                <img class="icons" id="show-caption" src="rsc/endgame/up-chevron.png">
                 <img class="icons" id="reset" src="rsc/endgame/synchronize.png"/>
-                <img class="icons" id="fullscreen" src="rsc/endgame/fullscreen.png">
+                <img class="icons" data-toggle="collapse" id="fullscreen" src="rsc/endgame/fullscreen.png">
             </div>
         </div>
-        <div class="caption"></div>
+        <div class="caption" id="canvas-caption">
+            Drax never would've met Quill and Rocket without the prison assault on Gamora. The prison
+            breakout is only done by Quill, Rocket, and Groot. Rocket and Groot leave Quill behind when he goes to get
+            his cassette player. Thus, Quill stays in jail and Ronan gets the power stone from him when he raids the
+            prison later.
+        </div>
+<!--        <div class="caption" id="canvas-caption">-->
+<!--&lt;!&ndash;            <svg class="svg-circleplus" viewBox="0 0 100 100">&ndash;&gt;-->
+<!--&lt;!&ndash;                <circle cx="50" cy="50" r="45" fill="none" stroke-width="7.5"></circle>&ndash;&gt;-->
+<!--&lt;!&ndash;                <line x1="32.5" y1="50" x2="67.5" y2="50" stroke-width="5"></line>&ndash;&gt;-->
+<!--&lt;!&ndash;                <line x1="50" y1="32.5" x2="50" y2="67.5" stroke-width="5"></line>&ndash;&gt;-->
+<!--&lt;!&ndash;            </svg>&ndash;&gt;-->
+<!--        </div>-->
         <div id="bottom-padding"></div>
     </div>
 </div>
@@ -52,5 +123,6 @@
 <script src="js/svg.min.js"></script>
 <script src="js/svg.path.js"></script>
 <script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
 <script src="js/endgame.js"></script>
 </html>

@@ -1,7 +1,7 @@
 // TODO: Set these variably depending on viewing device
 
 // Define all variables initializes in redraw so they're visible globally
-var margin, width, height, verticalOffset, iw, clickable_gradient, unclickable_gradient,
+var margin, width, height, verticalOffset, iw, fontsize, clickable_gradient, unclickable_gradient,
     x1950, x1970, x2012, x2013, x2014, x2018, x2023,
     y1950tl, y1970tl, y2013tl, yMaintl, y2014tl, y2012tl,
     x = [], y = [], dw, dh,
@@ -56,27 +56,34 @@ var redraw = function() {
     // Clear the padding, in case they were set for mobile portrait mode
     document.getElementById('top-padding').style.height = "0px";
     document.getElementById('bottom-padding').style.height = "0px";
+    document.getElementById('canvas-caption').classList.remove('caption-drawer');
+    document.getElementById('canvas-caption').classList.remove('hidden');
+    document.getElementById('show-caption').classList.add('hidden');
+    // TODO: Hide icon used to open and close drawer
 
     // Define bounds. Limit height to a 4:3 aspect ratio, and if in fullscreen, center vertically
     margin = 20;
     width = document.getElementById("endgame-canvas").offsetWidth;
-    if (
-        document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document.mozFullScreenElement ||
-        document.msFullscreenElement
-    ) {
-        // If fullscreen, set height to height of screen
-        height = window.screen.availHeight;
-    } else {
-        // If not in fullscreen, set height to the max the div will allow, ...
-        height = parseInt(getComputedStyle(document.getElementById("endgame-canvas")).maxHeight, 10);
-        if (height > window.screen.availHeight) {
-            // ... unless that max div height is higher than the screen, then just max out at screen height. This
-            // scenario is common on mobile landscape views
-            height = window.screen.availHeight;
-        }
-    }
+    fontsize = Math.min(16, width/50);
+    // if (
+    //     document.fullscreenElement ||
+    //     document.webkitFullscreenElement ||
+    //     document.mozFullScreenElement ||
+    //     document.msFullscreenElement
+    // ) {
+    //     // If fullscreen, set height to height of screen
+    //     height = window.screen.availHeight;
+    // } else {
+    //     // If not in fullscreen, set height to the max the div will allow, ...
+    //     height = parseInt(getComputedStyle(document.getElementById("endgame-canvas")).maxHeight, 10);
+    //     if (height > window.screen.availHeight) {
+    //         // ... unless that max div height is higher than the screen, then just max out at screen height. This
+    //         // scenario is common on mobile landscape views
+    //         height = window.screen.availHeight;
+    //     }
+    // }
+    // Set the height to the screen height to begin with, then crop to a 4:3 aspect ratio if that's a bit much
+    height = window.screen.availHeight;
     if (height > 3 / 4 * width) {
         // If the height is too tall, correct it to a 4:3 aspect ratio
         var newHeight = 3 / 4 * width;
@@ -94,7 +101,18 @@ var redraw = function() {
         }
         height = newHeight;
     } else {
-        verticalOffset = 0;
+        if (
+            document.fullscreenElement ||
+            document.webkitFullscreenElement ||
+            document.mozFullScreenElement ||
+            document.msFullscreenElement
+        ) {
+            // TODO: Call bootstrap function here to collapse drawer. Also add icon to open it.
+            document.getElementById('canvas-caption').classList.add('caption-drawer');
+            document.getElementById('canvas-caption').classList.add('hidden');
+            document.getElementById('show-caption').classList.remove('hidden');
+            document.getElementById('show-caption').src = imgPath + "up-chevron.png";
+        }
     }
 
     // Define grid and key axis points
@@ -178,7 +196,7 @@ var redraw = function() {
         .fill('none')
         .stroke({color: '#333', width: 3, linecap: 'round'});
     label1970_onMain = canvas.text("1970")
-        .font('family', 'Helvetica')
+        .font({family: 'Helvetica', size : fontsize})
         .cx(x1970)
         .y(yMaintl + 10);
     label1950_onMain = label1970_onMain.clone()
@@ -228,7 +246,7 @@ var redraw = function() {
         .fill('none')
         .stroke({color: '#333', width: 3, linecap: 'round'});
     label2018_on1950 = canvas.text("The Snap")
-        .font('family', 'Helvetica')
+        .font({family: 'Helvetica', size : fontsize})
         .cx(x2018)
         .y(y1950tl + 10);
     labelbench_on1950 = label2018_on1950.clone()
@@ -2113,6 +2131,16 @@ $(document).ready(function() {
         // canvas.width(container.clientWidth);
     });
 
+    $('#show-caption').on('click', function() {
+        if (document.getElementById('canvas-caption').classList.contains('hidden')) {
+            document.getElementById('show-caption').src = imgPath + "up-chevron.png";
+            document.getElementById('canvas-caption').classList.remove('hidden');
+        } else {
+            document.getElementById('show-caption').src = imgPath + "down-chevron.png";
+            document.getElementById('canvas-caption').classList.add('hidden');
+        }
+    });
+
     window.addEventListener('resize', function() {
         redraw();
     })
@@ -2135,6 +2163,10 @@ $(document).ready(function() {
         function(){$(this).animate({width: "26px", height:"26px"}, 300);}
     );
     $("#fullscreen").hover(
+        function(){$(this).animate({width: "32px", height:"32px"}, 300);},
+        function(){$(this).animate({width: "26px", height:"26px"}, 300);}
+    );
+    $('#show-caption').hover(
         function(){$(this).animate({width: "32px", height:"32px"}, 300);},
         function(){$(this).animate({width: "26px", height:"26px"}, 300);}
     );
