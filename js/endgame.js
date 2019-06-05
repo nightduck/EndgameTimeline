@@ -1,5 +1,3 @@
-// TODO: Set these variably depending on viewing device
-
 // Define string resources
 const rsc_string = {
     info_2012: "This timeline was royally messed up. Not only did Cap interact with Hydra, possibly interfering with the events of Winter Solder, but Loki escaped with the space stone to go star in his own TV show. It's likely Thanos still gets all the stones, but the snap would play out very differently",
@@ -9,7 +7,7 @@ const rsc_string = {
     info_2014: "Black Widow dies so Hawkeye can get the soul stone. Thanos, Gamora, and Evil Nebula capture good Nebula when she attempts to return to the present. Evil Nebula goes back in her place and summons Thanos and his minions back to the future.",
     info_bench: "Since cap doesn't return through the machine, we can conclude he never returns to his own reality. The Cap sitting on the bench is not the Cap that we just saw travel back in time. Rather, the Cap on the bench is from this branch's parent reality. Thus, the movie does not portray prime reality, it portrays a branched reality.",
     info_2014gotg: "In this timeline, Gamora is absent. Drax never would've met Quill and Rocket without Gamora being assaulted in the prison. The prison breakout would only be performed by Quill, Rocket, and Groot. Rocket and Groot leave Quill behind when he goes to get his cassette player. Thus, Quill stays in jail and Ronan gets the power stone from him when he raids the prison later. Also, Thanos is now absent from this timeline, greatly upsetting the political balance of the universe.",
-    info_1970endgame: "When the tessaract is returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has it's own snap, it's own time travel, and it's own branched timelines. These branches have their own branches on and on into infinite fractals",
+    info_1970endgame: "When the tessaract is returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has its own snap, it's own time travel, and it's own branched timelines. These branches have their own branches on and on into infinite fractals",
     info_2013endgame: "When the reality stone and Mjolnir are returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has it's own snap, it's own time travel, and it's own branched timelines. These branches have their own branches on and on into infinite fractals",
     jumpTo2012: "The center stage in this three ring circus: Stark, Steve, Scott, and Bruce travel to the attack on New York to retrieve 3 infinity stones. Let's see how that turns out.",
     lokiFucksOff: "Oh shit where did Loki go?",
@@ -89,7 +87,6 @@ var redraw = function() {
     document.getElementById('canvas-caption').classList.remove('caption-drawer');
     document.getElementById('canvas-caption').classList.remove('hidden');
     document.getElementById('show-caption').classList.add('hidden');
-    // TODO: Hide icon used to open and close drawer
 
     // Define bounds. Limit height to a 4:3 aspect ratio, and if in fullscreen, center vertically
     margin = 20;
@@ -137,7 +134,6 @@ var redraw = function() {
             document.mozFullScreenElement ||
             document.msFullscreenElement
         ) {
-            // TODO: Call bootstrap function here to collapse drawer. Also add icon to open it.
             document.getElementById('canvas-caption').classList.add('caption-drawer');
             document.getElementById('canvas-caption').classList.add('hidden');
             document.getElementById('show-caption').classList.remove('hidden');
@@ -203,28 +199,28 @@ var redraw = function() {
         xBreakStart + 3 * dxBreak, yMaintl + 5, xBreakEnd - 3 * dxBreak, yMaintl - 5,
         xBreakEnd - dxBreak, yMaintl + 5, xBreakEnd, yMaintl, width, yMaintl])
         .fill('none')
-        .stroke({color: '#333', width: 3, linejoin: 'round'});
+        .stroke({color: '#333', width: 2, linejoin: 'round'});
     tick1950_onMain = canvas.line(x1950, yMaintl - 5, x1950, yMaintl + 5)
         .fill('none')
-        .stroke({color: '#333', width: 3, linecap: 'round'});
+        .stroke({color: '#333', width: 2, linecap: 'round'});
     tick1970_onMain = canvas.line(x1970, yMaintl - 5, x1970, yMaintl + 5)
         .fill('none')
-        .stroke({color: '#333', width: 3, linecap: 'round'});
+        .stroke({color: '#333', width: 2, linecap: 'round'});
     tick2012_onMain = canvas.line(x2012, yMaintl - 5, x2012, yMaintl + 5)
         .fill('none')
-        .stroke({color: '#333', width: 3, linecap: 'round'});
+        .stroke({color: '#333', width: 2, linecap: 'round'});
     tick2013_onMain = canvas.line(x2013, yMaintl - 5, x2013, yMaintl + 5)
         .fill('none')
-        .stroke({color: '#333', width: 3, linecap: 'round'});
+        .stroke({color: '#333', width: 2, linecap: 'round'});
     tick2014_onMain = canvas.line(x2014, yMaintl - 5, x2014, yMaintl + 5)
         .fill('none')
-        .stroke({color: '#333', width: 3, linecap: 'round'});
+        .stroke({color: '#333', width: 2, linecap: 'round'});
     tick2018_onMain = canvas.line(x2018, yMaintl - 5, x2018, yMaintl + 5)
         .fill('none')
-        .stroke({color: '#333', width: 3, linecap: 'round'});
+        .stroke({color: '#333', width: 2, linecap: 'round'});
     tick2023_onMain = canvas.line(x2023, yMaintl - 5, x2023, yMaintl + 5)
         .fill('none')
-        .stroke({color: '#333', width: 3, linecap: 'round'});
+        .stroke({color: '#333', width: 2, linecap: 'round'});
     label1970_onMain = canvas.text("1970")
         .font({family: 'Helvetica', size : fontsize})
         .cx(x1970)
@@ -271,10 +267,10 @@ var redraw = function() {
         .fill('none');
     tick2018_on1950 = canvas.line(x2018, y1950tl - 5, x2018, y1950tl + 5)
         .fill('none')
-        .stroke({color: '#333', width: 3, linecap: 'round'});
+        .stroke({color: '#333', width: 2, linecap: 'round'});
     tickbench_on1950 = canvas.line(x2023+2*dw, y1950tl - 5, x2023+2*dw, y1950tl + 5)
         .fill('none')
-        .stroke({color: '#333', width: 3, linecap: 'round'});
+        .stroke({color: '#333', width: 2, linecap: 'round'});
     label2018_on1950 = canvas.text("The Snap")
         .font({family: 'Helvetica', size : fontsize})
         .cx(x2018)
@@ -288,7 +284,7 @@ var redraw = function() {
         xBreakStart + 3 * dxBreak, y1970tl + 5, xBreakEnd - 3 * dxBreak, y1970tl - 5,
         xBreakEnd - dxBreak, y1970tl + 5, xBreakEnd, y1970tl, width, y1970tl])
         .fill('none')
-        .stroke({color: '#555', width: 3, linejoin: 'round', linecap: 'round'});
+        .stroke({color: '#555', width: 2, linejoin: 'round', linecap: 'round'});
 // var tick2012_on1970 = tick2012_onMain.clone()
 //   .cy(y1970tl)
 // var tick2013_on1970 = tick2013_onMain.clone()
@@ -312,7 +308,7 @@ var redraw = function() {
 
 // 2012 NYC Timeline
     tl2012 = canvas.line(x2012 + width / 20, y2012tl, width, y2012tl)
-        .stroke({color: '#555', width: 3, linejoin: 'round', linecap: 'round'});
+        .stroke({color: '#555', width: 2, linejoin: 'round', linecap: 'round'});
 // var tick2013_on2012 = tick2013_onMain.clone()
 //     .cy(y2012tl);
 // var tick2014_on2012 = tick2014_onMain.clone()
@@ -333,7 +329,7 @@ var redraw = function() {
 
 // 2013 Asgard timeline
     tl2013 = canvas.line(x2013 + width / 20, y2013tl, width, y2013tl)
-        .stroke({color: '#555', width: 3, linejoin: 'round', linecap: 'round'});
+        .stroke({color: '#555', width: 2, linejoin: 'round', linecap: 'round'});
 //var tick2014_on2013 = tick2014_onMain.clone()
 //  .cy(y2013tl)
     tick2018_on2013 = tick2018_onMain.clone()
@@ -349,7 +345,7 @@ var redraw = function() {
 
 // 2014 GotG Timeline
     tl2014 = canvas.line(x2014 + width / 20, y2014tl, width, y2014tl)
-        .stroke({color: '#555', width: 3, linejoin: 'round', linecap: 'round'});
+        .stroke({color: '#555', width: 2, linejoin: 'round', linecap: 'round'});
 // var tick2018_on2014 = tick2018_onMain.clone()
 //   .cy(y2014tl)
 // var tick2023_on2014 = tick2023_onMain.clone()
@@ -516,7 +512,6 @@ var redraw = function() {
         .add(fractal2013_2013)
         .add(fractal2013_2014)
         .opacity(0);
-    // TODO: Add fractals
 
 // Gradients
     clickable_gradient = canvas.gradient('radial', function (stop) {
@@ -704,32 +699,32 @@ var redraw = function() {
 
     // Redraw the paths of travel, if needed
     if (ironmanCapState >= 1) {
-        jumpTo2012.stroke({color: '#00F', width: 3, linecap: 'round'});
-        stub2012.stroke({color: '#555', width: 3, linecap: 'round'});
+        jumpTo2012.stroke({color: '#00F', width: 2, linecap: 'round'});
+        stub2012.stroke({color: '#555', width: 2, linecap: 'round'});
     }
     if (ironmanCapState >= 3) {
-        jumpTo1970.stroke({color: '#3FF', width: 3, linecap: 'round'});
-        stub1970.stroke({color: '#555', width: 3, linecap: 'round'});
+        jumpTo1970.stroke({color: '#3FF', width: 2, linecap: 'round'});
+        stub1970.stroke({color: '#555', width: 2, linecap: 'round'});
     }
     if (ironmanCapState >= 4) {
-        returnFrom1970.stroke({color: '#3FF', width: 3, linecap: 'round'});
+        returnFrom1970.stroke({color: '#3FF', width: 2, linecap: 'round'});
     }
     if (hulkState >= 3) {
-        returnFrom2012.stroke({color: '#00F', width: 3, linecap: 'round'});
+        returnFrom2012.stroke({color: '#00F', width: 2, linecap: 'round'});
     }
     if (thorState >= 1) {
-        jumpTo2013.stroke({color: '#F00', width: 3, linecap: 'round'});
-        stub2013.stroke({color: '#555', width: 3, linecap: 'round'});
+        jumpTo2013.stroke({color: '#F00', width: 2, linecap: 'round'});
+        stub2013.stroke({color: '#555', width: 2, linecap: 'round'});
     }
     if (thorState >= 2) {
-        returnFrom2013.stroke({color: '#F00', width: 3, linecap: 'round'});
+        returnFrom2013.stroke({color: '#F00', width: 2, linecap: 'round'});
     }
     if (nebulaState >= 1) {
-        jumpTo2014.stroke({color: '#F0F', width: 3, linecap: 'round'});
-        stub2014.stroke({color: '#555', width: 3, linecap: 'round'});
+        jumpTo2014.stroke({color: '#F0F', width: 2, linecap: 'round'});
+        stub2014.stroke({color: '#555', width: 2, linecap: 'round'});
     }
     if (nebulaState >= 2 || hawkeyeState >= 2) {
-        returnFrom2014.stroke({color: '#F0F', width: 3, linecap: 'round'});
+        returnFrom2014.stroke({color: '#F0F', width: 2, linecap: 'round'});
     }
 
     // Move the icons to the neccesary places
@@ -1004,10 +999,10 @@ var redraw = function() {
             mindStone.move(x2012 + 2*dw+iw/2, y2012tl-iw/2);
             spaceStone_1970.move(x1970 + 2*dw, y1970tl-iw/2);
 
-            stub1970.stroke({color: '#555', width: 3, linecap: 'round'});
-            stub2012.stroke({color: '#555', width: 3, linecap: 'round'});
-            stub2013.stroke({color: '#555', width: 3, linecap: 'round'});
-            stub2014.stroke({color: '#555', width: 3, linecap: 'round'});
+            stub1970.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub2012.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub2013.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub2014.stroke({color: '#555', width: 2, linecap: 'round'});
             peggy.opacity(1);
             group2014Timeline.opacity(1);
             group2013Timeline.opacity(1);
@@ -1051,12 +1046,12 @@ var redraw = function() {
             mindStone.move(x2012 + 2*dw+iw/2, y2012tl-iw/2);
             spaceStone_1970.move(x1970 + 2*dw, y1970tl-iw/2);
 
-            stub1950.stroke({color: '#555', width: 3, linecap: 'round'});
-            stub1970.stroke({color: '#555', width: 3, linecap: 'round'});
-            stub2012.stroke({color: '#555', width: 3, linecap: 'round'});
-            stub2013.stroke({color: '#555', width: 3, linecap: 'round'});
-            stub2014.stroke({color: '#555', width: 3, linecap: 'round'});
-            tl1950.stroke({color: '#555', width: 3, linecap: 'round'});
+            stub1950.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub1970.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub2012.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub2013.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub2014.stroke({color: '#555', width: 2, linecap: 'round'});
+            tl1950.stroke({color: '#555', width: 2, linecap: 'round'});
             group1950Timeline.opacity(1);
 
             group2014Timeline.opacity(1);
@@ -1207,7 +1202,7 @@ var animate2023to2012 = function() {
 
         // Draw the path of travel
         jumpTo2012.drawAnimated(1000,'<>')
-            .stroke({ color: '#00F', width: 3, linecap: 'round' });
+            .stroke({ color: '#00F', width: 2, linecap: 'round' });
 
         // Show 2012 stub
         stub2012.drawAnimated({
@@ -1215,7 +1210,7 @@ var animate2023to2012 = function() {
             easing: '<>',
             delay: 600
             })
-            .stroke({ color: '#555', width: 3, linecap: 'round' });
+            .stroke({ color: '#555', width: 2, linecap: 'round' });
 
         // Show Loki and 3 infinity stones.
         loki.animate({
@@ -1393,7 +1388,7 @@ var animate2023to2013 = function() {
 
         // Draw the path of travel
         jumpTo2013.drawAnimated(700,'>')
-            .stroke({ color: '#F00', width: 3, linecap: 'round' });
+            .stroke({ color: '#F00', width: 2, linecap: 'round' });
 
         // Show reality stone.
         realityStone.animate({
@@ -1413,7 +1408,7 @@ var animate2023to2013 = function() {
             easing: '<>',
             delay: 600
             })
-            .stroke({ color: '#555', width: 3, linecap: 'round' });
+            .stroke({ color: '#555', width: 2, linecap: 'round' });
 
         // Move thor to 2013
         var length = thorPath.length();
@@ -1499,7 +1494,7 @@ var animate2023to2014 = function() {
 
         // Draw the path of travel
         jumpTo2014.drawAnimated(1000,'<>')
-            .stroke({ color: '#F0F', width: 3, linecap: 'round' });
+            .stroke({ color: '#F0F', width: 2, linecap: 'round' });
 
         // Show power stone.
         powerStone.animate({
@@ -1514,7 +1509,7 @@ var animate2023to2014 = function() {
             easing: '<>',
             delay: 400
             })
-            .stroke({ color: '#555', width: 3, linecap: 'round' });
+            .stroke({ color: '#555', width: 2, linecap: 'round' });
 
         // Move war machine to 2014
         var length = warMachinePath.length();
@@ -1590,7 +1585,7 @@ var animate2012to1970 = function() {
 
     // Draw path of travel
     jumpTo1970.drawAnimated(1000,'<>')
-        .stroke({ color: '#3FF', width: 3, linecap: 'round' });
+        .stroke({ color: '#3FF', width: 2, linecap: 'round' });
 
     // Draw stub of new timeline
     stub1970.drawAnimated({
@@ -1598,7 +1593,7 @@ var animate2012to1970 = function() {
         easing: '<>',
         delay: 600
         })
-        .stroke({ color: '#555', width: 3, linecap: 'round' });
+        .stroke({ color: '#555', width: 2, linecap: 'round' });
 
     // Make new space stone appear
     spaceStone_1970.animate({
@@ -1665,7 +1660,7 @@ var animate2012to2023 = function() {
 
     // Draw the path of travel
     returnFrom2012.drawAnimated(1000,'<>')
-        .stroke({ color: '#00F', width: 3, linecap: 'round' });
+        .stroke({ color: '#00F', width: 2, linecap: 'round' });
 
     // Move hulk back to 2023 with time stone
     var length = hulkPath.length();
@@ -1734,7 +1729,7 @@ var animate2013to2023 = function() {
 
     // Draw the path of travel
     returnFrom2013.drawAnimated(650,'<')
-        .stroke({ color: '#F00', width: 3, linecap: 'round' });
+        .stroke({ color: '#F00', width: 2, linecap: 'round' });
 
     // Move thor to 2023 with mjolnir
     var length = thorPath.length();
@@ -1825,7 +1820,7 @@ var animate2014to2023_SoulStone = function() {
             easing: '<',
             delay: 1000
             })
-            .stroke({color: '#F0F', width: 3, linecap: 'round'});
+            .stroke({color: '#F0F', width: 2, linecap: 'round'});
     }
 
     // Hawkeye returns to 2023 with soul stone
@@ -1890,7 +1885,7 @@ var animate2014To2023_PowerStone = function() {
     // Draw the path of travel, assuming hawkeye hasn't already travelled it
     if (!soulStoneInPresent) {
         returnFrom2014.drawAnimated(650, '<')
-            .stroke({color: '#F0F', width: 3, linecap: 'round'});
+            .stroke({color: '#F0F', width: 2, linecap: 'round'});
     }
 
     // War machine returns to 2023 with power stone. Nebula stays behind
@@ -2099,7 +2094,7 @@ var animate1970to2023 = function() {
 
     // Draw the path of travel
     returnFrom1970.drawAnimated(1000,'<>')
-        .stroke({ color: '#3FF', width: 3, linecap: 'round' });
+        .stroke({ color: '#3FF', width: 2, linecap: 'round' });
 
     // Ironman returns to present
     var length = ironmanPath.length();
@@ -2285,13 +2280,13 @@ var capReturnsStones = function() {
 var capLivesOutLife = function() {
     // Stroke 1950 timeline
     stub1950.drawAnimated(700,'<')
-        .stroke({color: '#555', width: 3, linecap: 'round'});
+        .stroke({color: '#555', width: 2, linecap: 'round'});
     tl1950.drawAnimated({
         duration: 2700,
         easing: '>',
         delay: 1000
         })
-        .stroke({color: '#555', width: 3, linecap: 'round'});
+        .stroke({color: '#555', width: 2, linecap: 'round'});
 
     info_1950.animate(250, '<>', 150).opacity(1);
     make_clickable(info_1950, function() {set_caption_text(rsc_string.info_1950);}, 150);
@@ -2333,31 +2328,6 @@ var capLivesOutLife = function() {
 
     // Update caption text
     set_caption_text(rsc_string.capLivesOutLife);
-};
-
-// TODO
-var gotg2014Prompt = function() {
-
-};
-
-// TODO
-var endgame2013Prompt = function() {
-
-};
-
-// TODO
-var loki2012Prompt = function() {
-
-};
-
-// TODO
-var endgame1970Prompt = function() {
-
-};
-
-// TODO
-var bench1970Prompt = function() {
-
 };
 
 
@@ -2412,13 +2382,7 @@ $(document).ready(function() {
     });
 
     $('#show-caption').on('click', function() {
-        if (document.getElementById('canvas-caption').classList.contains('hidden')) {
-            document.getElementById('show-caption').src = imgPath + "down-chevron.png";
-            document.getElementById('canvas-caption').classList.remove('hidden');
-        } else {
-            document.getElementById('show-caption').src = imgPath + "up-chevron.png";
-            document.getElementById('canvas-caption').classList.add('hidden');
-        }
+        document.getElementById('canvas-caption').focus();
     });
 
     window.addEventListener('resize', function() {

@@ -32,7 +32,7 @@
         .overlay {
             position: absolute;
             right: 0;
-            top: 0;
+            bottom: 0;
         }
         .overlay > img {
             width: 26px;
@@ -49,15 +49,17 @@
 
         .caption-drawer{
             position: absolute;
+            width: 80%;
+            bottom: -30%;
         }
 
-        .hidden {
+        .caption-drawer:focus-within {
+            bottom: 0px;
+        }
+
+        img.hidden {
             display: none;
         }
-
-        /*.caption > * {*/
-        /*    */
-        /*}*/
 
         /*.caption-drawer {*/
         /*    position: absolute;*/
@@ -106,7 +108,7 @@
                 <img class="icons" data-toggle="collapse" id="fullscreen" src="rsc/endgame/fullscreen.png">
             </div>
         </div>
-        <div class="caption" id="canvas-caption">
+        <div class="caption" id="canvas-caption" tabindex="-1">
             Click an avenger to get started
         </div>
 <!--        <div class="caption" id="canvas-caption">-->
