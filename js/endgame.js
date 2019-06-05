@@ -1,5 +1,33 @@
 // TODO: Set these variably depending on viewing device
 
+// Define string resources
+const rsc_string = {
+    info_2012: "This timeline was royally messed up. Not only did Cap interact with Hydra, possibly interfering with the events of Winter Solder, but Loki escaped with the space stone to go star in his own TV show.",
+    info_1950: "After jumping between alternate realities (plothole) without creating new branched realities (plothole), catching up with redskull, and replacing all the stones in their original forms (plothole), he finally returned to Peggy for that dance. They lived out their happy ending in a new timeline. And he never left (see cap on bench)",
+    info_1970: "In this timeline, Steve and Stark stole some Pym particles, borrowed the Tessaract, and Stark resolved some daddy issues.",
+    info_2013: "Why is it the timeline with the most emotionally unstable avenger is the only one to go according to plan? They got the reality stone and Mjolnir, which were replaced by Cap, and the events of this timeline developed almost identically to prime reality.",
+    info_2014: "Black Widow dies so Hawkeye can get the soul stone. Thanos, Gamora, and Evil Nebula capture good Nebula when she attempts to return to the present. Evil Nebula goes back in her place and summons Thanos and his minions back to the future.",
+    info_bench: "Since cap doesn't return through the machine, we can conclude he never returns to his own reality. The Cap sitting on the bench is not the Cap that we just saw travel back in time. Rather, the Cap on the bench is from this branch's parent reality. Thus, the movie does not portray prime reality, it portrays a branched reality.",
+    info_2014gotg: "Drax never would've met Quill and Rocket without Gamora being assaulted in the prison. The prison breakout would only be performed by Quill, Rocket, and Groot. Rocket and Groot leave Quill behind when he goes to get his cassette player. Thus, Quill stays in jail and Ronan gets the power stone from him when he raids the prison later. Also, Thanos is now absent from this timeline, greatly upsetting the political balance of the universe.",
+    info_1970endgame: "When the tessaract is returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has it's own snap, it's own time travel, and it's own branched timelines. These branches have their own branches on and on into infinite fractals",
+    info_2013endgame: "When the reality stone and Mjolnir are returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has it's own snap, it's own time travel, and it's own branched timelines. These branches have their own branches on and on into infinite fractals",
+    jumpTo2012: "The center stage in this three ring circus: Stark, Steve, Scott, and Bruce travel to the attack on New York to retrieve 3 infinity stones. Let's see how that turns out.",
+    lokiFucksOff: "Oh shit where did Loki go?",
+    jumpTo2013: "Thor and Rocket head to Asgard circa Thor: The Dark World to retrieve the reality stone.",
+    jumpTo2014: "Rhodey and Nebula go to Morag circa Guardians of the Galaxy to retrieve the power stone. ScarJo and Hawkeye go with them, but head to Vormir to get the Soul Stone",
+    jumpTo1970: "In a bold act of improvising that would make Ryan Stiles proud, Steve and Tony go to a military base in 1970 to retrieve another Tesseract and some Pym particles",
+    returnFrom2012: "Bruce and Scott return to the present, time stone and mind stone in hand.",
+    returnFrom2013: "Thor and Rocket return to the present with the reality stone and a souvenir.",
+    returnFrom2014_SoulStone: "After Clint brutally murders his lifetime co-worker, he acquires the soul stone and returns to the present",
+    returnFrom2014_PowerStone: "Rhodey returns with the power stone, but Nebula is kidnapped, though Rhodey is unaware of this.",
+    returnFrom1970: "Cap and Stark each encounter old friends, and return to the present",
+    returnFrom2014_Nebula: "2014 Nebula disguises herself as 2023 Nebula and goes to the future/present (depending on your point of view)",
+    thanosToPresent: "Nebula hacks into ... something, and summons Thanos and his army into the future where we prepare for act 3",
+    starkStones: "Stark manages to acquire the stones and snaps Thanos into oblivion. Also Cap picks up Mjolnir",
+    capStones: "Cap collects all the stones and Mjolnir. After jumping between alternate realities (plothole) without creating new branched realities (plothole), catching up with redskull, and replacing all the stones in their original forms (plothole), he finally returned to Peggy for that dance.",
+    capLivesOutLife: "Cap and Peggy grow old together and witness events play out the way they would in prime reality. Cap never returns to his original timeline. He does, however, put Peggy in a home once she starts getting senile."
+};
+
 // Define all variables initializes in redraw so they're visible globally
 var margin, width, height, verticalOffset, iw, fontsize, clickable_gradient, unclickable_gradient,
     x1950, x1970, x2012, x2013, x2014, x2018, x2023,
@@ -23,6 +51,8 @@ var margin, width, height, verticalOffset, iw, fontsize, clickable_gradient, unc
     war_machine_glow, black_widow_glow, nebula_glow,
     nebula_evil, thanos, loki,
     nebula_evil_glow, thanos_glow, loki_glow,
+    info_2012, info_2013, info_2014, info_1970, info_1970, info_1950, info_bench, info_2014gotg, info_1970endgame,
+    info_2013endgame,
     soulStone, powerStone, realityStone, spaceStone_loki, spaceStone_1970,  timeStone, mindStone, mjolnir,
     groupMainTimeline, group1950Timeline, group1970Timeline, group2012Timeline, group2013Timeline, group2014Timeline,
     group1950Fractals, group1970Fractals, group2012Fractals, group2013Fractals,
@@ -132,11 +162,11 @@ var redraw = function() {
         x2014 = x[22],
         x2018 = x[28],
         x2023 = x[34],
-        y1950tl = y[1],
-        y1970tl = y[5],
-        y2013tl = y[13],
-        yMaintl = y[21],
-        y2014tl = y[29],
+        y1950tl = y[2],
+        y1970tl = y[9],
+        y2013tl = y[15],
+        yMaintl = y[22],
+        y2014tl = y[30],
         y2012tl = y[37],
         spaceStoneInPresent = false,
         mindStoneInPresent = false,
@@ -330,40 +360,40 @@ var redraw = function() {
 
 // Time travel paths
     jumpTo1970 = canvas.path('M' + (x2012 + 2 * dw) + ' ' + y2012tl +
-        ' c' + -8 * dw + ',' + 0 + ' ' + -8 * dw + ',' + -28 * dh + ' ' + -6 * dw + ',' + -32 * dh)
+        ' c' + -8 * dw + ',' + 0 + ' ' + -8 * dw + ',' + -24 * dh + ' ' + -6 * dw + ',' + -28 * dh)
         .fill('none');
     jumpTo2012 = canvas.path('M' + x2023 + ',' + yMaintl +
         ' c ' + -3 * dw + ',' + dh + ' ' + -3 * dw + ',' + dh + ' ' + -6 * dw + ',' + dh +
         ' c ' + -3 * dw + ',' + 0 + ' ' + -7 * dw + ',' + 0 + ' ' + -10 * dw + ',' + 0 +
         ' c ' + -3 * dw + ',' + 0 + ' ' + -5 * dw + ',' + 1 * dh + ' ' + -6 * dw + ',' + 4 * dh +
-        ' c ' + -1 * dw + ',' + 3 * dh + ' ' + -1 * dw + ',' + 9 * dh + ' ' + 0 + ',' + 11 * dh)
+        ' c ' + -1 * dw + ',' + 3 * dh + ' ' + -1 * dw + ',' + 8 * dh + ' ' + 0 + ',' + 10 * dh)
         .fill('none');
     jumpTo2013 = canvas.path('M' + x2023 + ',' + yMaintl +
         ' c ' + -2.5 * dw + ',' + -2 * dh + ' ' + -2.5 * dw + ',' + -2 * dh + ' ' + -5 * dw + ',' + -2 * dh +
         ' c ' + -2.5 * dw + ',' + 0 + ' ' + -3.5 * dw + ',' + 0 + ',' + -6 * dw + ',' + 0 +
         ' c ' + -2.5 * dw + ',' + 0 + ' ' + -4.5 * dw + ',' + -1 * dh + ' ' + -5 * dw + ',' + -2 * dh +
-        ' c ' + -0.5 * dw + ',' + -1 * dh + ' ' + -0.5 * dw + ',' + -3 * dh + ' ' + 0 + ',' + -4 * dh)
+        ' c ' + -0.5 * dw + ',' + -1 * dh + ' ' + -0.25 * dw + ',' + -2 * dh + ' ' + 0 + ',' + -3 * dh)
         .fill('none');
     jumpTo2014 = canvas.path('M' + x2023 + ',' + yMaintl +
         ' c ' + -3 * dw + ',' + 3 * dh + ' ' + -2 * dw + ',' + 3 * dh + ' ' + -5 * dw + ',' + 3 * dh +
         ' c ' + -3 * dw + ',' + 0 + ' ' + -4 * dw + ',' + 0 + ' ' + -5 * dw + ',' + 2 * dh +
         ' c ' + -0.5 * dw + ',' + 1 * dh + ' ' + -0.5 * dw + ',' + 2 * dh + ' ' + 0 + ',' + 3 * dh)
-        .fill('none');
+        .fill('none')
 
     returnFrom1970 = canvas.path('M' + (x1970 + 2 * dw) + ' ' + y1970tl +
-        ' c ' + -1 * dw + ',' + 2 * dh + ' ' + -1 * dw + ',' + 7 * dh + ' ' + 0 + ',' + 10 * dh +
+        ' c ' + -1 * dw + ',' + 2 * dh + ' ' + -1 * dw + ',' + 4 * dh + ' ' + 0 + ',' + 7 * dh +
         ' c ' + 1 * dw + ',' + 3 * dh + ' ' + 3 * dw + ',' + 5 * dh + ' ' + 6 * dw + ',' + 5 * dh +
         ' c ' + 3 * dw + ',' + 0 + ' ' + 14 * dw + ',' + 0 + ' ' + 17 * dw + ',' + 0 +
         ' c ' + 3 * dw + ',' + 0 + ' ' + 3 * dw + ',' + 0 + ' ' + 5 * dw + ',' + 1 * dh)
         .fill('none');
     returnFrom2012 = canvas.path('M' + (x2012 + 2 * dw) + ' ' + y2012tl +
-        ' c ' + -1 * dw + ',' + -2 * dh + ' ' + -1 * dw + ',' + -7 * dh + ' ' + 0 + ',' + -10 * dh +
+        ' c ' + -1 * dw + ',' + -2 * dh + ' ' + -1 * dw + ',' + -6 * dh + ' ' + 0 + ',' + -9 * dh +
         ' c ' + 1 * dw + ',' + -3 * dh + ' ' + 3 * dw + ',' + -4 * dh + ' ' + 6 * dw + ',' + -4 * dh +
         ' c ' + 3 * dw + ',' + 0 + ' ' + 8 * dw + ',' + 0 + ' ' + 11 * dw + ',' + 0 +
         ' c ' + 3 * dw + ',' + 0 + ' ' + 3 * dw + ',' + -1 * dh + ' ' + 5 * dw + ',' + -2 * dh)
         .fill('none');
     returnFrom2013 = canvas.path('M' + (x2013 + 2 * dw) + ' ' + y2013tl +
-        ' c ' + -0.4 * dw + ',' + 1 * dh + ' ' + -0.4 * dw + ',' + 2 * dh + ' ' + 0 + ',' + 3 * dh +
+        ' c ' + -0.4 * dw + ',' + 1 * dh + ' ' + -0.4 * dw + ',' + 1 * dh + ' ' + 0 + ',' + 2 * dh +
         ' c ' + 0.5 * dw + ',' + 1 * dh + ' ' + 2.5 * dw + ',' + 2 * dh + ' ' + 5 * dw + ',' + 2 * dh +
         ' c ' + 2.5 * dw + ',' + 0 + ' ' + 3.5 * dw + ',' + 0 + ' ' + 6 * dw + ',' + 0 +
         ' c ' + 2.5 * dw + ',' + 0 + ' ' + 2.5 * dw + ',' + dh + ' ' + 5 * dw + ',' + 3 * dh)
@@ -450,11 +480,29 @@ var redraw = function() {
         stop.at({offset: 0, color: '#fff', opacity: 0});
     });
 
+    // Define prompt icons (for exploring app after animations are all done
+    var info_2012_glow = canvas.circle(iw)
+        .fill(unclickable_gradient);
+    var info_icon = canvas.image(imgPath + "prompt.png")
+        .size(iw*0.8, iw*0.8).center(info_2012_glow.cx(), info_2012_glow.cy());
+    info_2012 = canvas.group().add(info_2012_glow).add(info_icon)
+        .center(x2012+2*dw, y2012tl)
+        .opacity(0);
+
+    info_1950 = info_2012.clone().center(x1950, yMaintl);
+    info_1970 = info_2012.clone().center(x1970+2*dw, y1970tl);
+    info_2013 = info_2012.clone().center(x2013+2*dw, y2013tl);
+    info_2014 = info_2012.clone().center(x2014+2*dw, y2014tl);
+    info_bench = info_2012.clone().center(x2023+2*dw, y1950tl);
+    info_2014gotg = info_2012.clone().center(x2014+6*dw, y2014tl);
+    info_1970endgame = info_2012.clone().center(x2023, y1970tl);
+    info_2013endgame = info_2012.clone().center(x2023, y2013tl);
+
 // Icons
     ironman_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var ironman_icon = canvas.image(imgPath + "ironman.png")
-        .size(iw*0.8, iw*0.8).center(ironman_glow.cx(), ironman_glow.cy());
+        .size(iw*0.8, iw*0.8).center(ironman_glow.cx(), ironman_glow.cy())
     ironman = canvas.group().add(ironman_glow).add(ironman_icon)
         .move(x2023, yMaintl - iw);
 
@@ -604,6 +652,7 @@ var redraw = function() {
         .move(x2013 + 2 * dw + iw, y2013tl - iw / 2)
         .opacity(0);
 
+
     // Redraw the paths of travel, if needed
     if (ironmanCapState >= 1) {
         jumpTo2012.stroke({color: '#00F', width: 3, linecap: 'round'});
@@ -634,6 +683,7 @@ var redraw = function() {
         returnFrom2014.stroke({color: '#F0F', width: 3, linecap: 'round'});
     }
 
+    // Move the icons to the neccesary places
     switch (hulkState) {
         case 0:
             make_clickable(hulk, animate2023to2012, 500);
@@ -700,6 +750,10 @@ var redraw = function() {
             realityStone.move(rocket.cx(), rocket.cy());
             make_unclickable(rocket, [realityStone]);
             make_unclickable(thor, [mjolnir]);
+
+            // Show prompt, assuming everyone else is gone
+            info_2013.animate(250, '<>').opacity(1);
+            make_clickable(info_2013, function() {set_caption_text(rsc_string.info_2013);});
 
             realityStoneInPresent = true;
             break;
@@ -810,6 +864,12 @@ var redraw = function() {
             spaceStone_1970.opacity(1);
             make_clickable(ironman, animate1970to2023, 0);
             make_clickable(cap_am, animate1970to2023, 0, [spaceStone_1970]);
+
+            // Show prompt, assuming everyone else is gone
+            if (hulkState >= 3) {
+                info_2012.animate(250, '<>').opacity(1);
+                make_clickable(info_2012, function() {set_caption_text(rsc_string.info_2012);});
+            }
             break;
         case 4:
             // Draw space stone with them in 2023
@@ -822,11 +882,19 @@ var redraw = function() {
                 && soulStoneInPresent && nebulaInPresent) {
                 make_clickable(nebula_evil, animate2014to2023_Thanos);
             }
+
+            // Show prompts
+            info_1970.animate(250, '<>').opacity(1);
+            make_clickable(info_1970, function() {set_caption_text(rsc_string.info_1970);});
+            if (hulkState >= 3) {
+                info_2012.animate(250, '<>').opacity(1);
+                make_clickable(info_2012, function() {set_caption_text(rsc_string.info_2012);});
+            }
             break;
     }
 
 
-    if (nebulaState == 4) {
+    if (nebulaState >= 4) {
         // Depends on thorState = 2, hawkeyeState = 2, nebulaState = 3, and ironmanCapState = 4
         // Draw Thanos and gang in 2023 with everyone else.
         thanos.move(x2023, yMaintl - 2 * iw);
@@ -839,7 +907,11 @@ var redraw = function() {
         gamora.opacity(1);
         nebula_evil.opacity(1);
         make_unclickable(nebula_evil);
-        make_clickable(ironman, finalBattle);
+        if (nebulaState == 4) make_clickable(ironman, finalBattle);
+
+        // Show prompt
+        info_2014.animate(250, '<>').opacity(1);
+        make_clickable(info_2014, function() {set_caption_text(rsc_string.info_2014);});
     }
 
     switch (ironmanCapState) {
@@ -865,6 +937,11 @@ var redraw = function() {
             thanos.opacity(0);
             make_unclickable(ironman, [powerStone, soulStone, timeStone, spaceStone_1970, realityStone, mindStone, mjolnir]);
             make_clickable(cap_am, capReturnsStones, 0, [mjolnir]);
+
+            info_2012.animate(250, '<>').opacity(1);
+            make_clickable(info_2012, function() {set_caption_text(rsc_string.info_2012);});
+            info_1970.animate(250, '<>').opacity(1);
+            make_clickable(info_1970, function() {set_caption_text(rsc_string.info_1970);});
             break;
         case 6:
             // Put all the stones at each timeline and move cap to 1950 timeline, show Peggy
@@ -897,6 +974,17 @@ var redraw = function() {
 
             make_clickable(cap_am, capLivesOutLife);
             make_clickable(peggy, capLivesOutLife);
+
+            info_2012.animate(250, '<>').opacity(1);
+            make_clickable(info_2012, function() {set_caption_text(rsc_string.info_2012);});
+            info_1970.animate(250, '<>').opacity(1);
+            make_clickable(info_1970, function() {set_caption_text(rsc_string.info_1970);});
+            info_2014gotg.animate(250, '<>').opacity(1);
+            make_clickable(info_2014gotg, function() {set_caption_text(rsc_string.info_2014gotg);});
+            info_2013endgame.animate(250, '<>').opacity(1);
+            make_clickable(info_2013endgame, function() {set_caption_text(rsc_string.info_2013endgame);});
+            info_1970endgame.animate(250, '<>').opacity(1);
+            make_clickable(info_1970endgame, function() {set_caption_text(rsc_string.info_1970endgame);});
             break;
         case 7:
             // Place all stones in correct spots, show all timelines and put cap at end of 1950 timeline
@@ -930,6 +1018,21 @@ var redraw = function() {
             mindStone.opacity(1);
             mjolnir.opacity(1);
             make_unclickable(cap_am);
+
+            info_2012.animate(250, '<>').opacity(1);
+            make_clickable(info_2012, function() {set_caption_text(rsc_string.info_2012);});
+            info_1970.animate(250, '<>').opacity(1);
+            make_clickable(info_1970, function() {set_caption_text(rsc_string.info_1970);});
+            info_2014gotg.animate(250, '<>').opacity(1);
+            make_clickable(info_2014gotg, function() {set_caption_text(rsc_string.info_2014gotg);});
+            info_2013endgame.animate(250, '<>').opacity(1);
+            make_clickable(info_2013endgame, function() {set_caption_text(rsc_string.info_2013endgame);});
+            info_1970endgame.animate(250, '<>').opacity(1);
+            make_clickable(info_1970endgame, function() {set_caption_text(rsc_string.info_1970endgame);});
+            info_1950.animate(250, '<>').opacity(1);
+            make_clickable(info_1950, function() {set_caption_text(rsc_string.info_1950);});
+            info_bench.animate(250, '<>').opacity(1);
+            make_clickable(info_bench, function() {set_caption_text(rsc_string.info_bench);});
             break;
     }
 
@@ -952,12 +1055,19 @@ var setPulsating = function() {
 var make_clickable = function(icon, func, delay=0, carryItems = []) {
     // Reset click handler
     setTimeout(function() {
-        icon.click(null);
-        icon.click(func);
+        icon.click(null)
+            .click(func);
+        icon.last()
+            .mouseenter(function(){this.animate(250,'<>').scale(1.2,1.2);})
+            .mouseleave(function(){this.animate(250,'<>').scale(1,1);});
 
         for (var i in carryItems) {
-            carryItems[i].click(null);
-            carryItems[i].click(func);
+            carryItems[i].click(null)
+                .click(func)
+                .mouseenter(null)
+                .mouseleave(null)
+                .mouseenter(function(){icon.last().animate(250,'<>').scale(1.2,1.2);})
+                .mouseleave(function(){icon.last().animate(250,'<>').scale(1,1);});
         }
     }, delay);
 
@@ -980,14 +1090,22 @@ var make_unclickable = function(icon, carryItems = []) {
     // Remove click handler
     icon.click(null);
 
+    icon.last()
+        .finish()
+        .mouseenter(null)
+        .mouseleave(null)
+        .scale(1,1);
+
     for (var i in carryItems) {
-        carryItems[i].click(null);
+        carryItems[i].click(null)
+            .mouseenter(null)
+            .mouseleave(null);
     }
 
     // Remove clickable gradient
     icon.first().fill(unclickable_gradient);
 
-    // Stop any ongoing naimations to the image
+    // Stop any ongoing animations to the gradient
     icon.first().finish();
 
     // Remove this from the list of clickables
@@ -995,6 +1113,10 @@ var make_unclickable = function(icon, carryItems = []) {
         clickables.splice(index, 1);
     }
 };
+
+var set_caption_text = function(text) {
+    $('#canvas-caption')[0].innerText = text;
+}
 
 
 // ----------------  Events ------------------------
@@ -1110,6 +1232,9 @@ var animate2023to2012 = function() {
     ironmanCapState++;
     hulkState++;
 
+    // Update caption text
+    set_caption_text(rsc_string.jumpTo2012);
+
     // Pulsate all clickable icons periodically
     setPulsating();
 };
@@ -1177,6 +1302,9 @@ var lokiStealsStone = function() {
     // Update states
     ironmanCapState++;
     hulkState++;
+
+    // Update caption text
+    set_caption_text(rsc_string.lokiFucksOff);
 
     // Pulsate all clickable icons periodically
     setPulsating();
@@ -1262,6 +1390,9 @@ var animate2023to2013 = function() {
 
     // Update states
     thorState++;
+
+    // Update caption text
+    set_caption_text(rsc_string.jumpTo2013);
 
     // Pulsate all clickable icons periodically
     setPulsating();
@@ -1381,6 +1512,9 @@ var animate2023to2014 = function() {
     nebulaState++;
     hawkeyeState++;
 
+    // Update caption text
+    set_caption_text(rsc_string.jumpTo2014);
+
     // Pulsate all clickable icons periodically
     setPulsating();
 };
@@ -1447,6 +1581,15 @@ var animate2012to1970 = function() {
     // Update states
     ironmanCapState++;
 
+    // Update caption text
+    set_caption_text(rsc_string.jumpTo1970);
+
+    // Show prompt, assuming everyone else is gone
+    if (hulkState >= 3) {
+        info_2012.animate(250, '<>', 150).opacity(1);
+        make_clickable(info_2012, function() {set_caption_text(rsc_string.info_2012);}, 150);
+    }
+
     // Pulsate all clickable icons periodically
     setPulsating();
 };
@@ -1506,6 +1649,15 @@ var animate2012to2023 = function() {
 
     // Update states
     hulkState++;
+
+    // Show prompt, assuming everyone else is gone
+    if (ironmanCapState >= 3) {
+        info_2012.animate(250, '<>', 150).opacity(1);
+        make_clickable(info_2012, function() {set_caption_text(rsc_string.info_2012);}, 150);
+    }
+
+    // Update caption text
+    set_caption_text(rsc_string.returnFrom2012);
 
     // Pulsate all clickable icons periodically
     setPulsating();
@@ -1575,6 +1727,13 @@ var animate2013to2023 = function() {
 
     // Update states
     thorState++;
+
+    // Show prompt
+    info_2013.animate(250, '<>', 150).opacity(1);
+    make_clickable(info_2013, function() {set_caption_text(rsc_string.info_2013);}, 150);
+
+    // Update caption text
+    set_caption_text(rsc_string.returnFrom2013);
 
     // Pulsate all clickable icons periodically
     setPulsating();
@@ -1646,6 +1805,15 @@ var animate2014to2023_SoulStone = function() {
     // Update states
     hawkeyeState++;
 
+    // Show prompt, assuming everyone else is gone
+    if (nebulaState >= 4) {
+        info_2014.animate(250, '<>', 150).opacity(1);
+        make_clickable(info_2014, function() {set_caption_text(rsc_string.info_2014);}, 150);
+    }
+
+    // Update caption text
+    set_caption_text(rsc_string.returnFrom2014_SoulStone);
+
     // Pulsate all clickable icons periodically
     setPulsating();
 };
@@ -1713,6 +1881,9 @@ var animate2014To2023_PowerStone = function() {
     // Update states
     nebulaState++;
 
+    // Update caption text
+    set_caption_text(rsc_string.returnFrom2014_PowerStone);
+
     // Pulsate all clickable icons periodically
     setPulsating();
 };
@@ -1763,6 +1934,9 @@ var animate2014to2023_Nebula = function() {
 
     // Update states
     nebulaState++;
+
+    // Update caption text
+    set_caption_text(rsc_string.returnFrom2014_Nebula);
 
     // Pulsate all clickable icons periodically
     setPulsating();
@@ -1843,6 +2017,13 @@ var animate2014to2023_Thanos = function() {
     // Update states
     nebulaState++;
 
+    // Show prompt
+    info_2014.animate(250, '<>', 150).opacity(1);
+    make_clickable(info_2014, function() {set_caption_text(rsc_string.info_2014);}, 150);
+
+    // Update caption text
+    set_caption_text(rsc_string.thanosToPresent);
+
     // Pulsate all clickable icons periodically
     setPulsating();
 };
@@ -1900,6 +2081,13 @@ var animate1970to2023 = function() {
     // Update states
     ironmanCapState++;
 
+    // Show prompt
+    info_1970.animate(250, '<>', 150).opacity(1);
+    make_clickable(info_1970, function() {set_caption_text(rsc_string.info_1970);}, 150);
+
+    // Update caption text
+    set_caption_text(rsc_string.returnFrom1970);
+
     // Pulsate all clickable icons periodically
     setPulsating();
 };
@@ -1940,6 +2128,9 @@ var finalBattle = function() {
     ironmanCapState++;
     nebulaState++;
 
+    // Update caption text
+    set_caption_text(rsc_string.starkStones);
+
     // Pulsate all clickable icons periodically
     setPulsating();
 };
@@ -1972,6 +2163,8 @@ var capReturnsStones = function() {
     group2014Timeline.animate(500,"",1750).opacity(1);
     soulStone.animate(450,"<>").move(x2014 + 2*dw+iw/2, y2014tl-iw/2);
     powerStone.animate(450,"<>").move(x2014 + 2*dw, y2014tl-iw/2);
+    info_2014gotg.animate(250, '<>', 1900).opacity(1);
+    make_clickable(info_2014gotg, function() {set_caption_text(rsc_string.info_2014gotg);}, 1900);
 
     // Move cap to 2013 timeline. Leave power and soul stones behind
     cap_am.animate(1000, "<>", 250).move(x2013 + width/20, y2013tl);
@@ -1981,8 +2174,10 @@ var capReturnsStones = function() {
     mindStone.animate(1000, "<>", 250).move(x2013 + width/20+iw-mindStone.width()/2, y2013tl + ih/2 - mindStone.height()/2);
     mjolnir.animate(1000, "<>", 250).move(x2013 + width/20 + iw/2, y2013tl + ih/2);
     group2013Timeline.animate(500,"",3000).opacity(1);
-    realityStone.animate(450,"<>").move(x2013 + 2*dw, y2013tl-iw/2);
-    mjolnir.animate(450,"<>").move(x2013 + 2*dw+iw/2, y2013tl-iw/2);
+    realityStone.animate(450,"<>").move(x2013 + 3*dw, y2013tl-iw/2);
+    mjolnir.animate(450,"<>").move(x2013 + 3*dw+iw/2, y2013tl-iw/2);
+    info_2013endgame.animate(250, '<>', 3150).opacity(1);
+    make_clickable(info_2013endgame, function() {set_caption_text(rsc_string.info_2013endgame);}, 3150);
 
     // Move cap to 2012 timeline. Leave reality stone behind
     cap_am.animate(1000, "<>", 250).move(x2012 + width/20, y2012tl);
@@ -1990,14 +2185,18 @@ var capReturnsStones = function() {
     spaceStone_1970.animate(1000, "<>", 250).move(x2012 + width/20, y2012tl+ih-spaceStone_1970.height());
     mindStone.animate(1000, "<>", 250).move(x2012 + width/20+iw-mindStone.width()/2, y2012tl + ih/2 - mindStone.height()/2);
     group2012Timeline.animate(500,"",4250).opacity(1);
-    timeStone.animate(450,"<>").move(x2012 + 2*dw, y2012tl-iw/2);
-    mindStone.animate(450,"<>").move(x2012 + 2*dw+iw/2, y2012tl-iw/2);
+    timeStone.animate(450,"<>").move(x2012 + 3*dw, y2012tl-iw/2);
+    mindStone.animate(450,"<>").move(x2012 + 3*dw+iw/2, y2012tl-iw/2);
+    // info_2012loki.animate(250, '<>', 4400).opacity(1);
+    // make_clickable(info_2013endgame, function() {set_caption_text(rsc_string.info_2012loki);}, 4400);
 
     // Move cap to 1970 timeline. Leave mind and time stones behind
     cap_am.animate(1000, "<>", 250).move(x1970 + width/20, y1970tl);
     spaceStone_1970.animate(1000, "<>", 250).move(x1970 + width/20, y1970tl+ih-spaceStone_1970.height());
     group1970Timeline.animate(500,"",5500).opacity(1);
-    spaceStone_1970.animate(450,"<>").move(x1970 + 2*dw, y1970tl-iw/2);
+    spaceStone_1970.animate(450,"<>").move(x1970 + 3*dw, y1970tl-iw/2);
+    info_1970endgame.animate(250, '<>', 5650).opacity(1);
+    make_clickable(info_1970endgame, function() {set_caption_text(rsc_string.info_1970endgame);}, 5650);
 
     // Move cap to 1950, show Peggy
     cap_am.animate(1000, "<>", 250).move(x1950, yMaintl);
@@ -2011,6 +2210,9 @@ var capReturnsStones = function() {
 
     // Update states
     ironmanCapState++;
+
+    // Update caption text
+    set_caption_text(rsc_string.capStones);
 };
 
 var capLivesOutLife = function() {
@@ -2023,6 +2225,9 @@ var capLivesOutLife = function() {
         delay: 1000
         })
         .stroke({color: '#555', width: 3, linecap: 'round'});
+
+    info_1950.animate(250, '<>', 150).opacity(1);
+    make_clickable(info_1950, function() {set_caption_text(rsc_string.info_1950);}, 150);
 
     group1950Timeline.animate(250, '<>', 3000).opacity(1);
 
@@ -2053,6 +2258,12 @@ var capLivesOutLife = function() {
     make_unclickable(peggy);
     // Update states
     ironmanCapState++;
+
+    info_bench.animate(250, '<>', 3200).opacity(1);
+    make_clickable(info_bench, function() {set_caption_text(rsc_string.info_bench);}, 3200);
+
+    // Update caption text
+    set_caption_text(rsc_string.capLivesOutLife);
 };
 
 // TODO
@@ -2133,10 +2344,10 @@ $(document).ready(function() {
 
     $('#show-caption').on('click', function() {
         if (document.getElementById('canvas-caption').classList.contains('hidden')) {
-            document.getElementById('show-caption').src = imgPath + "up-chevron.png";
+            document.getElementById('show-caption').src = imgPath + "down-chevron.png";
             document.getElementById('canvas-caption').classList.remove('hidden');
         } else {
-            document.getElementById('show-caption').src = imgPath + "down-chevron.png";
+            document.getElementById('show-caption').src = imgPath + "up-chevron.png";
             document.getElementById('canvas-caption').classList.add('hidden');
         }
     });
@@ -2163,10 +2374,6 @@ $(document).ready(function() {
         function(){$(this).animate({width: "26px", height:"26px"}, 300);}
     );
     $("#fullscreen").hover(
-        function(){$(this).animate({width: "32px", height:"32px"}, 300);},
-        function(){$(this).animate({width: "26px", height:"26px"}, 300);}
-    );
-    $('#show-caption').hover(
         function(){$(this).animate({width: "32px", height:"32px"}, 300);},
         function(){$(this).animate({width: "26px", height:"26px"}, 300);}
     );

@@ -4,9 +4,10 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5e304c2-e623-4752-ab13-c48a5937391d" name="Default Changelist" comment="">
+    <list default="true" id="f5e304c2-e623-4752-ab13-c48a5937391d" name="Default Changelist" comment="Have a caption box working. I don't like it though.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/endgame.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/endgame.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/page.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,14 +24,14 @@
     <favorites_list name="EndgameTimeline" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.41849148">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/page.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="405">
-                  <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+                <state relative-caret-position="-645">
+                  <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
                 </state>
               </provider>
             </entry>
@@ -38,17 +39,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/endgame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="2008" column="45" selection-start-line="2008" selection-start-column="45" selection-end-line="2008" selection-end-column="45" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/manifest.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret column="1" lean-forward="true" selection-start-column="1" selection-end-column="1" />
+                <state relative-caret-position="495">
+                  <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -60,8 +52,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/endgame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="405">
-                  <caret line="870" column="36" selection-start-line="870" selection-start-column="36" selection-end-line="870" selection-end-column="36" />
+                <state relative-caret-position="713">
+                  <caret line="2181" lean-forward="true" selection-start-line="2181" selection-end-line="2181" />
                 </state>
               </provider>
             </entry>
@@ -128,6 +120,7 @@
         <option value="$PROJECT_DIR$/svg.path.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/endgame.js" />
+        <option value="$PROJECT_DIR$/js/endgame-strings.js" />
         <option value="$PROJECT_DIR$/page.html" />
         <option value="$PROJECT_DIR$/js/endgame.js" />
       </list>
@@ -208,7 +201,7 @@
       <workItem from="1558831103232" duration="8245000" />
       <workItem from="1558844488620" duration="66905000" />
       <workItem from="1559404395650" duration="868000" />
-      <workItem from="1559410230707" duration="56660000" />
+      <workItem from="1559410230707" duration="77192000" />
     </task>
     <task id="LOCAL-00001" summary="Finished redesigning paths of travel&#10;Added relative path constant for image locations&#10;Added preparatory and post animations.&#10;Tweaked Loki animation">
       <created>1559417262684</created>
@@ -259,11 +252,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559599456374</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added 1950 and peggy animation.">
+      <created>1559605707586</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1559605707586</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Have a caption box working. I don't like it though.">
+      <created>1559620863939</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1559620863939</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="169555000" />
+    <option name="totallyTimeSpent" value="190087000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -278,12 +285,12 @@
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49621212" visible="true" weight="0.18257757" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.18257757" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" sideWeight="0.5037879" side_tool="true" visible="true" weight="0.18257757" />
+      <window_info id="Favorites" order="2" sideWeight="0.5041322" side_tool="true" visible="true" weight="0.18257757" />
       <window_info anchor="bottom" id="Messages" weight="0.3299373" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.37931034" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.37931034" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32924962" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39969373" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -291,7 +298,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3299373" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.2413793" />
+      <window_info anchor="bottom" id="Version Control" order="9" visible="true" weight="0.2413793" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3299373" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -337,7 +344,20 @@
     <MESSAGE value="General mobile friendliness. Made icons resizable, handled fullscreen and portrait mode." />
     <MESSAGE value="Moved files to match structure on website" />
     <MESSAGE value="Crop the height when in not in fullscreen, but the height exceeds the screen height anyways" />
-    <option name="LAST_COMMIT_MESSAGE" value="Crop the height when in not in fullscreen, but the height exceeds the screen height anyways" />
+    <MESSAGE value="Added 1950 and peggy animation." />
+    <MESSAGE value="Have a caption box working. I don't like it though." />
+    <option name="LAST_COMMIT_MESSAGE" value="Have a caption box working. I don't like it though." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/page.html</url>
+          <line>53</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
@@ -357,13 +377,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -371,10 +384,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/endgame-strings.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-645">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/endgame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="2008" column="45" selection-start-line="2008" selection-start-column="45" selection-end-line="2008" selection-end-column="45" />
+        <state relative-caret-position="495">
+          <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
         </state>
       </provider>
     </entry>
