@@ -135,8 +135,9 @@ var redraw = function() {
             document.msFullscreenElement
         ) {
             document.getElementById('canvas-caption').classList.add('caption-drawer');
+            document.getElementById('canvas-caption').classList.add('visible');
             document.getElementById('show-caption').classList.remove('hidden');
-            document.getElementById('show-caption').src = imgPath + "up-chevron.png";
+            document.getElementById('show-caption').src = imgPath + "down-chevron.png";
         }
     }
 
