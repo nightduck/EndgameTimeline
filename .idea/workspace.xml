@@ -4,10 +4,9 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5e304c2-e623-4752-ab13-c48a5937391d" name="Default Changelist" comment="Have a caption box working. I don't like it though.">
+    <list default="true" id="f5e304c2-e623-4752-ab13-c48a5937391d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/endgame.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/endgame.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/page.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +29,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/page.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-645">
-                  <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+                <state relative-caret-position="555">
+                  <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
                 </state>
               </provider>
             </entry>
@@ -39,8 +38,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/endgame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="495">
-                  <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+                <state relative-caret-position="525">
+                  <caret line="1039" column="109" selection-start-line="1039" selection-start-column="109" selection-end-line="1039" selection-end-column="109" />
                 </state>
               </provider>
             </entry>
@@ -52,8 +51,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/endgame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="713">
-                  <caret line="2181" lean-forward="true" selection-start-line="2181" selection-end-line="2181" />
+                <state relative-caret-position="525">
+                  <caret line="376" column="63" lean-forward="true" selection-start-line="376" selection-start-column="63" selection-end-line="376" selection-end-column="63" />
                 </state>
               </provider>
             </entry>
@@ -72,7 +71,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>returnFrom2012</find>
       <find>travelTo2012</find>
       <find>canvas</find>
       <find>onReset</find>
@@ -101,6 +99,8 @@
       <find>40</find>
       <find>window</find>
       <find>stub</find>
+      <find>pym</find>
+      <find>onmouseenter</find>
     </findStrings>
     <replaceStrings>
       <replace>clearInterval(pulsatingInterval)</replace>
@@ -201,7 +201,7 @@
       <workItem from="1558831103232" duration="8245000" />
       <workItem from="1558844488620" duration="66905000" />
       <workItem from="1559404395650" duration="868000" />
-      <workItem from="1559410230707" duration="77192000" />
+      <workItem from="1559410230707" duration="82003000" />
     </task>
     <task id="LOCAL-00001" summary="Finished redesigning paths of travel&#10;Added relative path constant for image locations&#10;Added preparatory and post animations.&#10;Tweaked Loki animation">
       <created>1559417262684</created>
@@ -266,11 +266,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559620863939</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added caption text, clickable prompts, and icons now emphasize when hovered over">
+      <created>1559696021507</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1559696021507</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added caption text, clickable prompts, corrected sizing issue with overlay icons and character icons now emphasize when hovered over">
+      <created>1559698008727</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1559698008727</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="190087000" />
+    <option name="totallyTimeSpent" value="194898000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -285,7 +299,7 @@
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.18257757" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.18257757" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5041322" side_tool="true" visible="true" weight="0.18257757" />
       <window_info anchor="bottom" id="Messages" weight="0.3299373" />
@@ -298,7 +312,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3299373" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" visible="true" weight="0.2413793" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.2413793" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3299373" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -346,14 +360,16 @@
     <MESSAGE value="Crop the height when in not in fullscreen, but the height exceeds the screen height anyways" />
     <MESSAGE value="Added 1950 and peggy animation." />
     <MESSAGE value="Have a caption box working. I don't like it though." />
-    <option name="LAST_COMMIT_MESSAGE" value="Have a caption box working. I don't like it though." />
+    <MESSAGE value="Added caption text, clickable prompts, and icons now emphasize when hovered over" />
+    <MESSAGE value="Added caption text, clickable prompts, corrected sizing issue with overlay icons and character icons now emphasize when hovered over" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added caption text, clickable prompts, corrected sizing issue with overlay icons and character icons now emphasize when hovered over" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/page.html</url>
-          <line>53</line>
+          <line>57</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
@@ -389,15 +405,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-645">
-          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+        <state relative-caret-position="555">
+          <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/endgame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+        <state relative-caret-position="525">
+          <caret line="376" column="63" lean-forward="true" selection-start-line="376" selection-start-column="63" selection-end-line="376" selection-end-column="63" />
         </state>
       </provider>
     </entry>

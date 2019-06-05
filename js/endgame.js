@@ -2,13 +2,13 @@
 
 // Define string resources
 const rsc_string = {
-    info_2012: "This timeline was royally messed up. Not only did Cap interact with Hydra, possibly interfering with the events of Winter Solder, but Loki escaped with the space stone to go star in his own TV show.",
+    info_2012: "This timeline was royally messed up. Not only did Cap interact with Hydra, possibly interfering with the events of Winter Solder, but Loki escaped with the space stone to go star in his own TV show. It's likely Thanos still gets all the stones, but the snap would play out very differently",
     info_1950: "After jumping between alternate realities (plothole) without creating new branched realities (plothole), catching up with redskull, and replacing all the stones in their original forms (plothole), he finally returned to Peggy for that dance. They lived out their happy ending in a new timeline. And he never left (see cap on bench)",
     info_1970: "In this timeline, Steve and Stark stole some Pym particles, borrowed the Tessaract, and Stark resolved some daddy issues.",
     info_2013: "Why is it the timeline with the most emotionally unstable avenger is the only one to go according to plan? They got the reality stone and Mjolnir, which were replaced by Cap, and the events of this timeline developed almost identically to prime reality.",
     info_2014: "Black Widow dies so Hawkeye can get the soul stone. Thanos, Gamora, and Evil Nebula capture good Nebula when she attempts to return to the present. Evil Nebula goes back in her place and summons Thanos and his minions back to the future.",
     info_bench: "Since cap doesn't return through the machine, we can conclude he never returns to his own reality. The Cap sitting on the bench is not the Cap that we just saw travel back in time. Rather, the Cap on the bench is from this branch's parent reality. Thus, the movie does not portray prime reality, it portrays a branched reality.",
-    info_2014gotg: "Drax never would've met Quill and Rocket without Gamora being assaulted in the prison. The prison breakout would only be performed by Quill, Rocket, and Groot. Rocket and Groot leave Quill behind when he goes to get his cassette player. Thus, Quill stays in jail and Ronan gets the power stone from him when he raids the prison later. Also, Thanos is now absent from this timeline, greatly upsetting the political balance of the universe.",
+    info_2014gotg: "In this timeline, Gamora is absent. Drax never would've met Quill and Rocket without Gamora being assaulted in the prison. The prison breakout would only be performed by Quill, Rocket, and Groot. Rocket and Groot leave Quill behind when he goes to get his cassette player. Thus, Quill stays in jail and Ronan gets the power stone from him when he raids the prison later. Also, Thanos is now absent from this timeline, greatly upsetting the political balance of the universe.",
     info_1970endgame: "When the tessaract is returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has it's own snap, it's own time travel, and it's own branched timelines. These branches have their own branches on and on into infinite fractals",
     info_2013endgame: "When the reality stone and Mjolnir are returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has it's own snap, it's own time travel, and it's own branched timelines. These branches have their own branches on and on into infinite fractals",
     jumpTo2012: "The center stage in this three ring circus: Stark, Steve, Scott, and Bruce travel to the attack on New York to retrieve 3 infinity stones. Let's see how that turns out.",
@@ -326,6 +326,7 @@ var redraw = function() {
 // var label2014_on2012 = label2014_onMain.clone()
 //  .y(y2012tl+10)
     label2018_on2012 = label2018_onMain.clone()
+        .text("The Snap?")
         .y(y2012tl + 10);
 // var label2023_on2012 = label2023_onMain.clone()
 //     .y(y2012tl+10);
@@ -357,6 +358,35 @@ var redraw = function() {
 //   .y(y2014tl+10)
 // var label2023_on2014 = label2023_onMain.clone()
 //   .y(y2014tl+10)
+
+    // Fractal timelines
+    var fractal1950_2014 = canvas.path('M' + x2014 + ' ' + y1950tl + ' c ' + dw/2 + ' 0 0 '
+        + 2*dw + ' ' + dw + ' ' + 2*dw + ' l ' + dw + ' 0')
+        .fill('none')
+        .stroke({ width: 2, color: '#555', dasharray: '3,3' });
+    var fractal1950_2013 = canvas.path('M' + x2013 + ' ' + y1950tl + ' c ' + dw/2 + ' 0 0 '
+        + -2*dw + ' ' + dw + ' ' + -2*dw + ' l ' + dw + ' 0')
+        .fill('none')
+        .stroke({ width: 2, color: '#555', dasharray: '3,3' });
+    var fractal1950_2012 = fractal1950_2014.clone().x(x2012);
+    var fractal1950_1970 = fractal1950_2013.clone().x(x1970);
+    var fractal1950_1950 = canvas.path('M' + x1950 + ' ' + yMaintl + ' c ' + dw/2 + ' 0 0 '
+        + 4*dw + ' ' + dw + ' ' + 4*dw + ' l ' + dw + ' 0')
+        .fill('none')
+        .stroke({ width: 2, color: '#555', dasharray: '3,3' });
+    var fractal1970_2014 = fractal1950_2014.clone().y(y1970tl);
+    var fractal1970_2013 = fractal1950_2013.clone().y(y1970tl-2*dw);
+    var fractal1970_2012 = fractal1950_2012.clone().y(y1970tl);
+    var fractal1970_1970 = fractal1950_1950.clone().x(x1970);
+    var fractal1970_1950 = fractal1950_1950.clone();
+    var fractal2013_2014 = fractal1950_2014.clone().y(y2013tl);
+    var fractal2013_2013 = fractal1950_1950.clone().x(x2013);
+    var fractal2013_2012 = canvas.path('M' + x2012 + ' ' + yMaintl + ' c ' + dw/2 + ' 0 0 '
+        + -4*dw + ' ' + dw + ' ' + -4*dw + ' l ' + dw + ' 0')
+        .fill('none')
+        .stroke({ width: 2, color: '#555', dasharray: '3,3' });
+    var fractal2013_1970 = fractal1970_1970.clone();
+    var fractal2013_1950 = fractal1950_1950.clone();
 
 // Time travel paths
     jumpTo1970 = canvas.path('M' + (x2012 + 2 * dw) + ' ' + y2012tl +
@@ -464,9 +494,28 @@ var redraw = function() {
 //  .add(tick2023_on2014)
 //  .add(label2018_on2014)
 //  .add(label2023_on2014)
-    group1970Fractals = canvas.group();
+    group1950Fractals = canvas.group()
+        .add(fractal1950_2014)
+        .add(fractal1950_1950)
+        .add(fractal1950_1970)
+        .add(fractal1950_2012)
+        .add(fractal1950_2013)
+        .opacity(0);
+    group1970Fractals = canvas.group()
+        .add(fractal1970_1950)
+        .add(fractal1970_1970)
+        .add(fractal1970_2012)
+        .add(fractal1970_2013)
+        .add(fractal1970_2014)
+        .opacity(0);
     group2012Fractals = canvas.group();
-    group2013Fractals = canvas.group();
+    group2013Fractals = canvas.group()
+        .add(fractal2013_1950)
+        .add(fractal2013_1970)
+        .add(fractal2013_2012)
+        .add(fractal2013_2013)
+        .add(fractal2013_2014)
+        .opacity(0);
     // TODO: Add fractals
 
 // Gradients
@@ -985,6 +1034,10 @@ var redraw = function() {
             make_clickable(info_2013endgame, function() {set_caption_text(rsc_string.info_2013endgame);});
             info_1970endgame.animate(250, '<>').opacity(1);
             make_clickable(info_1970endgame, function() {set_caption_text(rsc_string.info_1970endgame);});
+            info_2013endgame.last().mouseenter(function() {group2013Fractals.animate(250,"<>").opacity(1);});
+            info_2013endgame.last().mouseleave(function() {group2013Fractals.animate(250,"<>").opacity(0);});
+            info_1970endgame.last().mouseenter(function() {group1970Fractals.animate(250,"<>").opacity(1);});
+            info_1970endgame.last().mouseleave(function() {group1970Fractals.animate(250,"<>").opacity(0);});
             break;
         case 7:
             // Place all stones in correct spots, show all timelines and put cap at end of 1950 timeline
@@ -1033,6 +1086,12 @@ var redraw = function() {
             make_clickable(info_1950, function() {set_caption_text(rsc_string.info_1950);});
             info_bench.animate(250, '<>').opacity(1);
             make_clickable(info_bench, function() {set_caption_text(rsc_string.info_bench);});
+            info_2013endgame.last().mouseenter(function() {group2013Fractals.animate(250,"<>").opacity(1);});
+            info_2013endgame.last().mouseleave(function() {group2013Fractals.animate(250,"<>").opacity(0);});
+            info_1970endgame.last().mouseenter(function() {group1970Fractals.animate(250,"<>").opacity(1);});
+            info_1970endgame.last().mouseleave(function() {group1970Fractals.animate(250,"<>").opacity(0);});
+            info_bench.last().mouseenter(function() {group1950Fractals.animate(250,"<>").opacity(1);});
+            info_bench.last().mouseleave(function() {group1950Fractals.animate(250,"<>").opacity(0);});
             break;
     }
 
@@ -2161,8 +2220,8 @@ var capReturnsStones = function() {
     mindStone.animate(1000, "<>", 250).move(x2014 + width/20+iw-mindStone.width()/2, y2014tl + ih/2 - mindStone.height()/2);
     mjolnir.animate(1000, "<>", 750).move(x2014 + width/20 + iw/2, y2014tl + ih/2);
     group2014Timeline.animate(500,"",1750).opacity(1);
-    soulStone.animate(450,"<>").move(x2014 + 2*dw+iw/2, y2014tl-iw/2);
-    powerStone.animate(450,"<>").move(x2014 + 2*dw, y2014tl-iw/2);
+    soulStone.animate(450,"<>").move(x2014 + 3*dw+iw/2, y2014tl-iw/2);
+    powerStone.animate(450,"<>").move(x2014 + 3*dw, y2014tl-iw/2);
     info_2014gotg.animate(250, '<>', 1900).opacity(1);
     make_clickable(info_2014gotg, function() {set_caption_text(rsc_string.info_2014gotg);}, 1900);
 
@@ -2178,6 +2237,10 @@ var capReturnsStones = function() {
     mjolnir.animate(450,"<>").move(x2013 + 3*dw+iw/2, y2013tl-iw/2);
     info_2013endgame.animate(250, '<>', 3150).opacity(1);
     make_clickable(info_2013endgame, function() {set_caption_text(rsc_string.info_2013endgame);}, 3150);
+    setTimeout(function() {
+            info_2013endgame.last().mouseenter(function() {group2013Fractals.animate(250,"<>").opacity(1);});
+            info_2013endgame.last().mouseleave(function() {group2013Fractals.animate(250,"<>").opacity(0);});
+        }, 5650);
 
     // Move cap to 2012 timeline. Leave reality stone behind
     cap_am.animate(1000, "<>", 250).move(x2012 + width/20, y2012tl);
@@ -2197,6 +2260,10 @@ var capReturnsStones = function() {
     spaceStone_1970.animate(450,"<>").move(x1970 + 3*dw, y1970tl-iw/2);
     info_1970endgame.animate(250, '<>', 5650).opacity(1);
     make_clickable(info_1970endgame, function() {set_caption_text(rsc_string.info_1970endgame);}, 5650);
+    setTimeout(function() {
+            info_1970endgame.last().mouseenter(function() {group1970Fractals.animate(250,"<>").opacity(1);});
+        info_1970endgame.last().mouseleave(function() {group1970Fractals.animate(250,"<>").opacity(0);});
+        }, 5650);
 
     // Move cap to 1950, show Peggy
     cap_am.animate(1000, "<>", 250).move(x1950, yMaintl);
@@ -2261,6 +2328,8 @@ var capLivesOutLife = function() {
 
     info_bench.animate(250, '<>', 3200).opacity(1);
     make_clickable(info_bench, function() {set_caption_text(rsc_string.info_bench);}, 3200);
+    info_bench.last().mouseenter(function() {group1950Fractals.animate(250,"<>").opacity(1);});
+    info_bench.last().mouseleave(function() {group1950Fractals.animate(250,"<>").opacity(0);});
 
     // Update caption text
     set_caption_text(rsc_string.capLivesOutLife);
