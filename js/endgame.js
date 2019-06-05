@@ -85,7 +85,7 @@ var redraw = function() {
     document.getElementById('top-padding').style.height = "0px";
     document.getElementById('bottom-padding').style.height = "0px";
     document.getElementById('canvas-caption').classList.remove('caption-drawer');
-    document.getElementById('canvas-caption').classList.remove('hidden');
+    document.getElementById('canvas-caption').classList.remove('visible');
     document.getElementById('show-caption').classList.add('hidden');
 
     // Define bounds. Limit height to a 4:3 aspect ratio, and if in fullscreen, center vertically
@@ -135,7 +135,6 @@ var redraw = function() {
             document.msFullscreenElement
         ) {
             document.getElementById('canvas-caption').classList.add('caption-drawer');
-            document.getElementById('canvas-caption').classList.add('hidden');
             document.getElementById('show-caption').classList.remove('hidden');
             document.getElementById('show-caption').src = imgPath + "up-chevron.png";
         }
@@ -2382,7 +2381,14 @@ $(document).ready(function() {
     });
 
     $('#show-caption').on('click', function() {
-        document.getElementById('canvas-caption').focus();
+        //document.getElementById('canvas-caption').focus();
+        if (document.getElementById('canvas-caption').classList.contains('visible')) {
+            document.getElementById('show-caption').src = imgPath + "up-chevron.png";
+            document.getElementById('canvas-caption').classList.remove('visible')
+        } else {
+            document.getElementById('show-caption').src = imgPath + "down-chevron.png";
+            document.getElementById('canvas-caption').classList.add('visible');
+        }
     });
 
     window.addEventListener('resize', function() {
