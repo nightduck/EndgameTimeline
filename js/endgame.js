@@ -1294,7 +1294,7 @@ var animate2023to2012 = function() {
     set_caption_text(rsc_string.jumpTo2012);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 1000);
 };
 
 var lokiStealsStone = function() {
@@ -1349,12 +1349,12 @@ var lokiStealsStone = function() {
 
 
     // Update click handlers for cap and ironman
-    make_clickable(ironman, animate2012to1970, durationOpen+durationClose);
-    make_clickable(cap_am, animate2012to1970, durationOpen+durationClose);
+    make_clickable(ironman, animate2012to1970, durationDelay+durationOpen+durationClose);
+    make_clickable(cap_am, animate2012to1970, durationDelay+durationOpen+durationClose);
 
     // Update click handlers for hulk and antman
-    make_clickable(hulk, animate2012to2023, durationOpen+durationClose, [timeStone]);
-    make_clickable(antman, animate2012to2023, durationOpen+durationClose, [mindStone]);
+    make_clickable(hulk, animate2012to2023, durationDelay+durationOpen+durationClose, [timeStone]);
+    make_clickable(antman, animate2012to2023, durationDelay+durationOpen+durationClose, [mindStone]);
 
 
     // Update states
@@ -1365,7 +1365,7 @@ var lokiStealsStone = function() {
     set_caption_text(rsc_string.lokiFucksOff);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating,durationDelay+durationOpen+durationClose);
 };
 
 var animate2023to2013 = function() {
@@ -1453,7 +1453,7 @@ var animate2023to2013 = function() {
     set_caption_text(rsc_string.jumpTo2013);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 1200);
 };
 
 var animate2023to2014 = function() {
@@ -1574,7 +1574,7 @@ var animate2023to2014 = function() {
     set_caption_text(rsc_string.jumpTo2014);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 1000);
 };
 
 var animate2012to1970 = function() {
@@ -1649,7 +1649,7 @@ var animate2012to1970 = function() {
     }
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 1200);
 };
 
 var animate2012to2023 = function() {
@@ -1718,7 +1718,7 @@ var animate2012to2023 = function() {
     set_caption_text(rsc_string.returnFrom2012);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 1000);
 };
 
 var animate2013to2023 = function() {
@@ -1794,7 +1794,7 @@ var animate2013to2023 = function() {
     set_caption_text(rsc_string.returnFrom2013);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 900);
 };
 
 var animate2014to2023_SoulStone = function() {
@@ -1873,7 +1873,7 @@ var animate2014to2023_SoulStone = function() {
     set_caption_text(rsc_string.returnFrom2014_SoulStone);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 3000);
 };
 
 var animate2014To2023_PowerStone = function() {
@@ -1943,7 +1943,7 @@ var animate2014To2023_PowerStone = function() {
     set_caption_text(rsc_string.returnFrom2014_PowerStone);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 1000);
 };
 
 var animate2014to2023_Nebula = function() {
@@ -1997,7 +1997,7 @@ var animate2014to2023_Nebula = function() {
     set_caption_text(rsc_string.returnFrom2014_Nebula);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 1000);
 };
 
 var animate2014to2023_Thanos = function() {
@@ -2070,7 +2070,7 @@ var animate2014to2023_Thanos = function() {
     make_unclickable(nebula_evil);
 
     // Make Tony clickable
-    make_clickable(ironman, finalBattle,1000);
+    make_clickable(ironman, finalBattle,1200);
 
     // Update states
     nebulaState++;
@@ -2083,7 +2083,7 @@ var animate2014to2023_Thanos = function() {
     set_caption_text(rsc_string.thanosToPresent);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 1200);
 };
 
 var animate1970to2023 = function() {
@@ -2133,7 +2133,7 @@ var animate1970to2023 = function() {
     // Set click handlers for final battle if everyone's in the present
     if (spaceStoneInPresent && mindStoneInPresent && timeStoneInPresent && realityStoneInPresent && powerStoneInPresent
         && soulStoneInPresent && nebulaInPresent) {
-        make_clickable(nebula_evil, animate2014to2023_Thanos, 1000);
+        make_clickable(nebula_evil, animate2014to2023_Thanos, 1250);
     }
 
     // Update states
@@ -2147,7 +2147,7 @@ var animate1970to2023 = function() {
     set_caption_text(rsc_string.returnFrom1970);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 1250);
 };
 
 var finalBattle = function() {
@@ -2190,7 +2190,7 @@ var finalBattle = function() {
     set_caption_text(rsc_string.starkStones);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 1200);
 };
 
 var capReturnsStones = function() {
@@ -2281,7 +2281,7 @@ var capReturnsStones = function() {
     set_caption_text(rsc_string.capStones);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 6750);
 };
 
 var capLivesOutLife = function() {
@@ -2340,7 +2340,7 @@ var capLivesOutLife = function() {
     set_caption_text(rsc_string.capLivesOutLife);
 
     // Pulsate all clickable icons periodically
-    setPulsating();
+    setTimeout(setPulsating, 3200);
 };
 
 

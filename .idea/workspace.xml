@@ -4,10 +4,9 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5e304c2-e623-4752-ab13-c48a5937391d" name="Default Changelist" comment="">
+    <list default="true" id="f5e304c2-e623-4752-ab13-c48a5937391d" name="Default Changelist" comment="Fixed issue with easing fn. Added code to easily catch this error in the future.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/endgame.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/endgame.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/page.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +29,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/page.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="540">
-                  <caret line="63" column="9" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+                <state relative-caret-position="301">
+                  <caret line="61" column="26" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
                 </state>
               </provider>
             </entry>
@@ -39,8 +38,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/endgame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1620">
-                  <caret line="157" column="7" lean-forward="true" selection-start-line="157" selection-start-column="7" selection-end-line="157" selection-end-column="7" />
+                <state relative-caret-position="2355">
+                  <caret line="157" column="7" selection-start-line="157" selection-start-column="7" selection-end-line="157" selection-end-column="7" />
                 </state>
               </provider>
             </entry>
@@ -48,12 +47,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/endgame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="480">
-                  <caret line="644" column="20" lean-forward="true" selection-start-line="644" selection-start-column="20" selection-end-line="644" selection-end-column="20" />
+                <state relative-caret-position="518">
+                  <caret line="2342" column="33" selection-start-line="2342" selection-start-column="33" selection-end-line="2342" selection-end-column="33" />
                 </state>
               </provider>
             </entry>
@@ -123,16 +122,17 @@
         <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/endgame.js" />
         <option value="$PROJECT_DIR$/js/endgame-strings.js" />
-        <option value="$PROJECT_DIR$/js/endgame.js" />
         <option value="$PROJECT_DIR$/page.html" />
+        <option value="$PROJECT_DIR$/js/endgame.js" />
       </list>
     </option>
   </component>
   <component name="PhpDebugGeneral" listening_started="true" />
   <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="132" />
     <option name="y" value="27" />
-    <option name="width" value="1280" />
-    <option name="height" value="1413" />
+    <option name="width" value="1578" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -203,7 +203,8 @@
       <workItem from="1558831103232" duration="8245000" />
       <workItem from="1558844488620" duration="66905000" />
       <workItem from="1559404395650" duration="868000" />
-      <workItem from="1559410230707" duration="92883000" />
+      <workItem from="1559410230707" duration="94130000" />
+      <workItem from="1559861339945" duration="602000" />
     </task>
     <task id="LOCAL-00001" summary="Finished redesigning paths of travel&#10;Added relative path constant for image locations&#10;Added preparatory and post animations.&#10;Tweaked Loki animation">
       <created>1559417262684</created>
@@ -324,11 +325,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559780965267</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Fixed issue with easing fn. Added code to easily catch this error in the future.">
+      <created>1559783786211</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1559783786211</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Fixed issue with easing fn. Added code to easily catch this error in the future.">
+      <created>1559783889615</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1559783889615</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205778000" />
+    <option name="totallyTimeSpent" value="207627000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -343,10 +358,9 @@
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49586776" visible="true" weight="0.18257757" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49544996" visible="true" weight="0.18416865" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" sideWeight="0.5041322" side_tool="true" visible="true" weight="0.18257757" />
-      <window_info anchor="bottom" id="Messages" weight="0.3299373" />
+      <window_info id="Favorites" order="2" sideWeight="0.50455004" side_tool="true" weight="0.18257757" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.37931034" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32924962" />
@@ -356,9 +370,10 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3299373" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.2413793" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3299373" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.2460815" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32310054" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3299373" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24980111" />
@@ -393,6 +408,20 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Finished redesigning paths of travel&#10;Added relative path constant for image locations&#10;Added preparatory and post animations.&#10;Tweaked Loki animation" />
@@ -412,7 +441,8 @@
     <MESSAGE value="CSS tweaks" />
     <MESSAGE value="Tweaked Thor path of travel" />
     <MESSAGE value="Fixed scroll bar, bug with stones not being redrawn in the correct spot, bug with paths of travel not animating on the dictated durations, bug with prompt icons not pulsating near end of applet." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed scroll bar, bug with stones not being redrawn in the correct spot, bug with paths of travel not animating on the dictated durations, bug with prompt icons not pulsating near end of applet." />
+    <MESSAGE value="Fixed issue with easing fn. Added code to easily catch this error in the future." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue with easing fn. Added code to easily catch this error in the future." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
@@ -422,16 +452,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exitfullscreen.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/endgame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="17" lean-forward="true" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/exitfullscreen.png" />
+    <entry file="file://$PROJECT_DIR$/endgame.js" />
     <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -439,20 +461,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/endgame-strings.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/endgame.js">
+    <entry file="file://$PROJECT_DIR$/js/endgame-strings.js" />
+    <entry file="file://$PROJECT_DIR$/page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1620">
-          <caret line="157" column="7" lean-forward="true" selection-start-line="157" selection-start-column="7" selection-end-line="157" selection-end-column="7" />
+        <state relative-caret-position="301">
+          <caret line="61" column="26" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/page.html">
+    <entry file="file://$PROJECT_DIR$/js/endgame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="63" column="9" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+        <state relative-caret-position="518">
+          <caret line="2342" column="33" selection-start-line="2342" selection-start-column="33" selection-end-line="2342" selection-end-column="33" />
         </state>
       </provider>
     </entry>
