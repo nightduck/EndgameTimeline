@@ -49,7 +49,7 @@ var margin, width, height, verticalOffset, iw, fontsize, clickable_gradient, unc
     war_machine_glow, black_widow_glow, nebula_glow,
     nebula_evil, thanos, loki,
     nebula_evil_glow, thanos_glow, loki_glow,
-    info_2012, info_2013, info_2014, info_1970, info_1970, info_1950, info_bench, info_2014gotg, info_1970endgame,
+    info_2012, info_2013, info_2014, info_1970, info_1950, info_bench, info_2014gotg, info_1970endgame,
     info_2013endgame,
     soulStone, powerStone, realityStone, spaceStone_loki, spaceStone_1970,  timeStone, mindStone, mjolnir,
     groupMainTimeline, group1950Timeline, group1970Timeline, group2012Timeline, group2013Timeline, group2014Timeline,
@@ -990,14 +990,14 @@ var redraw = function() {
         case 6:
             // Put all the stones at each timeline and move cap to 1950 timeline, show Peggy
             cap_am.move(x1950, yMaintl);
-            timeStone.move(x2012 + 2*dw, y2012tl-iw/2);
-            soulStone.move(x2014 + 2*dw+iw/2, y2014tl-iw/2);
-            powerStone.move(x2014 + 2*dw, y2014tl-iw/2);
-            realityStone.move(x2013 + 2*dw, y2013tl-iw/2);
-            mjolnir.move(x2013 + 2*dw+iw/2, y2013tl-iw/2);
-            timeStone.move(x2012 + 2*dw, y2012tl-iw/2);
-            mindStone.move(x2012 + 2*dw+iw/2, y2012tl-iw/2);
-            spaceStone_1970.move(x1970 + 2*dw, y1970tl-iw/2);
+            timeStone.move(x2012 + 3*dw, y2012tl-iw/2);
+            soulStone.move(x2014 + 3*dw+iw/2, y2014tl-iw/2);
+            powerStone.move(x2014 + 3*dw, y2014tl-iw/2);
+            realityStone.move(x2013 + 3*dw, y2013tl-iw/2);
+            mjolnir.move(x2013 + 3*dw+iw/2, y2013tl-iw/2);
+            timeStone.move(x2012 + 3*dw, y2012tl-iw/2);
+            mindStone.move(x2012 + 3*dw+iw/2, y2012tl-iw/2);
+            spaceStone_1970.move(x1970 + 3*dw, y1970tl-iw/2);
 
             stub1970.stroke({color: '#555', width: 2, linecap: 'round'});
             stub2012.stroke({color: '#555', width: 2, linecap: 'round'});
@@ -1036,15 +1036,15 @@ var redraw = function() {
             break;
         case 7:
             // Place all stones in correct spots, show all timelines and put cap at end of 1950 timeline
-            cap_am.move(x2023 + 2*dw-iw, y1950tl);
-            timeStone.move(x2012 + 2*dw, y2012tl-iw/2);
-            soulStone.move(x2014 + 2*dw+iw/2, y2014tl-iw/2);
-            powerStone.move(x2014 + 2*dw, y2014tl-iw/2);
-            realityStone.move(x2013 + 2*dw, y2013tl-iw/2);
-            mjolnir.move(x2013 + 2*dw+iw/2, y2013tl-iw/2);
-            timeStone.move(x2012 + 2*dw, y2012tl-iw/2);
-            mindStone.move(x2012 + 2*dw+iw/2, y2012tl-iw/2);
-            spaceStone_1970.move(x1970 + 2*dw, y1970tl-iw/2);
+            cap_am.move(x2023 + 3*dw-iw, y1950tl);
+            timeStone.move(x2012 + 3*dw, y2012tl-iw/2);
+            soulStone.move(x2014 + 3*dw+iw/2, y2014tl-iw/2);
+            powerStone.move(x2014 + 3*dw, y2014tl-iw/2);
+            realityStone.move(x2013 + 3*dw, y2013tl-iw/2);
+            mjolnir.move(x2013 + 3*dw+iw/2, y2013tl-iw/2);
+            timeStone.move(x2012 + 3*dw, y2012tl-iw/2);
+            mindStone.move(x2012 + 3*dw+iw/2, y2012tl-iw/2);
+            spaceStone_1970.move(x1970 + 3*dw, y1970tl-iw/2);
 
             stub1950.stroke({color: '#555', width: 2, linecap: 'round'});
             stub1970.stroke({color: '#555', width: 2, linecap: 'round'});
@@ -1201,7 +1201,7 @@ var animate2023to2012 = function() {
             .dmove(antman.cx()-x2023,antman.cy()-yMaintl);
 
         // Draw the path of travel
-        jumpTo2012.drawAnimated(1000,'<>')
+        jumpTo2012.drawAnimated({duration: 1000, easing: '<>'})
             .stroke({ color: '#00F', width: 2, linecap: 'round' });
 
         // Show 2012 stub
@@ -1236,7 +1236,7 @@ var animate2023to2012 = function() {
 
         // Move ironman to 2012
         var length = ironmanPath.length();
-        ironman.animate(1000, '>').during(function(pos, morph, eased) {
+        ironman.animate(1000, '<>').during(function(pos, morph, eased) {
             p = ironmanPath.pointAt(eased * length);
             ironman.center(p.x, p.y);
         }).after(function() {
@@ -1245,7 +1245,7 @@ var animate2023to2012 = function() {
         });
         // Move cap to 2012
         length = capPath.length();
-        cap_am.animate(1000, '>').during(function(pos, morph, eased) {
+        cap_am.animate(1000, '<>').during(function(pos, morph, eased) {
             p = capPath.pointAt(eased * length);
             cap_am.center(p.x, p.y);
         }).after(function() {
@@ -1254,7 +1254,7 @@ var animate2023to2012 = function() {
         });
         // Move hulk to 2012
         length = hulkPath.length();
-        hulk.animate(1000, '>').during(function(pos, morph, eased) {
+        hulk.animate(1000, '<>').during(function(pos, morph, eased) {
             p = hulkPath.pointAt(eased * length);
             hulk.center(p.x, p.y);
         }).after(function() {
@@ -1263,7 +1263,7 @@ var animate2023to2012 = function() {
         });
         // Move antman to 2012
         length = antmanPath.length();
-        antman.animate(1000, '>').during(function(pos, morph, eased) {
+        antman.animate(1000, '<>').during(function(pos, morph, eased) {
             p = antmanPath.pointAt(eased * length);
             antman.center(p.x, p.y)
         }).after(function() {
@@ -1387,26 +1387,26 @@ var animate2023to2013 = function() {
             .dmove(rocket.cx()-x2023,rocket.cy()-yMaintl);
 
         // Draw the path of travel
-        jumpTo2013.drawAnimated(700,'>')
+        jumpTo2013.drawAnimated({duration: 700, easing: '>'})
             .stroke({ color: '#F00', width: 2, linecap: 'round' });
 
         // Show reality stone.
         realityStone.animate({
             duration: 300,
             easing: '<>',
-            delay: 900
+            delay: 700
         }).opacity(1);
         mjolnir.animate({
             duration: 300,
             easing: '<>',
-            delay: 900
+            delay: 700
         }).opacity(1);
 
         // Show 2013 stub
         stub2013.drawAnimated({
             duration: 400,
             easing: '<>',
-            delay: 600
+            delay: 300
             })
             .stroke({ color: '#555', width: 2, linecap: 'round' });
 
@@ -1493,21 +1493,21 @@ var animate2023to2014 = function() {
             .dmove(black_widow.cx()-x2023,black_widow.cy()-yMaintl);
 
         // Draw the path of travel
-        jumpTo2014.drawAnimated(1000,'<>')
+        jumpTo2014.drawAnimated({duration: 600, easing: '>'})
             .stroke({ color: '#F0F', width: 2, linecap: 'round' });
 
         // Show power stone.
         powerStone.animate({
             duration: 300,
             easing: '<>',
-            delay: 900
+            delay: 600
         }).opacity(1);
 
         // Show 2014 stub
         stub2014.drawAnimated({
             duration: 400,
             easing: '<>',
-            delay: 400
+            delay: 200
             })
             .stroke({ color: '#555', width: 2, linecap: 'round' });
 
@@ -1584,7 +1584,7 @@ var animate2012to1970 = function() {
         .dmove(cap_am.cx()-x2012-width/20,cap_am.cy()-y2012tl);
 
     // Draw path of travel
-    jumpTo1970.drawAnimated(1000,'<>')
+    jumpTo1970.drawAnimated({ duration: 1000, easing: '<>'})
         .stroke({ color: '#3FF', width: 2, linecap: 'round' });
 
     // Draw stub of new timeline
@@ -1659,7 +1659,7 @@ var animate2012to2023 = function() {
         .dmove(antman.cx()-x2012-width/20,antman.cy()-y2012tl);
 
     // Draw the path of travel
-    returnFrom2012.drawAnimated(1000,'<>')
+    returnFrom2012.drawAnimated({duration:1000, easing: '<>'})
         .stroke({ color: '#00F', width: 2, linecap: 'round' });
 
     // Move hulk back to 2023 with time stone
@@ -1728,7 +1728,7 @@ var animate2013to2023 = function() {
         .dmove(rocket.cx()-x2013-width/20,rocket.cy()-y2013tl);
 
     // Draw the path of travel
-    returnFrom2013.drawAnimated(650,'<')
+    returnFrom2013.drawAnimated({duration: 650, easing: '<'})
         .stroke({ color: '#F00', width: 2, linecap: 'round' });
 
     // Move thor to 2023 with mjolnir
@@ -1884,7 +1884,7 @@ var animate2014To2023_PowerStone = function() {
 
     // Draw the path of travel, assuming hawkeye hasn't already travelled it
     if (!soulStoneInPresent) {
-        returnFrom2014.drawAnimated(650, '<')
+        returnFrom2014.drawAnimated({duration: 650, easing: '<'})
             .stroke({color: '#F0F', width: 2, linecap: 'round'});
     }
 
@@ -2093,7 +2093,7 @@ var animate1970to2023 = function() {
         .dmove(cap_am.cx()-x1970-width/20,cap_am.cy()-y1970tl);
 
     // Draw the path of travel
-    returnFrom1970.drawAnimated(1000,'<>')
+    returnFrom1970.drawAnimated({duration: 1250, easing: '<>'})
         .stroke({ color: '#3FF', width: 2, linecap: 'round' });
 
     // Ironman returns to present
@@ -2170,13 +2170,13 @@ var finalBattle = function() {
     // Give mjolnir to cap
     mjolnir.animate(500, "<>").move(cap_am.cx(), cap_am.cy());
 
-    thanos.animate(1000,"<",750).opacity(0);
+    thanos.animate(500,"<",600).opacity(0);
 
     // Remove click handler from ironman
     make_unclickable(ironman, [powerStone, soulStone, timeStone, spaceStone_1970, realityStone, mindStone, mjolnir]);
 
     // Assign click handler to cap
-    make_clickable(cap_am, capReturnsStones, 2000, [mjolnir]);
+    make_clickable(cap_am, capReturnsStones, 1200, [mjolnir]);
 
     // Update states
     ironmanCapState++;
@@ -2275,23 +2275,29 @@ var capReturnsStones = function() {
 
     // Update caption text
     set_caption_text(rsc_string.capStones);
+
+    // Pulsate all clickable icons periodically
+    setPulsating();
 };
 
 var capLivesOutLife = function() {
+    // Temporarily redraw the pulsating icons
+    clearInterval(pulsatingInterval);
+
     // Stroke 1950 timeline
-    stub1950.drawAnimated(700,'<')
+    stub1950.drawAnimated({duration: 700, easing: '<'})
         .stroke({color: '#555', width: 2, linecap: 'round'});
     tl1950.drawAnimated({
-        duration: 2700,
+        duration: 3000,
         easing: '>',
-        delay: 1000
+        delay: 700
         })
         .stroke({color: '#555', width: 2, linecap: 'round'});
 
     info_1950.animate(250, '<>', 150).opacity(1);
     make_clickable(info_1950, function() {set_caption_text(rsc_string.info_1950);}, 150);
 
-    group1950Timeline.animate(250, '<>', 3000).opacity(1);
+    group1950Timeline.animate(250, '=', 3000).opacity(1);
 
     // Cap and peggy travel along 1950 timeline
     var length = stub1950.length();
@@ -2313,7 +2319,7 @@ var capLivesOutLife = function() {
     peggy.animate(1200, '-').move(x[26]);
 
     // Peggy dies in 2016, but cap goes on to future
-    cap_am.animate(1000, '>').move(x2023 + 2*dw-iw);
+    cap_am.animate(750, '>').move(x2023 + 2*dw-iw);
     peggy.animate(500, '<>').opacity(0);
 
     make_unclickable(cap_am);
@@ -2328,6 +2334,9 @@ var capLivesOutLife = function() {
 
     // Update caption text
     set_caption_text(rsc_string.capLivesOutLife);
+
+    // Pulsate all clickable icons periodically
+    setPulsating();
 };
 
 
