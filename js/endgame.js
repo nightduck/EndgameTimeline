@@ -1222,7 +1222,7 @@ var animate2023to2012 = function() {
     set_caption_text(rsc_string.jumpTo2012);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 1000);
+    setPulsating();
 };
 
 var lokiStealsStone = function() {
@@ -1293,7 +1293,7 @@ var lokiStealsStone = function() {
     set_caption_text(rsc_string.lokiFucksOff);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating,durationDelay+durationOpen+durationClose);
+    setPulsating();
 };
 
 var animate2023to2013 = function() {
@@ -1381,7 +1381,7 @@ var animate2023to2013 = function() {
     set_caption_text(rsc_string.jumpTo2013);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 1200);
+    setPulsating();
 };
 
 var animate2023to2014 = function() {
@@ -1502,7 +1502,7 @@ var animate2023to2014 = function() {
     set_caption_text(rsc_string.jumpTo2014);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 1000);
+    setPulsating();
 };
 
 var animate2012to1970 = function() {
@@ -1577,7 +1577,7 @@ var animate2012to1970 = function() {
     }
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 1200);
+    setPulsating();
 };
 
 var animate2012to2023 = function() {
@@ -1646,7 +1646,7 @@ var animate2012to2023 = function() {
     set_caption_text(rsc_string.returnFrom2012);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 1000);
+    setPulsating();
 };
 
 var animate2013to2023 = function() {
@@ -1722,7 +1722,7 @@ var animate2013to2023 = function() {
     set_caption_text(rsc_string.returnFrom2013);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 900);
+    setPulsating();
 };
 
 var animate2014to2023_SoulStone = function() {
@@ -1801,7 +1801,7 @@ var animate2014to2023_SoulStone = function() {
     set_caption_text(rsc_string.returnFrom2014_SoulStone);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 3000);
+    setPulsating();
 };
 
 var animate2014To2023_PowerStone = function() {
@@ -1871,7 +1871,7 @@ var animate2014To2023_PowerStone = function() {
     set_caption_text(rsc_string.returnFrom2014_PowerStone);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 1000);
+    setPulsating();
 };
 
 var animate2014to2023_Nebula = function() {
@@ -1925,7 +1925,7 @@ var animate2014to2023_Nebula = function() {
     set_caption_text(rsc_string.returnFrom2014_Nebula);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 1000);
+    setPulsating();
 };
 
 var animate2014to2023_Thanos = function() {
@@ -2011,7 +2011,7 @@ var animate2014to2023_Thanos = function() {
     set_caption_text(rsc_string.thanosToPresent);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 1200);
+    setPulsating();
 };
 
 var animate1970to2023 = function() {
@@ -2075,7 +2075,7 @@ var animate1970to2023 = function() {
     set_caption_text(rsc_string.returnFrom1970);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 1250);
+    setPulsating();
 };
 
 var finalBattle = function() {
@@ -2118,7 +2118,7 @@ var finalBattle = function() {
     set_caption_text(rsc_string.starkStones);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 1200);
+    setPulsating();
 };
 
 var capReturnsStones = function() {
@@ -2209,7 +2209,7 @@ var capReturnsStones = function() {
     set_caption_text(rsc_string.capStones);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 6750);
+    setPulsating();
 };
 
 var capLivesOutLife = function() {
@@ -2268,7 +2268,7 @@ var capLivesOutLife = function() {
     set_caption_text(rsc_string.capLivesOutLife);
 
     // Pulsate all clickable icons periodically
-    setTimeout(setPulsating, 3200);
+    setPulsating();
 };
 
 
