@@ -65,12 +65,16 @@ var margin, width, height, verticalOffset, iw, fontsize, clickable_gradient, unc
 var imgPath = "rsc/endgame/";
 
 var finishAllAnimations = function(dom) {
-      dom.finish();
-      if (dom.children) {
-          for (var i in dom.children()) {
-              finishAllAnimations(dom.children()[i]);
-          }
-      }
+    try {
+        dom.finish();
+        if (dom.children) {
+            for (var i in dom.children()) {
+                finishAllAnimations(dom.children()[i]);
+            }
+        }
+    } catch(err) {
+        document.getElementById("canvas-caption").innerHTML = err.message;
+    }
 };
 
 // Initial conditions
@@ -2297,7 +2301,7 @@ var capLivesOutLife = function() {
     info_1950.animate(250, '<>', 150).opacity(1);
     make_clickable(info_1950, function() {set_caption_text(rsc_string.info_1950);}, 150);
 
-    group1950Timeline.animate(250, '=', 3000).opacity(1);
+    group1950Timeline.animate(250, '-', 3000).opacity(1);
 
     // Cap and peggy travel along 1950 timeline
     var length = stub1950.length();
