@@ -96,23 +96,6 @@ var redraw = function() {
     margin = 20;
     width = document.getElementById("endgame-canvas").offsetWidth;
     fontsize = Math.min(16, width/50);
-    // if (
-    //     document.fullscreenElement ||
-    //     document.webkitFullscreenElement ||
-    //     document.mozFullScreenElement ||
-    //     document.msFullscreenElement
-    // ) {
-    //     // If fullscreen, set height to height of screen
-    //     height = window.screen.availHeight;
-    // } else {
-    //     // If not in fullscreen, set height to the max the div will allow, ...
-    //     height = parseInt(getComputedStyle(document.getElementById("endgame-canvas")).maxHeight, 10);
-    //     if (height > window.screen.availHeight) {
-    //         // ... unless that max div height is higher than the screen, then just max out at screen height. This
-    //         // scenario is common on mobile landscape views
-    //         height = window.screen.availHeight;
-    //     }
-    // }
     // Set the height to the screen height to begin with, then crop to a 4:3 aspect ratio if that's a bit much
     height = window.screen.availHeight;
     if (height > 3 / 4 * width) {
@@ -197,7 +180,7 @@ var redraw = function() {
     // Define workspace
     background = canvas.rect(width, height).fill('#d3d3d3');
 
-// Draw main timeline
+    // Draw main timeline
     dxBreak = (xBreakEnd - xBreakStart) / 8;
     tlMain = canvas.polyline([0, yMaintl, xBreakStart, yMaintl, xBreakStart + dxBreak, yMaintl - 5,
         xBreakStart + 3 * dxBreak, yMaintl + 5, xBreakEnd - 3 * dxBreak, yMaintl - 5,
@@ -248,7 +231,7 @@ var redraw = function() {
         .text("Endgame")
         .cx(x2023);
 
-// Stubs of alternate timelines
+    // Stubs of alternate timelines
     stub1950 = canvas.path('M' + x1950 + ' ' + yMaintl + ' c ' + dw + ' 0 0 '
         + (y1950tl - yMaintl) + ' ' + 2 * dw + ' ' + (y1950tl - yMaintl))
         .fill('none');
@@ -266,7 +249,6 @@ var redraw = function() {
         .fill('none');
 
     // 1950 Timeline
-    //tl1950 = canvas.line(x1950 + 2*dw, y1950tl, width, y1950tl)
     tl1950 = canvas.path('M' + (x1950 + 2*dw) + ' ' + y1950tl + ' L ' + width + ',' + y1950tl)
         .fill('none');
     tick2018_on1950 = canvas.line(x2018, y1950tl - 5, x2018, y1950tl + 5)
@@ -283,81 +265,45 @@ var redraw = function() {
         .text("Cap on Bench")
         .x(x2023+2*dw);
 
-// 1970 Timeline
+    // 1970 Timeline
     tl1970 = canvas.polyline([x1970 + width / 20, y1970tl, xBreakStart + 2 * dxBreak, y1970tl,
         xBreakStart + 3 * dxBreak, y1970tl + 5, xBreakEnd - 3 * dxBreak, y1970tl - 5,
         xBreakEnd - dxBreak, y1970tl + 5, xBreakEnd, y1970tl, width, y1970tl])
         .fill('none')
         .stroke({color: '#555', width: 2, linejoin: 'round', linecap: 'round'});
-// var tick2012_on1970 = tick2012_onMain.clone()
-//   .cy(y1970tl)
-// var tick2013_on1970 = tick2013_onMain.clone()
-//   .cy(y1970tl)
-// var tick2014_on1970 = tick2014_onMain.clone()
-//   .cy(y1970tl)
     tick2018_on1970 = tick2018_onMain.clone()
         .cy(y1970tl);
     tick2023_on1970 = tick2023_onMain.clone()
         .cy(y1970tl);
-// var label2012_on1970 = label2012_onMain.clone()
-//   .y(y1970tl+10)
-// var label2013_on1970 = label2013_onMain.clone()
-//   .y(y1970tl+10)
-// var label2014_on1970 = label2014_onMain.clone()
-//   .y(y1970tl+10)
     label2018_on1970 = label2018_onMain.clone()
         .y(y1970tl + 10);
     label2023_on1970 = label2023_onMain.clone()
         .y(y1970tl + 10);
 
-// 2012 NYC Timeline
+    // 2012 NYC Timeline
     tl2012 = canvas.line(x2012 + width / 20, y2012tl, width, y2012tl)
         .stroke({color: '#555', width: 2, linejoin: 'round', linecap: 'round'});
-// var tick2013_on2012 = tick2013_onMain.clone()
-//     .cy(y2012tl);
-// var tick2014_on2012 = tick2014_onMain.clone()
-//   .cy(y2012tl)
     tick2018_on2012 = tick2018_onMain.clone()
         .cy(y2012tl);
-// var tick2023_on2012 = tick2023_onMain.clone()
-//     .cy(y2012tl);
-// var label2013_on2012 = label2013_onMain.clone()
-//     .y(y2012tl+10);
-// var label2014_on2012 = label2014_onMain.clone()
-//  .y(y2012tl+10)
     label2018_on2012 = label2018_onMain.clone()
         .text("The Snap?")
         .y(y2012tl + 10);
-// var label2023_on2012 = label2023_onMain.clone()
-//     .y(y2012tl+10);
 
-// 2013 Asgard timeline
+    // 2013 Asgard timeline
     tl2013 = canvas.line(x2013 + width / 20, y2013tl, width, y2013tl)
         .stroke({color: '#555', width: 2, linejoin: 'round', linecap: 'round'});
-//var tick2014_on2013 = tick2014_onMain.clone()
-//  .cy(y2013tl)
     tick2018_on2013 = tick2018_onMain.clone()
         .cy(y2013tl);
     tick2023_on2013 = tick2023_onMain.clone()
         .cy(y2013tl);
-//var label2014_on2013 = label2014_onMain.clone()
-//  .y(y2013tl+10)
     label2018_on2013 = label2018_onMain.clone()
         .y(y2013tl + 10);
     label2023_on2013 = label2023_onMain.clone()
         .y(y2013tl + 10);
 
-// 2014 GotG Timeline
+    // 2014 GotG Timeline
     tl2014 = canvas.line(x2014 + width / 20, y2014tl, width, y2014tl)
         .stroke({color: '#555', width: 2, linejoin: 'round', linecap: 'round'});
-// var tick2018_on2014 = tick2018_onMain.clone()
-//   .cy(y2014tl)
-// var tick2023_on2014 = tick2023_onMain.clone()
-//   .cy(y2014tl)
-// var label2018_on2014 = label2018_onMain.clone()
-//   .y(y2014tl+10)
-// var label2023_on2014 = label2023_onMain.clone()
-//   .y(y2014tl+10)
 
     // Fractal timelines
     var fractal1950_2014 = canvas.path('M' + x2014 + ' ' + y1950tl + ' c ' + dw/2 + ' 0 0 '
@@ -388,14 +334,14 @@ var redraw = function() {
     var fractal2013_1970 = fractal1970_1970.clone();
     var fractal2013_1950 = fractal1950_1950.clone();
 
-// Time travel paths
+    // Time travel paths
     jumpTo1970 = canvas.path('M' + (x2012 + 2 * dw) + ' ' + y2012tl +
         ' c' + -8 * dw + ',' + 0 + ' ' + -8 * dw + ',' + -24 * dh + ' ' + -6 * dw + ',' + -28 * dh)
         .fill('none');
     jumpTo2012 = canvas.path('M' + x2023 + ',' + yMaintl +
         ' c ' + -3 * dw + ',' + dh + ' ' + -3 * dw + ',' + dh + ' ' + -6 * dw + ',' + dh +
         ' c ' + -3 * dw + ',' + 0 + ' ' + -7 * dw + ',' + 0 + ' ' + -10 * dw + ',' + 0 +
-        ' c ' + -3 * dw + ',' + 0 + ' ' + -5 * dw + ',' + 1 * dh + ' ' + -6 * dw + ',' + 4 * dh +
+        ' c ' + -3 * dw + ',' + 0 + ' ' + -5 * dw + ',' + dh + ' ' + -6 * dw + ',' + 4 * dh +
         ' c ' + -1 * dw + ',' + 3 * dh + ' ' + -1 * dw + ',' + 8 * dh + ' ' + 0 + ',' + 10 * dh)
         .fill('none');
     jumpTo2013 = canvas.path('M' + x2023 + ',' + yMaintl +
@@ -407,34 +353,34 @@ var redraw = function() {
     jumpTo2014 = canvas.path('M' + x2023 + ',' + yMaintl +
         ' c ' + -3 * dw + ',' + 3 * dh + ' ' + -2 * dw + ',' + 3 * dh + ' ' + -5 * dw + ',' + 3 * dh +
         ' c ' + -3 * dw + ',' + 0 + ' ' + -4 * dw + ',' + 0 + ' ' + -5 * dw + ',' + 2 * dh +
-        ' c ' + -0.5 * dw + ',' + 1 * dh + ' ' + -0.5 * dw + ',' + 2 * dh + ' ' + 0 + ',' + 3 * dh)
-        .fill('none')
+        ' c ' + -0.5 * dw + ',' + dh + ' ' + -0.5 * dw + ',' + 2 * dh + ' ' + 0 + ',' + 3 * dh)
+        .fill('none');
 
     returnFrom1970 = canvas.path('M' + (x1970 + 2 * dw) + ' ' + y1970tl +
-        ' c ' + -1 * dw + ',' + 2 * dh + ' ' + -1 * dw + ',' + 4 * dh + ' ' + 0 + ',' + 7 * dh +
-        ' c ' + 1 * dw + ',' + 3 * dh + ' ' + 3 * dw + ',' + 5 * dh + ' ' + 6 * dw + ',' + 5 * dh +
+        ' c ' + -0.5 * dw + ',' + 2 * dh + ' ' + -1 * dw + ',' + 4 * dh + ' ' + 0 + ',' + 7 * dh +
+        ' c ' + dw + ',' + 3 * dh + ' ' + 3 * dw + ',' + 5 * dh + ' ' + 6 * dw + ',' + 5 * dh +
         ' c ' + 3 * dw + ',' + 0 + ' ' + 14 * dw + ',' + 0 + ' ' + 17 * dw + ',' + 0 +
-        ' c ' + 3 * dw + ',' + 0 + ' ' + 3 * dw + ',' + 0 + ' ' + 5 * dw + ',' + 1 * dh)
+        ' c ' + 3 * dw + ',' + 0 + ' ' + 3 * dw + ',' + 0 + ' ' + 5 * dw + ',' + dh)
         .fill('none');
     returnFrom2012 = canvas.path('M' + (x2012 + 2 * dw) + ' ' + y2012tl +
-        ' c ' + -1 * dw + ',' + -2 * dh + ' ' + -1 * dw + ',' + -6 * dh + ' ' + 0 + ',' + -9 * dh +
-        ' c ' + 1 * dw + ',' + -3 * dh + ' ' + 3 * dw + ',' + -4 * dh + ' ' + 6 * dw + ',' + -4 * dh +
-        ' c ' + 3 * dw + ',' + 0 + ' ' + 8 * dw + ',' + 0 + ' ' + 11 * dw + ',' + 0 +
+        ' c ' + -0.5 * dw + ',' + -2 * dh + ' ' + -0.5 * dw + ',' + -6 * dh + ' ' + 0.5 * dw + ',' + -9 * dh +
+        ' c ' + dw + ',' + -3 * dh + ' ' + 3 * dw + ',' + -4 * dh + ' ' + 6 * dw + ',' + -4 * dh +
+        ' c ' + 3 * dw + ',' + 0 + ' ' + 7.5 * dw + ',' + 0 + ' ' + 10.5 * dw + ',' + 0 +
         ' c ' + 3 * dw + ',' + 0 + ' ' + 3 * dw + ',' + -1 * dh + ' ' + 5 * dw + ',' + -2 * dh)
         .fill('none');
     returnFrom2013 = canvas.path('M' + (x2013 + 2 * dw) + ' ' + y2013tl +
-        ' c ' + -0.4 * dw + ',' + 1 * dh + ' ' + -0.4 * dw + ',' + 1 * dh + ' ' + 0 + ',' + 2 * dh +
-        ' c ' + 0.5 * dw + ',' + 1 * dh + ' ' + 2.5 * dw + ',' + 2 * dh + ' ' + 5 * dw + ',' + 2 * dh +
+        ' c ' + -0.2 * dw + ',' + 0.8 * dh + ' ' + -0.4 * dw + ',' + dh + ' ' + 0 + ',' + 2 * dh +
+        ' c ' + 0.5 * dw + ',' + dh + ' ' + 2.5 * dw + ',' + 2 * dh + ' ' + 5 * dw + ',' + 2 * dh +
         ' c ' + 2.5 * dw + ',' + 0 + ' ' + 3.5 * dw + ',' + 0 + ' ' + 6 * dw + ',' + 0 +
         ' c ' + 2.5 * dw + ',' + 0 + ' ' + 2.5 * dw + ',' + dh + ' ' + 5 * dw + ',' + 3 * dh)
         .fill('none');
     returnFrom2014 = canvas.path('M' + (x2014 + width / 20) + ' ' + y2014tl +
         ' c ' + -0.3 * dw + ',' + -0.8 * dh + ' ' + -0.3 * dw + ',' + -1.2 * dh + ' ' + 0 + ',' + -2 * dh +
-        ' c ' + 1 * dw + ',' + -2 * dh + ' ' + 2 * dw + ',' + -2 * dh + ' ' + 5 * dw + ',' + -2 * dh +
+        ' c ' + dw + ',' + -2 * dh + ' ' + 2 * dw + ',' + -2 * dh + ' ' + 5 * dw + ',' + -2 * dh +
         ' c ' + 2 * dw + ',' + 0 + ' ' + 2 * dw + ',' + dh + ' ' + 5 * dw + ',' + -4 * dh)
         .fill('none');
 
-// Group timelines with their tickmarks
+    // Group timelines with their tickmarks
     groupMainTimeline = canvas.group()
         .add(tlMain)
         .add(tick1970_onMain)
@@ -457,43 +403,26 @@ var redraw = function() {
         .opacity(0);
     group1970Timeline = canvas.group()
         .add(tl1970)
-        // .add(tick2012_on1970)
-        // .add(tick2013_on1970)
-        // .add(tick2014_on1970)
         .add(tick2018_on1970)
         .add(tick2023_on1970)
-        // .add(label2012_on1970)
-        // .add(label2013_on1970)
-        // .add(label2014_on1970)
         .add(label2018_on1970)
         .add(label2023_on1970)
         .opacity(0);
     group2012Timeline = canvas.group()
         .add(tl2012)
-        // .add(tick2013_on2012)
-        // .add(tick2014_on2012)
         .add(tick2018_on2012)
-        //.add(tick2023_on2012)
-        // .add(label2013_on2012)
-        // .add(label2014_on2012)
         .add(label2018_on2012)
         .opacity(0);
     group2013Timeline = canvas.group()
         .add(tl2013)
-        //  .add(tick2014_on2013)
         .add(tick2018_on2013)
         .add(tick2023_on2013)
-        //  .add(label2014_on2013)
         .add(label2018_on2013)
         .add(label2023_on2013)
         .opacity(0);
     group2014Timeline = canvas.group()
         .add(tl2014)
         .opacity(0);
-//  .add(tick2018_on2014)
-//  .add(tick2023_on2014)
-//  .add(label2018_on2014)
-//  .add(label2023_on2014)
     group1950Fractals = canvas.group()
         .add(fractal1950_2014)
         .add(fractal1950_1950)
@@ -517,7 +446,7 @@ var redraw = function() {
         .add(fractal2013_2014)
         .opacity(0);
 
-// Gradients
+    // Gradients
     clickable_gradient = canvas.gradient('radial', function (stop) {
         stop.at(0, '#ddf');
         stop.at(0.7, '#ddf');
@@ -546,11 +475,11 @@ var redraw = function() {
     info_1970endgame = info_2012.clone().center(x2023, y1970tl);
     info_2013endgame = info_2012.clone().center(x2023, y2013tl);
 
-// Icons
+    // Icons
     ironman_glow = canvas.circle(iw)
         .fill(unclickable_gradient);
     var ironman_icon = canvas.image(imgPath + "ironman.png")
-        .size(iw*0.8, iw*0.8).center(ironman_glow.cx(), ironman_glow.cy())
+        .size(iw * 0.8, iw * 0.8).center(ironman_glow.cx(), ironman_glow.cy());
     ironman = canvas.group().add(ironman_glow).add(ironman_icon)
         .move(x2023, yMaintl - iw);
 
@@ -1003,6 +932,11 @@ var redraw = function() {
             mindStone.move(x2012 + 3*dw+iw/2, y2012tl-iw/2);
             spaceStone_1970.move(x1970 + 3*dw, y1970tl-iw/2);
 
+            // Ironman, Thanos, and 2014 nebula are now dead
+            ironman.opacity(0);
+            nebula_evil.opacity(0);
+            thanos.opacity(0);
+
             stub1970.stroke({color: '#555', width: 2, linecap: 'round'});
             stub2012.stroke({color: '#555', width: 2, linecap: 'round'});
             stub2013.stroke({color: '#555', width: 2, linecap: 'round'});
@@ -1049,6 +983,11 @@ var redraw = function() {
             timeStone.move(x2012 + 3*dw, y2012tl-iw/2);
             mindStone.move(x2012 + 3*dw+iw/2, y2012tl-iw/2);
             spaceStone_1970.move(x1970 + 3*dw, y1970tl-iw/2);
+
+            // Ironman, Thanos, and 2014 nebula are now dead
+            ironman.opacity(0);
+            nebula_evil.opacity(0);
+            thanos.opacity(0);
 
             stub1950.stroke({color: '#555', width: 2, linecap: 'round'});
             stub1970.stroke({color: '#555', width: 2, linecap: 'round'});
@@ -1133,10 +1072,6 @@ var make_clickable = function(icon, func, delay=0, carryItems = []) {
     icon.first().fill(clickable_gradient).opacity(0);
     icon.first().animate(250, "", delay).opacity(1);
 
-    // Stop any ongoing animations to the image
-    //icon.last().finish();
-    //icon.last().animate(300,"",3000).scale(1.25).loop(6, true);
-
     // Add this to the list of clickables (if not already in it)
     if (clickables.indexOf(icon) == -1) {
         clickables.push(icon);
@@ -1174,7 +1109,7 @@ var make_unclickable = function(icon, carryItems = []) {
 
 var set_caption_text = function(text) {
     $('#canvas-caption')[0].innerText = text;
-}
+};
 
 
 // ----------------  Events ------------------------
@@ -1188,94 +1123,87 @@ var animate2023to2012 = function() {
     cap_am.finish();
     hulk.finish();
     antman.finish();
-    // ironman.animate(200,'<').move(x2023,yMaintl-iw).after(function() { ironman.move(x2023,yMaintl-iw); });
-    // cap_am.animate(200,'<').move(x2023+iw,yMaintl-iw).after(function() { cap_am.move(x2023+iw,yMaintl-iw); });
-    // hulk.animate(200,'<').move(x2023,yMaintl).after(function() { hulk.move(2023,yMaintl); });
-    // antman.animate(200,'<').move(x2023+iw,yMaintl).after(function() { antman.move(x2023+iw,yMaintl); });
-    //
-    // setTimeout(function() {
-        // Trace paths for thor and rocket to go to 2013.
-        var ironmanPath = jumpTo2012.clone()
-            .dmove(ironman.cx()-x2023,ironman.cy()-yMaintl);
-        var capPath = jumpTo2012.clone()
-            .dmove(cap_am.cx()-x2023,cap_am.cy()-yMaintl);
-        var hulkPath = jumpTo2012.clone()
-            .dmove(hulk.cx()-x2023,hulk.cy()-yMaintl);
-        var antmanPath = jumpTo2012.clone()
-            .dmove(antman.cx()-x2023,antman.cy()-yMaintl);
 
-        // Draw the path of travel
-        jumpTo2012.drawAnimated({duration: 1000, easing: '<>'})
-            .stroke({ color: '#00F', width: 2, linecap: 'round' });
+    // Trace paths for thor and rocket to go to 2013.
+    var ironmanPath = jumpTo2012.clone()
+        .dmove(ironman.cx() - x2023, ironman.cy() - yMaintl);
+    var capPath = jumpTo2012.clone()
+        .dmove(cap_am.cx() - x2023, cap_am.cy() - yMaintl);
+    var hulkPath = jumpTo2012.clone()
+        .dmove(hulk.cx() - x2023, hulk.cy() - yMaintl);
+    var antmanPath = jumpTo2012.clone()
+        .dmove(antman.cx() - x2023, antman.cy() - yMaintl);
 
-        // Show 2012 stub
-        stub2012.drawAnimated({
-            duration: 400,
-            easing: '<>',
-            delay: 600
-            })
-            .stroke({ color: '#555', width: 2, linecap: 'round' });
+    // Draw the path of travel
+    jumpTo2012.drawAnimated({duration: 1000, easing: '<>'})
+        .stroke({color: '#00F', width: 2, linecap: 'round'});
 
-        // Show Loki and 3 infinity stones.
-        loki.animate({
-            duration: 300,
-            easing: '<>',
-            delay: 900
-            }).opacity(1);
-        spaceStone_loki.animate({
-            duration: 300,
-            easing: '<>',
-            delay: 900
-        }).opacity(1);
-        timeStone.animate({
-            duration: 300,
-            easing: '<>',
-            delay: 900
-        }).opacity(1);
-        mindStone.animate({
-            duration: 300,
-            easing: '<>',
-            delay: 900
-        }).opacity(1);
+    // Show 2012 stub
+    stub2012.drawAnimated({
+        duration: 400,
+        easing: '<>',
+        delay: 600
+    })
+        .stroke({color: '#555', width: 2, linecap: 'round'});
 
-        // Move ironman to 2012
-        var length = ironmanPath.length();
-        ironman.animate(1000, '<>').during(function(pos, morph, eased) {
-            p = ironmanPath.pointAt(eased * length);
-            ironman.center(p.x, p.y);
-        }).after(function() {
-            p = ironmanPath.pointAt(length);
-            ironman.center(p.x, p.y);
-        });
-        // Move cap to 2012
-        length = capPath.length();
-        cap_am.animate(1000, '<>').during(function(pos, morph, eased) {
-            p = capPath.pointAt(eased * length);
-            cap_am.center(p.x, p.y);
-        }).after(function() {
-            p = capPath.pointAt(length);
-            cap_am.center(p.x, p.y);
-        });
-        // Move hulk to 2012
-        length = hulkPath.length();
-        hulk.animate(1000, '<>').during(function(pos, morph, eased) {
-            p = hulkPath.pointAt(eased * length);
-            hulk.center(p.x, p.y);
-        }).after(function() {
-            p = hulkPath.pointAt(length);
-            hulk.center(p.x, p.y);
-        });
-        // Move antman to 2012
-        length = antmanPath.length();
-        antman.animate(1000, '<>').during(function(pos, morph, eased) {
-            p = antmanPath.pointAt(eased * length);
-            antman.center(p.x, p.y)
-        }).after(function() {
-            p = antmanPath.pointAt(length);
-            antman.center(p.x, p.y)
-        });
-    //}, 200);
+    // Show Loki and 3 infinity stones.
+    loki.animate({
+        duration: 300,
+        easing: '<>',
+        delay: 900
+    }).opacity(1);
+    spaceStone_loki.animate({
+        duration: 300,
+        easing: '<>',
+        delay: 900
+    }).opacity(1);
+    timeStone.animate({
+        duration: 300,
+        easing: '<>',
+        delay: 900
+    }).opacity(1);
+    mindStone.animate({
+        duration: 300,
+        easing: '<>',
+        delay: 900
+    }).opacity(1);
 
+    // Move ironman to 2012
+    var length = ironmanPath.length();
+    ironman.animate(1000, '<>').during(function (pos, morph, eased) {
+        p = ironmanPath.pointAt(eased * length);
+        ironman.center(p.x, p.y);
+    }).after(function () {
+        p = ironmanPath.pointAt(length);
+        ironman.center(p.x, p.y);
+    });
+    // Move cap to 2012
+    length = capPath.length();
+    cap_am.animate(1000, '<>').during(function (pos, morph, eased) {
+        p = capPath.pointAt(eased * length);
+        cap_am.center(p.x, p.y);
+    }).after(function () {
+        p = capPath.pointAt(length);
+        cap_am.center(p.x, p.y);
+    });
+    // Move hulk to 2012
+    length = hulkPath.length();
+    hulk.animate(1000, '<>').during(function (pos, morph, eased) {
+        p = hulkPath.pointAt(eased * length);
+        hulk.center(p.x, p.y);
+    }).after(function () {
+        p = hulkPath.pointAt(length);
+        hulk.center(p.x, p.y);
+    });
+    // Move antman to 2012
+    length = antmanPath.length();
+    antman.animate(1000, '<>').during(function (pos, morph, eased) {
+        p = antmanPath.pointAt(eased * length);
+        antman.center(p.x, p.y)
+    }).after(function () {
+        p = antmanPath.pointAt(length);
+        antman.center(p.x, p.y)
+    });
 
     // Remove click handlers
     make_unclickable(ironman);
@@ -1305,7 +1233,7 @@ var lokiStealsStone = function() {
     var portalGradient = canvas.gradient('radial', function(stop) {
         stop.at(0, '#08172a');
         stop.at(0.6, '#083459');
-        stop.at(0.8, '#498fb3')
+        stop.at(0.8, '#498fb3');
         stop.at(0.9, '#b4e2e2');
         stop.at(1, '#a0d1da')
     });
@@ -1424,7 +1352,7 @@ var animate2023to2013 = function() {
             thor.center(p.x, p.y);
         });
         // Move rocket to 2013
-        var length = rocketPath.length();
+        length = rocketPath.length();
         rocket.animate(700, '>').during(function(pos, morph, eased){
             p = rocketPath.pointAt(eased * length);
             rocket.center(p.x, p.y);
@@ -1683,11 +1611,11 @@ var animate2012to2023 = function() {
     antman.finish();
     antman.animate(1000, '<>').during(function(pos, morph, eased) {
         p = antmanPath.pointAt(eased * length);
-        antman.center(p.x, p.y)
+        antman.center(p.x, p.y);
         mindStone.move(p.x, p.y);
     }).after(function() {
         p = antmanPath.pointAt(length);
-        antman.center(p.x, p.y)
+        antman.center(p.x, p.y);
         mindStone.move(p.x, p.y);
     });
 
@@ -1852,7 +1780,7 @@ var animate2014to2023_SoulStone = function() {
     make_unclickable(black_widow);
 
     // Mark boolean that this dependency is satisfied
-    soulStoneInPresent = true
+    soulStoneInPresent = true;
 
     // Set click handlers for final battle if everyone's in the present
     if (spaceStoneInPresent && mindStoneInPresent && timeStoneInPresent && realityStoneInPresent && powerStoneInPresent
@@ -2197,7 +2125,7 @@ var capReturnsStones = function() {
     // Temporarily redraw the pulsating icons
     clearInterval(pulsatingInterval);
 
-    // Give stones to cap
+    // Give stones to cap, kill off the casualties
     var ix = cap_am.x();
     var iy = cap_am.y();
     var ih = cap_am.first().height();
@@ -2208,6 +2136,8 @@ var capReturnsStones = function() {
     spaceStone_1970.animate(500, "<>").move(ix, iy+ih-spaceStone_1970.height());
     realityStone.animate(500, "<>").move(ix+iw/2-realityStone.width()/2, iy - realityStone.height()/3);
     mindStone.animate(500, "<>").move(ix+iw-mindStone.width()/2, iy + ih/2 - mindStone.height()/2);
+    ironman.animate(500, '<>').opacity(0);
+    nebula_evil.animate(500, '<>').opacity(0);
 
     // Move cap to 2014 timeline with all stones
     cap_am.animate(1000, "<>", 750).move(x2014 + width/20, y2014tl);
@@ -2249,8 +2179,6 @@ var capReturnsStones = function() {
     group2012Timeline.animate(500,"",4250).opacity(1);
     timeStone.animate(450,"<>").move(x2012 + 3*dw, y2012tl-iw/2);
     mindStone.animate(450,"<>").move(x2012 + 3*dw+iw/2, y2012tl-iw/2);
-    // info_2012loki.animate(250, '<>', 4400).opacity(1);
-    // make_clickable(info_2013endgame, function() {set_caption_text(rsc_string.info_2012loki);}, 4400);
 
     // Move cap to 1970 timeline. Leave mind and time stones behind
     cap_am.animate(1000, "<>", 250).move(x1970 + width/20, y1970tl);
@@ -2387,11 +2315,6 @@ $(document).ready(function() {
                 element.msRequestFullscreen();
             }
         }
-
-        // var container = $('#endgame-container')[0];
-        // canvas.scale(container.clientHeight / canvas.height(), container.clientWidth / canvas.width());
-        // canvas.height(container.clientHeight);
-        // canvas.width(container.clientWidth);
     });
 
     $('#show-caption').on('click', function() {
@@ -2407,18 +2330,19 @@ $(document).ready(function() {
 
     window.addEventListener('resize', function() {
         redraw();
-    })
+    });
 
-    $('#endgame-container')[0].addEventListener("fullscreenchange", function () {
+    var container = $('#endgame-container');
+    container[0].addEventListener("fullscreenchange", function () {
         redraw();
     });
-    $('#endgame-container')[0].addEventListener("mozfullscreenchange", function () {
+    container[0].addEventListener("mozfullscreenchange", function () {
         redraw();
     });
-    $('#endgame-container')[0].addEventListener("webkitfullscreenchange", function () {
+    container[0].addEventListener("webkitfullscreenchange", function () {
         redraw();
     });
-    $('#endgame-container')[0].addEventListener("msfullscreenchange", function () {
+    container[0].addEventListener("msfullscreenchange", function () {
         redraw();
     });
 
