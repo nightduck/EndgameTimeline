@@ -7,8 +7,8 @@ const rsc_string = {
     info_2014: "Black Widow dies so Hawkeye can get the soul stone. Thanos, Gamora, and Evil Nebula capture good Nebula when she attempts to return to the present. Evil Nebula goes back in her place and summons Thanos and his minions back to the future.",
     info_bench: "Since cap doesn't return through the machine, we can conclude he never returns to his own reality. The Cap sitting on the bench is not the Cap that we just saw travel back in time. Rather, the Cap on the bench is from this branch's parent reality. Thus, the movie does not portray prime reality, it portrays a branched reality.",
     info_2014gotg: "In this timeline, Gamora is absent. Drax never would've met Quill and Rocket without Gamora being assaulted in the prison. The prison breakout would only be performed by Quill, Rocket, and Groot. Rocket and Groot leave Quill behind when he goes to get his cassette player. Thus, Quill stays in jail and Ronan gets the power stone from him when he raids the prison later. Also, Thanos is now absent from this timeline, greatly upsetting the political balance of the universe.",
-    info_1970endgame: "When the tessaract is returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has its own snap, it's own time travel, and it's own branched timelines. These branches have their own branches on and on into infinite fractals",
-    info_2013endgame: "When the reality stone and Mjolnir are returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has it's own snap, it's own time travel, and it's own branched timelines. These branches have their own branches on and on into infinite fractals",
+    info_1970endgame: "When the tessaract is returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has its own snap, its own time travel, and its own branched timelines. These branches have their own branches on and on into infinite fractals",
+    info_2013endgame: "When the reality stone and Mjolnir are returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has its own snap, its own time travel, and its own branched timelines. These branches have their own branches on and on into infinite fractals",
     jumpTo2012: "The center stage in this three ring circus: Stark, Steve, Scott, and Bruce travel to the attack on New York to retrieve 3 infinity stones. Let's see how that turns out.",
     lokiFucksOff: "Oh shit where did Loki go?",
     jumpTo2013: "Thor and Rocket head to Asgard circa Thor: The Dark World to retrieve the reality stone.",
@@ -1108,7 +1108,9 @@ var make_unclickable = function(icon, carryItems = []) {
 };
 
 var set_caption_text = function(text) {
-    $('#canvas-caption')[0].innerText = text;
+    var caption = $('#canvas-caption')[0];
+    caption.innerText = text;
+    caption.scrollTop = 0;
 };
 
 
