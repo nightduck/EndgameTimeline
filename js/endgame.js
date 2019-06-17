@@ -5,7 +5,6 @@ const rsc_string = {
     info_1970: "In this timeline, Steve and Stark stole some Pym particles, borrowed the Tessaract, and Stark resolved some daddy issues.",
     info_2013: "Why is it the timeline with the most emotionally unstable avenger is the only one to go according to plan? They got the reality stone and Mjolnir, which were replaced by Cap, and the events of this timeline developed almost identically to prime reality.",
     info_2014: "Black Widow dies so Hawkeye can get the soul stone. Thanos, Gamora, and Evil Nebula capture good Nebula when she attempts to return to the present. Evil Nebula goes back in her place and summons Thanos and his minions back to the future.",
-    info_bench: "Since cap doesn't return through the machine, we can conclude he never returns to his own reality. The Cap sitting on the bench is not the Cap that we just saw travel back in time. Rather, the Cap on the bench is from this branch's parent reality. Thus, the movie does not portray prime reality, it portrays a branched reality.",
     info_2014gotg: "In this timeline, Gamora is absent. Drax never would've met Quill and Rocket without Gamora being assaulted in the prison. The prison breakout would only be performed by Quill, Rocket, and Groot. Rocket and Groot leave Quill behind when he goes to get his cassette player. Thus, Quill stays in jail and Ronan gets the power stone from him when he raids the prison later. Also, Thanos is now absent from this timeline, greatly upsetting the political balance of the universe.",
     info_1970endgame: "When the tessaract is returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has its own snap, its own time travel, and its own branched timelines. These branches have their own branches on and on into infinite fractals",
     info_2013endgame: "When the reality stone and Mjolnir are returned to this timeline, events play out the same way they would've in prime reality. Thus this reality has its own snap, its own time travel, and its own branched timelines. These branches have their own branches on and on into infinite fractals",
@@ -22,8 +21,9 @@ const rsc_string = {
     returnFrom2014_Nebula: "2014 Nebula disguises herself as 2023 Nebula and goes to the future/present (depending on your point of view)",
     thanosToPresent: "Nebula hacks into ... something, and summons Thanos and his army into the future where we prepare for act 3",
     starkStones: "Stark manages to acquire the stones and snaps Thanos into oblivion. Also Cap picks up Mjolnir",
-    capStones: "Cap collects all the stones and Mjolnir. After jumping between alternate realities (plothole) without creating new branched realities (plothole), catching up with redskull, and replacing all the stones in their original forms (plothole), he finally returned to Peggy for that dance.",
-    capLivesOutLife: "Cap and Peggy grow old together and witness events play out the way they would in prime reality. Cap never returns to his original timeline. He does, however, put Peggy in a home once she starts getting senile."
+    capStones: "Cap collects all the stones and Mjolnir. After jumping between alternate realities without creating new branched realities (plothole), catching up with redskull, and replacing all the stones in their original forms (plothole), he finally returned to Peggy for that dance.",
+    capLivesOutLife: "Cap and Peggy grow old together in this alternate reality. Although it is unclear how much impact Cap had on this timeline, but one can speculate that he changed the course of history, averting Hydra's infiltration of shield and warning of the attack on NYC and the Snap. It is possible he contacted Howard Stark and Hank Pym to create another time travel machine. He definitely, at some point, acquired a new shield.",
+    capReturns: "The most debated plot-point about this movie surrounds cap's return. It is unclear if he returned when his younger self emerged from the ice, or if he waited around until Peggy's death in 2016. It is also unclear how he returned, since his time-travel equipment would have been decades old. If they were no longer functional, he would've had to contact Howard Stark and Hank Pym to build a new time machine. He also has a shield, which could be taken from this timeline's cap, or could be a newly Wakanda-commissioned one. This is the shield he presents to Sam."
 };
 
 // Define all variables initializes in redraw so they're visible globally
@@ -49,9 +49,9 @@ var margin, width, height, verticalOffset, iw, fontsize, clickable_gradient, unc
     war_machine_glow, black_widow_glow, nebula_glow,
     nebula_evil, thanos, loki,
     nebula_evil_glow, thanos_glow, loki_glow,
-    info_2012, info_2013, info_2014, info_1970, info_1950, info_bench, info_2014gotg, info_1970endgame,
+    info_2012, info_2013, info_2014, info_1970, info_1950, info_altLife, info_2014gotg, info_1970endgame,
     info_2013endgame,
-    soulStone, powerStone, realityStone, spaceStone_loki, spaceStone_1970,  timeStone, mindStone, mjolnir,
+    soulStone, powerStone, realityStone, spaceStone_loki, spaceStone_1970, timeStone, mindStone, mjolnir, shield,
     groupMainTimeline, group1950Timeline, group1970Timeline, group2012Timeline, group2013Timeline, group2014Timeline,
     group1950Fractals, group1970Fractals, group2012Fractals, group2013Fractals,
     clickables = [],
@@ -470,7 +470,7 @@ var redraw = function() {
     info_1970 = info_2012.clone().center(x1970+2*dw, y1970tl);
     info_2013 = info_2012.clone().center(x2013+2*dw, y2013tl);
     info_2014 = info_2012.clone().center(x2014+2*dw, y2014tl);
-    info_bench = info_2012.clone().center(x2023+2*dw, y1950tl);
+    info_altLife = info_2012.clone().center(x[26], y1950tl);
     info_2014gotg = info_2012.clone().center(x2014+6*dw, y2014tl);
     info_1970endgame = info_2012.clone().center(x2023, y1970tl);
     info_2013endgame = info_2012.clone().center(x2023, y2013tl);
@@ -627,6 +627,11 @@ var redraw = function() {
     mjolnir = canvas.image(imgPath + "mjolnir.png")
         .size(iw*0.4, iw*0.4)
         .move(x2013 + 2 * dw + iw, y2013tl - iw / 2)
+        .opacity(0);
+
+    shield = canvas.image(imgPath + "shield.png")
+        .size(iw * 0.4, iw * 0.4)
+        .move(x[26] + iw / 2, y1950tl + iw / 2)
         .opacity(0);
 
 
@@ -973,8 +978,8 @@ var redraw = function() {
             info_1970endgame.last().mouseleave(function() {group1970Fractals.animate(250,"<>").opacity(0);});
             break;
         case 7:
-            // Place all stones in correct spots, show all timelines and put cap at end of 1950 timeline
-            cap_am.move(x2023 + 3*dw-iw, y1950tl);
+            // Place all stones in correct spots, show all timelines and put cap in 1950 timeline
+            cap_am.move(x[26], y1950tl);
             timeStone.move(x2012 + 3*dw, y2012tl-iw/2);
             soulStone.move(x2014 + 3*dw+iw/2, y2014tl-iw/2);
             powerStone.move(x2014 + 3*dw, y2014tl-iw/2);
@@ -984,10 +989,11 @@ var redraw = function() {
             mindStone.move(x2012 + 3*dw+iw/2, y2012tl-iw/2);
             spaceStone_1970.move(x1970 + 3*dw, y1970tl-iw/2);
 
-            // Ironman, Thanos, and 2014 nebula are now dead
+            // Ironman, Thanos, Peggy, and 2014 nebula are now dead
             ironman.opacity(0);
             nebula_evil.opacity(0);
             thanos.opacity(0);
+            peggy.opacity(0);
 
             stub1950.stroke({color: '#555', width: 2, linecap: 'round'});
             stub1970.stroke({color: '#555', width: 2, linecap: 'round'});
@@ -1008,7 +1014,7 @@ var redraw = function() {
             realityStone.opacity(1);
             mindStone.opacity(1);
             mjolnir.opacity(1);
-            make_unclickable(cap_am);
+            make_clickable(cap_am, capReturnsToSitOnBench);
 
             info_2012.animate(250, '<>').opacity(1);
             make_clickable(info_2012, function() {set_caption_text(rsc_string.info_2012);});
@@ -1022,14 +1028,106 @@ var redraw = function() {
             make_clickable(info_1970endgame, function() {set_caption_text(rsc_string.info_1970endgame);});
             info_1950.animate(250, '<>').opacity(1);
             make_clickable(info_1950, function() {set_caption_text(rsc_string.info_1950);});
-            info_bench.animate(250, '<>').opacity(1);
-            make_clickable(info_bench, function() {set_caption_text(rsc_string.info_bench);});
+            info_2013endgame.last().mouseenter(null);
+            info_1970endgame.last().mouseenter(null);
+            info_altLife.last().mouseenter(null);
             info_2013endgame.last().mouseenter(function() {group2013Fractals.animate(250,"<>").opacity(1);});
             info_2013endgame.last().mouseleave(function() {group2013Fractals.animate(250,"<>").opacity(0);});
             info_1970endgame.last().mouseenter(function() {group1970Fractals.animate(250,"<>").opacity(1);});
             info_1970endgame.last().mouseleave(function() {group1970Fractals.animate(250,"<>").opacity(0);});
-            info_bench.last().mouseenter(function() {group1950Fractals.animate(250,"<>").opacity(1);});
-            info_bench.last().mouseleave(function() {group1950Fractals.animate(250,"<>").opacity(0);});
+            break;
+        case 8:
+            // Place all stones in correct spots, show all timelines and put cap in main timeline
+            cap_am.move(x2023 + iw, yMaintl - iw);
+            timeStone.move(x2012 + 3 * dw, y2012tl - iw / 2);
+            soulStone.move(x2014 + 3 * dw + iw / 2, y2014tl - iw / 2);
+            powerStone.move(x2014 + 3 * dw, y2014tl - iw / 2);
+            realityStone.move(x2013 + 3 * dw, y2013tl - iw / 2);
+            mjolnir.move(x2013 + 3 * dw + iw / 2, y2013tl - iw / 2);
+            timeStone.move(x2012 + 3 * dw, y2012tl - iw / 2);
+            mindStone.move(x2012 + 3 * dw + iw / 2, y2012tl - iw / 2);
+            spaceStone_1970.move(x1970 + 3 * dw, y1970tl - iw / 2);
+            shield.move(x2023 + 3 * iw / 2, yMaintl - iw / 2);
+
+            // Ironman, Thanos, Peggy, and 2014 nebula are now dead
+            ironman.opacity(0);
+            nebula_evil.opacity(0);
+            thanos.opacity(0);
+            peggy.opacity(0);
+
+            // Render all timelines
+            stub1950.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub1970.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub2012.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub2013.stroke({color: '#555', width: 2, linecap: 'round'});
+            stub2014.stroke({color: '#555', width: 2, linecap: 'round'});
+            tl1950.stroke({color: '#555', width: 2, linecap: 'round'});
+            group1950Timeline.opacity(1);
+
+            group2014Timeline.opacity(1);
+            group2013Timeline.opacity(1);
+            group2012Timeline.opacity(1);
+            group1970Timeline.opacity(1);
+            powerStone.opacity(1);
+            soulStone.opacity(1);
+            timeStone.opacity(1);
+            spaceStone_1970.opacity(1);
+            realityStone.opacity(1);
+            mindStone.opacity(1);
+            mjolnir.opacity(1);
+            shield.opacity(1);
+            make_unclickable(cap_am);
+
+            // Show all prompts
+            info_2012.animate(250, '<>').opacity(1);
+            make_clickable(info_2012, function () {
+                set_caption_text(rsc_string.info_2012);
+            });
+            info_1970.animate(250, '<>').opacity(1);
+            make_clickable(info_1970, function () {
+                set_caption_text(rsc_string.info_1970);
+            });
+            info_2014gotg.animate(250, '<>').opacity(1);
+            make_clickable(info_2014gotg, function () {
+                set_caption_text(rsc_string.info_2014gotg);
+            });
+            info_2013endgame.animate(250, '<>').opacity(1);
+            make_clickable(info_2013endgame, function () {
+                set_caption_text(rsc_string.info_2013endgame);
+            });
+            info_1970endgame.animate(250, '<>').opacity(1);
+            make_clickable(info_1970endgame, function () {
+                set_caption_text(rsc_string.info_1970endgame);
+            });
+            info_1950.animate(250, '<>').opacity(1);
+            make_clickable(info_1950, function () {
+                set_caption_text(rsc_string.info_1950);
+            });
+            info_altLife.animate(250, '<>').opacity(1);
+            make_clickable(info_altLife, function () {
+                set_caption_text(rsc_string.capLivesOutLife);
+            });
+            info_2013endgame.last().mouseenter(null);
+            info_1970endgame.last().mouseenter(null);
+            info_altLife.last().mouseenter(null);
+            info_2013endgame.last().mouseenter(function () {
+                group2013Fractals.animate(250, "<>").opacity(1);
+            });
+            info_2013endgame.last().mouseleave(function () {
+                group2013Fractals.animate(250, "<>").opacity(0);
+            });
+            info_1970endgame.last().mouseenter(function () {
+                group1970Fractals.animate(250, "<>").opacity(1);
+            });
+            info_1970endgame.last().mouseleave(function () {
+                group1970Fractals.animate(250, "<>").opacity(0);
+            });
+            info_altLife.last().mouseenter(function () {
+                group1950Fractals.animate(250, "<>").opacity(1);
+            });
+            info_altLife.last().mouseleave(function () {
+                group1950Fractals.animate(250, "<>").opacity(0);
+            });
             break;
     }
 
@@ -2249,25 +2347,57 @@ var capLivesOutLife = function() {
         p = stub1950.pointAt(length);
         peggy.move(p.x, p.y-iw);
     });
-    cap_am.animate(1200, '-').move(x[26]);
-    peggy.animate(1200, '-').move(x[26]);
+    cap_am.animate(1500, '>').move(x[26]);
+    peggy.animate(1500, '>').move(x[26]);
 
-    // Peggy dies in 2016, but cap goes on to future
-    cap_am.animate(750, '>').move(x2023 + 2*dw-iw);
+    // Peggy dies in 2016
     peggy.animate(500, '<>').opacity(0);
 
-    make_unclickable(cap_am);
     make_unclickable(peggy);
+    make_clickable(cap_am, capReturnsToSitOnBench);
+
     // Update states
     ironmanCapState++;
 
-    info_bench.animate(250, '<>', 3200).opacity(1);
-    make_clickable(info_bench, function() {set_caption_text(rsc_string.info_bench);}, 3200);
-    info_bench.last().mouseenter(function() {group1950Fractals.animate(250,"<>").opacity(1);});
-    info_bench.last().mouseleave(function() {group1950Fractals.animate(250,"<>").opacity(0);});
-
     // Update caption text
     set_caption_text(rsc_string.capLivesOutLife);
+
+    // Pulsate all clickable icons periodically
+    setPulsating();
+};
+
+var capReturnsToSitOnBench = function () {
+    // Temporarily redraw the pulsating icons
+    clearInterval(pulsatingInterval);
+
+    // Show prompt where cap left
+    info_altLife.animate(250, '<>', 500).opacity(1);
+    make_clickable(info_altLife, function () {
+        set_caption_text(rsc_string.capLivesOutLife);
+    }, 500);
+    info_altLife.last().mouseenter(function () {
+        group1950Fractals.animate(250, "<>").opacity(1);
+    });
+    info_altLife.last().mouseleave(function () {
+        group1950Fractals.animate(250, "<>").opacity(0);
+    });
+
+    // Shield appears with cap before he moves
+    shield.animate(250, "<>", 0).opacity(1);
+
+    // Move cap back to present
+    cap_am.animate(700, '<>', 250).move(x2023 + iw, yMaintl - iw);
+    shield.animate(700, '<>').move(x2023 + 3 * iw / 2, yMaintl - iw / 2);
+
+    // TODO: Give shield to Sam
+
+    make_unclickable(cap_am);
+
+    // Update states
+    ironmanCapState++;
+
+    // Update caption text
+    set_caption_text(rsc_string.capReturns);
 
     // Pulsate all clickable icons periodically
     setPulsating();

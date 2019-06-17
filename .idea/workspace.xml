@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5e304c2-e623-4752-ab13-c48a5937391d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/endgame.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/endgame.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/page.html" afterDir="false" />
     </list>
     <list id="6776c334-d26b-4760-ae5c-ae04532220d4" name="Revert: Wrapped setPulsating calls in timeouts, so they don't start their count until all animations are done." comment="Partial Revert: Wrapped setPulsating calls in timeouts, so they don't start their count until all animations are done.&#10;&#10;This small cosmetic fix introduced much larger cosmetic bugs, so we'll live with the small stuff." />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,23 +24,14 @@
     <favorites_list name="EndgameTimeline" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4129693">
+    <splitter split-orientation="horizontal" split-proportion="0.4640938">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/page.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/endgame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1323">
-                  <caret line="989" column="30" selection-start-line="989" selection-start-column="30" selection-end-line="989" selection-end-column="30" />
+                <state relative-caret-position="262">
+                  <caret line="1047" column="60" lean-forward="true" selection-start-line="1047" selection-start-column="60" selection-end-line="1047" selection-end-column="60" />
                 </state>
               </provider>
             </entry>
@@ -52,8 +43,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/endgame.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
-                  <caret line="1113" column="2" lean-forward="true" selection-start-line="1113" selection-start-column="2" selection-end-line="1113" selection-end-column="2" />
+                <state relative-caret-position="368">
+                  <caret line="2345" lean-forward="true" selection-start-line="2345" selection-end-line="2345" />
                 </state>
               </provider>
             </entry>
@@ -72,9 +63,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>onReset</find>
-      <find>offsetHeight</find>
-      <find>scale</find>
       <find>spaceStone</find>
       <find>returnFrom2014</find>
       <find>thanos</find>
@@ -102,6 +90,9 @@
       <find>width: 3</find>
       <find>drawAnimated</find>
       <find>mouseenter</find>
+      <find>info_altLife</find>
+      <find>capLivesOutLife</find>
+      <find>shield</find>
     </findStrings>
     <replaceStrings>
       <replace>clearInterval(pulsatingInterval)</replace>
@@ -141,6 +132,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -157,7 +149,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -206,7 +197,8 @@
       <workItem from="1558844488620" duration="66905000" />
       <workItem from="1559404395650" duration="868000" />
       <workItem from="1559410230707" duration="94130000" />
-      <workItem from="1559861339945" duration="3853000" />
+      <workItem from="1559861339945" duration="5910000" />
+      <workItem from="1560719624002" duration="7684000" />
     </task>
     <task id="LOCAL-00001" summary="Finished redesigning paths of travel&#10;Added relative path constant for image locations&#10;Added preparatory and post animations.&#10;Tweaked Loki animation">
       <created>1559417262684</created>
@@ -369,11 +361,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559864448090</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Post-publication edits: Fixed typos, reset scrolling when caption text changes.">
+      <created>1560051345937</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1560051345937</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="210878000" />
+    <option name="totallyTimeSpent" value="220619000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -388,11 +387,11 @@
     <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49544996" visible="true" weight="0.18416865" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49544996" visible="true" weight="0.18575974" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50455004" side_tool="true" weight="0.18257757" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.37931034" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.14420062" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32924962" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39969373" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -400,7 +399,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3299373" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.2460815" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.2460815" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32288402" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3299373" />
@@ -476,8 +475,9 @@
     <MESSAGE value="Wrapped setPulsating calls in timeouts, so they don't start their count until all animations are done." />
     <MESSAGE value="Code cleanup, ironman and nebula now disappear after final battle. Fixed bug where Thanos was re-rendered when resizing. Tweaked return paths of travel." />
     <MESSAGE value="Partial Revert: Wrapped setPulsating calls in timeouts, so they don't start their count until all animations are done.&#10;&#10;This small cosmetic fix introduced much larger cosmetic bugs, so we'll live with the small stuff." />
-    <MESSAGE value="Increased max height of caption-box" />
-    <option name="LAST_COMMIT_MESSAGE" value="Increased max height of caption-box" />
+    <MESSAGE value="Increased max height of caption-box. This is commit marks how to app function at time of publishing." />
+    <MESSAGE value="Post-publication edits: Fixed typos, reset scrolling when caption text changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Post-publication edits: Fixed typos, reset scrolling when caption text changes." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -501,15 +501,15 @@
     <entry file="file://$PROJECT_DIR$/js/endgame-strings.js" />
     <entry file="file://$PROJECT_DIR$/page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+        <state relative-caret-position="558">
+          <caret line="50" column="9" lean-forward="true" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/endgame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="1113" column="2" lean-forward="true" selection-start-line="1113" selection-start-column="2" selection-end-line="1113" selection-end-column="2" />
+        <state relative-caret-position="368">
+          <caret line="2345" lean-forward="true" selection-start-line="2345" selection-end-line="2345" />
         </state>
       </provider>
     </entry>
